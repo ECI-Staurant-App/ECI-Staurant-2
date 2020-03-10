@@ -1,13 +1,39 @@
-package edu.eci.arsw.ecistaurant;
+package edu.eci.arsw.EciStaurant;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EcistaurantApplicationTests {
 
-	@Test
-	void contextLoads() {
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+/**
+ * Unit test for simple App.
+ */
+public class EciStaurantApplicationTests extends TestCase
+{
+	/**
+	 * Create the test case
+	 *
+	 * @param testName name of the test case
+	 */
+	public EciStaurantApplicationTests( String testName )
+	{
+		super( testName );
 	}
 
+	/**
+	 * @return the suite of tests being tested
+	 */
+	public static Test suite()
+	{
+		return new TestSuite( EciStaurantApplicationTests.class );
+	}
+
+	/**
+	 * Rigourous Test :-)
+	 */
+	public void testApp()
+	{
+		assertTrue( true );
+	}
 }

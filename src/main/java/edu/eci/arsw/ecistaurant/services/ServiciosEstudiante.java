@@ -1,4 +1,4 @@
-package edu.eci.arsw.EciStaurant.services;
+package edu.eci.arsw.ecistaurant.services;
 
 public interface ServiciosEstudiante {
 }

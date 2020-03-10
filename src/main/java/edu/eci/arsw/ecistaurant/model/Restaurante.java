@@ -1,4 +1,4 @@
-package edu.eci.arsw.EciStaurant.model;
+package edu.eci.arsw.ecistaurant.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

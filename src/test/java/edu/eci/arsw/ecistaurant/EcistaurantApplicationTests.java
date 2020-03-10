@@ -1,4 +1,4 @@
-package edu.eci.arsw.EciStaurant;
+package edu.eci.arsw.ecistaurant;
 
 
 
@@ -9,14 +9,14 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class EciStaurantApplicationTests extends TestCase
+public class EcistaurantApplicationTests extends TestCase
 {
 	/**
 	 * Create the test case
 	 *
 	 * @param testName name of the test case
 	 */
-	public EciStaurantApplicationTests( String testName )
+	public EcistaurantApplicationTests(String testName )
 	{
 		super( testName );
 	}
@@ -26,7 +26,7 @@ public class EciStaurantApplicationTests extends TestCase
 	 */
 	public static Test suite()
 	{
-		return new TestSuite( EciStaurantApplicationTests.class );
+		return new TestSuite( EcistaurantApplicationTests.class );
 	}
 
 	/**

@@ -1,6 +1,6 @@
-package edu.eci.arsw.EciStaurant.Repository;
+package edu.eci.arsw.ecistaurant.Repository;
 
-import edu.eci.arsw.EciStaurant.model.Pedido;
+import edu.eci.arsw.ecistaurant.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PedidoRepository extends JpaRepository<Pedido,Integer> {

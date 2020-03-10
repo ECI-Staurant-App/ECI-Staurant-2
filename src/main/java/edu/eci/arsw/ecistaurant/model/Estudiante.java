@@ -38,6 +38,10 @@ public class Estudiante implements Serializable {
 
     }
 
+    public Estudiante() {
+
+    }
+
     public Set<Pedido> getPedidos() {
         return pedidos;
     }

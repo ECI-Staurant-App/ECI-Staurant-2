@@ -16,6 +16,9 @@ public class Platillo implements Serializable {
     @JoinColumn(name = "fk_menu")
     private Menu menu;
 
+    public Platillo() {
+    }
+
     public Platillo(String nombre, Menu menu) {
         this.nombre = nombre;
         this.menu = menu;

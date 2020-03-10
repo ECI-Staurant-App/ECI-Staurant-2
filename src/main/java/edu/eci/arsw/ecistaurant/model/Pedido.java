@@ -22,6 +22,8 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "fk_platillo")
     private Platillo platillo;
 
+    public Pedido() {
+    }
 
     public Pedido(Estudiante estudiante, Restaurante restaurante, Platillo platillo) {
         this.estudiante = estudiante;

@@ -2,7 +2,6 @@ package edu.eci.arsw.ecistaurant.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +25,10 @@ public class Restaurante implements Serializable {
 
     public Restaurante(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Restaurante() {
+
     }
 
     public int getIdRestaurante() {

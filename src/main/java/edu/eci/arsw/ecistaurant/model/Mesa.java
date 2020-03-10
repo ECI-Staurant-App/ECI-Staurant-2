@@ -18,6 +18,9 @@ public class Mesa implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Estudiante estudiante;
 
+    public Mesa() {
+    }
+
     public Mesa(String ubicacion, boolean estaDisponible, Estudiante estudiante) {
         this.ubicacion = ubicacion;
         this.estaDisponible = estaDisponible;

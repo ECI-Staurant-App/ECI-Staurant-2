@@ -1,4 +1,4 @@
-package edu.eci.arsw.ecistaurant.Repository;
+package edu.eci.arsw.ecistaurant.persistence;
 
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;

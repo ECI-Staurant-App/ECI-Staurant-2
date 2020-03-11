@@ -1,8 +1,10 @@
 package edu.eci.arsw.ecistaurant.services.impl;
 
+import edu.eci.arsw.ecistaurant.model.Menu;
+import edu.eci.arsw.ecistaurant.model.Pedido;
+import edu.eci.arsw.ecistaurant.model.Platillo;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
-import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
-import edu.eci.arsw.ecistaurant.persistence.RestaurantRepository;
+import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,12 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
     @Autowired
     private RestaurantRepository restaurantRepo;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private MenuRepository menuRepository;
+    @Autowired
+    private PlatilloRepository platilloRepository;
 
     @Override
     public List<Restaurante> getAllRestaurants() throws EcistaurantPersistenceException {
@@ -23,7 +31,13 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
     @Override
     public void saveRestaurant(Restaurante restaurante) throws EcistaurantPersistenceException {
-        restaurantRepo.save(restaurante);
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findById(restaurante.getIdRestaurante());
+        if (optionalRestaurante.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_REGISTERED);
+        }else
+        {
+            restaurantRepo.save(restaurante);
+        }
     }
 
     @Override
@@ -33,4 +47,47 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.STUDENT_NOT_FOUND);
         return optionalRestaurante.get();
     }
+
+    @Override
+    public List<Pedido> getAllPedidos(){
+        return pedidoRepository.findAll();
+    }
+
+    @Override
+    public Pedido getPedidoById(int id) throws EcistaurantPersistenceException {
+        Optional<Pedido> pedidoOptional = pedidoRepository.findById(id);
+        if (!pedidoOptional.isPresent())
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PEDIDO_NOT_FOUND);
+        return pedidoOptional.get();
+
+    }
+
+    @Override
+    public void saveMenu(Menu menu) throws EcistaurantPersistenceException {
+        Optional<Menu> optionalMenu = menuRepository.findById(menu.getIdMenu());
+        if (optionalMenu.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
+        }else
+        {
+            menuRepository.save(menu);
+        }
+    }
+
+    @Override
+    public List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException {
+        return platilloRepository.findAll();
+    }
+
+    @Override
+    public Platillo getPlatilloById(int id) throws EcistaurantPersistenceException {
+        Optional<Platillo> optionalPlatillo= platilloRepository.findById(id);
+        if (!optionalPlatillo.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PLATILLO_NOT_FOUND);
+        }else
+        {
+            return optionalPlatillo.get();
+        }
+    }
+
+
 }

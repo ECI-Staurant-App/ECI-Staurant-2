@@ -11,6 +11,8 @@ public class Platillo implements Serializable {
     private int idPlatillo;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "precio",nullable = false,length = 20)
+    private int precio;
 
     @ManyToOne
     @JoinColumn(name = "fk_menu")
@@ -19,9 +21,10 @@ public class Platillo implements Serializable {
     public Platillo() {
     }
 
-    public Platillo(String nombre, Menu menu) {
+    public Platillo(String nombre, int precio, Menu menu) {
         this.nombre = nombre;
         this.menu = menu;
+        this.precio = precio;
     }
 
     public int getIdPlatillo() {
@@ -46,5 +49,13 @@ public class Platillo implements Serializable {
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 }

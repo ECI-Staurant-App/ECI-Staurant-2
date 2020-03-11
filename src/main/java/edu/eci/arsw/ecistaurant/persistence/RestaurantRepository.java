@@ -1,5 +1,5 @@
 package edu.eci.arsw.ecistaurant.persistence;
-import edu.eci.arsw.ecistaurant.model.Estudiante;
+
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
 

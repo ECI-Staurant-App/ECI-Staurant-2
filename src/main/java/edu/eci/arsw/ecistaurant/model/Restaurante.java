@@ -15,9 +15,6 @@ public class Restaurante implements Serializable {
     private String nombre;
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
-    Set<Estudiante> estudiantes= new HashSet<Estudiante>();
-
-    @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
@@ -45,14 +42,6 @@ public class Restaurante implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Set<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
-    public void setEstudiantes(Set<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
     }
 
     public Set<Pedido> getPedidos() {

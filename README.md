@@ -15,17 +15,21 @@ Diariamente, los estudiantes de la Escuela Colombiana de Ingenieria se enfrentan
 Actualmente no existe una solucion para estas problematicas y como solución proponemos crear una aplicación web que permita administrar el manejo de las mesas de una manera mas óptima y el pedido de los almuerzos a travez de la aplicación.
 
 
-#### Diagrama de clases
+#### Class Diagram
 
 ![](img/class.png)
 
-#### Diagrama Entidad-Relación
+#### E-R Diagram
 
 ![](img/db.png)
 
-#### Componentes
+#### Component Diagram
 
 ![](img/componentes.png)
+
+#### Deploy Diagram
+
+![](img/deploy.png)
 
 A continuacion se presenta el diagrama de componentes
 

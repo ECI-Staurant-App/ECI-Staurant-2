@@ -13,7 +13,7 @@ public class Pedido implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "fk_estudiante")
-    private Estudiante estudiante;
+    private Usuario usuario;
 
     @Column
     private Date fecha;
@@ -29,8 +29,8 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(Estudiante estudiante, Restaurante restaurante, Platillo platillo,Date fecha) {
-        this.estudiante = estudiante;
+    public Pedido(Usuario usuario, Restaurante restaurante, Platillo platillo, Date fecha) {
+        this.usuario = usuario;
         this.restaurante = restaurante;
         this.platillo = platillo;
         this.fecha = fecha;
@@ -56,12 +56,12 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public Estudiante getEstudiante() {
-        return estudiante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Platillo getPlatillo() {

@@ -17,11 +17,11 @@ insert into restaurante values (2,'kiosko2');
 insert into restaurante values (3,'restaurante');
 
 ---ESTUDIANTES
-insert into estudiante values (2145195,'johan.arias@mail','johan','johan123',10000);
-insert into estudiante values (2145191,'test.arias@mail','test','johan123',10000);
-insert into estudiante values (2145192,'testyy.arias@mail','probando','johan123',10000);
-insert into estudiante values (2145193,'test.arias@mail','test2','johan123',10000);
-insert into estudiante values (2145194,'test1.arias@mail','test3','johan123',0);
+insert into usuario values (2145195,'johan.arias@mail','johan','johan123',10000);
+insert into usuario values (2145191,'test.arias@mail','test','johan123',10000);
+insert into usuario values (2145192,'testyy.arias@mail','probando','johan123',10000);
+insert into usuario values (2145193,'test.arias@mail','test2','johan123',10000);
+insert into usuario values (2145194,'test1.arias@mail','test3','johan123',0);
 
 --MENU
 insert into menu values (123,'Menu del dia',9800,1);

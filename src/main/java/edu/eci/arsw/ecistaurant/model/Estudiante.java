@@ -24,17 +24,15 @@ public class Estudiante implements Serializable {
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
-    @ManyToOne
-    @JoinColumn(name = "fk_restaurante")
-    private Restaurante restaurante;
-
-
     public Estudiante(int carne, String name, int saldo, String email,String passwd) {
         this.carne = carne;
         this.name = name;
         this.saldo = saldo;
         this.email = email;
         this.passwd = passwd;
+    }
+
+    public Estudiante() {
 
     }
 
@@ -44,14 +42,6 @@ public class Estudiante implements Serializable {
 
     public void setPedidos(Set<Pedido> pedidos) {
         this.pedidos = pedidos;
-    }
-
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
     }
 
     public int getCarne() {

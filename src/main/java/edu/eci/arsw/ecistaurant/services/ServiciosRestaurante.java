@@ -9,6 +9,7 @@ import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface ServiciosRestaurante {
 
     List<Restaurante> getAllRestaurants() throws EcistaurantPersistenceException;

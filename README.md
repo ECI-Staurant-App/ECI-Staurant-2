@@ -7,7 +7,7 @@ Integrantes:
 
 
 [![CircleCI](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant.svg?style=svg)](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant)
-[![Deployed to Heroku](https://www.herokucdn.com/deploy/button.png)](https://eci-staurant.herokuapp.com/)
+[![Deployed to Heroku](https://www.herokucdn.com/deploy/button.png)](https://ecistaurant.herokuapp.com/)
 
 ### Descripción (antecedentes, problema que se resuelve, etc.):
 Diariamente, los estudiantes de la Escuela Colombiana de Ingenieria se enfrentan a entornos caoticos a la hora del almuerzo, pues se presentan extensas filas en los restaurantes, existe un acaparamiento de mesas del campus por parte de otros estudiantes que no emplean las mismas para comer.
@@ -15,17 +15,21 @@ Diariamente, los estudiantes de la Escuela Colombiana de Ingenieria se enfrentan
 Actualmente no existe una solucion para estas problematicas y como solución proponemos crear una aplicación web que permita administrar el manejo de las mesas de una manera mas óptima y el pedido de los almuerzos a travez de la aplicación.
 
 
-#### Diagrama de clases
+#### Class Diagram
 
 ![](img/class.png)
 
-#### Diagrama Entidad-Relación
+#### E-R Diagram
 
 ![](img/db.png)
 
-#### Componentes
+#### Component Diagram
 
 ![](img/componentes.png)
+
+#### Deploy Diagram
+
+![](img/deploy.png)
 
 A continuacion se presenta el diagrama de componentes
 

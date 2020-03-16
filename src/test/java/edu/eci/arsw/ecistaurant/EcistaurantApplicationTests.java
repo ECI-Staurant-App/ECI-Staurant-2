@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 
 @RunWith(SpringRunner.class)
@@ -44,12 +45,15 @@ public class EcistaurantApplicationTests extends TestCase
 		Usuario est = new Usuario();
 		List<Usuario> usuarioList = repoEst.findAll();
 		if (usuarioList.isEmpty()){
+			System.out.println("holaaaaaaAAAAA11 ");
 			est.setCarne(2146190);
 		}else{
 			Usuario ultimoUsuario = usuarioList.get(usuarioList.size()-1);
 			est.setCarne(ultimoUsuario.getCarne()+1);
 		}
-		est.setEmail("estudianteprueba@mail.escuela.co");
+		Random num = new Random();
+		int generator = num.nextInt();
+		est.setEmail("estudianteprueba"+ generator +"@mail.escuela.co");
 		est.setName("EstPrueba");
 		est.setPasswd("12345");
 		est.setSaldo(10000);

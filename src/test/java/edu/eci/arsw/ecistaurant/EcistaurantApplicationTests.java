@@ -1,4 +1,4 @@
-/*
+
 package edu.eci.arsw.ecistaurant;
 
 
@@ -51,9 +51,10 @@ public class EcistaurantApplicationTests extends TestCase
 			Usuario ultimoUsuario = usuarioList.get(usuarioList.size()-1);
 			est.setCarne(ultimoUsuario.getCarne()+1);
 		}
-		Random num = new Random();
+		Random num = new Random(1000);
 		int generator = num.nextInt();
 		est.setEmail("estudianteprueba"+ generator +"@mail.escuela.co");
+		est.setEnabled(true);
 		est.setName("EstPrueba");
 		est.setPasswd("12345");
 		est.setSaldo(10000);
@@ -92,4 +93,3 @@ public class EcistaurantApplicationTests extends TestCase
 
 
 }
-*/

@@ -5,10 +5,11 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Estudiante implements Serializable {
+public class Usuario implements Serializable {
 
     @Id
     private int carne;
@@ -16,15 +17,21 @@ public class Estudiante implements Serializable {
     private String name;
     @Column(name = "saldo",length = 30)
     private int saldo;
-    @Column(name = "email",nullable = false,length = 40)
+    @Column(name = "email",unique = true,nullable = false,length = 244)
     private String email;
-    @Column(name="passwd",nullable = false)
+    @Column(name="passwd",nullable = false,length = 60)
     private String passwd;
 
-    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
+    private Boolean enabled;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Rol> roles;
+
+
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
-    public Estudiante(int carne, String name, int saldo, String email,String passwd) {
+    public Usuario(int carne, String name, int saldo, String email, String passwd) {
         this.carne = carne;
         this.name = name;
         this.saldo = saldo;
@@ -32,7 +39,7 @@ public class Estudiante implements Serializable {
         this.passwd = passwd;
     }
 
-    public Estudiante() {
+    public Usuario() {
 
     }
 
@@ -82,5 +89,21 @@ public class Estudiante implements Serializable {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

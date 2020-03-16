@@ -12,16 +12,19 @@ insert into mesa values (9,false,'kiosko2',null);
 
 
 ---RESTAURANTES---
-insert into restaurante values (1,'kiosko1');
-insert into restaurante values (2,'kiosko2');
-insert into restaurante values (3,'restaurante');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko1');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko2');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'restaurante');
 
----ESTUDIANTES
-insert into estudiante values (2145195,'johan.arias@mail','johan','johan123',10000);
-insert into estudiante values (2145191,'test.arias@mail','test','johan123',10000);
-insert into estudiante values (2145192,'testyy.arias@mail','probando','johan123',10000);
-insert into estudiante values (2145193,'test.arias@mail','test2','johan123',10000);
-insert into estudiante values (2145194,'test1.arias@mail','test3','johan123',0);
+---usuarioS
+insert into usuario values (2145195,'johan.arias@mail',true,'johan','johan123',10000);
+insert into usuario values (2145191,'test.arias@mail',true,'test','johan123',10000);
+insert into usuario values (2145192,'testyy.arias@mail',true,'probando','johan123',10000);
+insert into usuario values (2145193,'test5.arias@mail',true,'test2','johan123',10000);
+insert into usuario values (2145194,'test1.arias@mail',true,'test3','johan123',0);
+insert into usuario values (2145197,'test6.arias@mail',true,'test2','',10000);
+insert into usuario values (2145196,'test7.arias@mail',true,'test3','$2a$10$Yr4F8CDjptZ5FWD6xxuTa.qk9Ylvejwccarr8UerQP/heBqmoMcy6',0);
+insert into usuario values (1111111,'admin.arias@mail',true,'admin','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',1000000);
 
 --MENU
 insert into menu values (123,'Menu del dia',9800,1);
@@ -41,6 +44,19 @@ insert into platillo values (14,'Bandeja paisa',10000,126);
 insert into platillo values (15,'Pechuga',9800,126);
 insert into platillo values (16,'Churrasco',9500,127);
 insert into platillo values (17,'Bandeja paisa',9900,129);
+
+--ROLES 
+
+insert into rol (nombre) values ('ROLE_USER');
+insert into rol (nombre) values ('ROLE_ADMIN');
+
+delete from usuario_roles;
+delete from rol;
+delete from usuario;
+
+
+insert into usuario_roles values (2145197,(select count(id) from rol));
+insert into usuario_roles values (1111111,(select count(id)+1 from rol);
 
 
 

@@ -16,15 +16,15 @@ public class Mesa implements Serializable {
 
     @JoinColumn(name = "carne")
     @OneToOne(cascade = CascadeType.ALL)
-    private Estudiante estudiante;
+    private Usuario usuario;
 
     public Mesa() {
     }
 
-    public Mesa(String ubicacion, boolean estaDisponible, Estudiante estudiante) {
+    public Mesa(String ubicacion, boolean estaDisponible, Usuario usuario) {
         this.ubicacion = ubicacion;
         this.estaDisponible = estaDisponible;
-        this.estudiante = estudiante;
+        this.usuario = usuario;
     }
 
     public int getIdMesa() {

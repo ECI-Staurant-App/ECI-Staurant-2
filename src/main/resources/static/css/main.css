@@ -546,19 +546,7 @@ img {
   vertical-align: middle;
 }
 
-.btn {
-  color: #ffffff;
-  padding: 0.8rem;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-}
+
 
 .btn:hover {
   background-color: rgba(255, 255, 255, 0.12);
@@ -624,7 +612,8 @@ html {
   .card-item {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #000000;
+    opacity: 0.70;
     width: 100%;
     border-radius: 6px;
     box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
@@ -637,7 +626,8 @@ html {
       transform: scale(1.1);
       -webkit-transform: scale(1.1);
       .card-image {
-        opacity: 1;
+        background-color: #000000;
+        opacity: 0.90;
       }
     }
   }
@@ -649,6 +639,8 @@ html {
     flex-direction: column;
     padding: 1rem;
     line-height: 1.5em;
+    background-color: #000000;
+    opacity: 0.70;
   }
 
   .card-title {
@@ -665,8 +657,9 @@ html {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #000000;
     border-radius: 6px 6px 0px 0px;
-    opacity: 0.91;
+    opacity: 0.70;
   }
 }
 
@@ -721,21 +714,26 @@ html {
 .cards .card-item {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   width: 100%;
   border-radius: 6px;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   transition: transform 0.5s;
   -webkit-transition: transform 0.5s;
+  background-color: #000000;
+  opacity: 0.70;
 }
 .cards .card-item:hover {
   cursor: pointer;
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
+  opacity: 0.90;
+  background-color: #000000;
 }
 .cards .card-item:hover .card-image {
-  opacity: 1;
+  opacity: 0.70;
+  background-color: #000000;
+
 }
 .cards .card-info {
   display: flex;
@@ -757,5 +755,35 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 6px 6px 0px 0px;
-  opacity: 0.91;
+  opacity: 0.70;
+  background-color: #000000;
 }
+
+
+.cards .card-image-mesa {
+  height: 50px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 6px 6px 0px 0px;
+  opacity: 0.70;
+  background-color: #000000;
+  background-image: url("../images/mesa.jpg");
+}
+
+.cards .card-image-mesa-left {
+  height: 50px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  border-radius: 6px 6px 0px 0px;
+  opacity: 0.70;
+  background-color: #000000;
+  background-image: url("../images/mesa.jpg");
+}
+
+div { border: 1px solid transparent; }
+
+

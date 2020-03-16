@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>EciStaurant</title>
+	<title>Mesas</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -33,14 +33,115 @@
 		<div class="container-login100" style="background-image: url('images/back.jpg');">
 
 			<div class="wrap-login100 p-t-30 p-b-50">
-				<div class="brand">
-					 <img src="images/logo.png"/>
+				<div class="container">
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa-left">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>							
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
 				</div>
-				<h1>Construyendo Mesas...</h1>
+				<div class="container">
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>							
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+					<div class="cards" data-toggle="modal" data-target="#modalMesa">
+						<div class="card-item">
+							<div class="card-image-mesa">
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	
+	<div class="modal fade" id="modalMesa" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Mesa</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="ubicacion"><span style="color: red"></span> Ubicacion</label>
+					<input readonly>
+						Null
+					</textarea>
+				</div>	
+				<div class="form-group">
+					<label for="tiempo"><span style="color: red"></span> Tiempo</label>
+					<input readonly>
+						Null
+					</textarea>
+				  </div>	  
+			</div>
+			<button type="button" class="btn btn-primary" data-dismiss="modal" >Reservar</button>
+		  </div>
+		  
+		</div>
+	  </div>
+
 
 	<div id="dropDownSelect1"></div>
 	
@@ -61,5 +162,6 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
+	
 </body>
 </html>

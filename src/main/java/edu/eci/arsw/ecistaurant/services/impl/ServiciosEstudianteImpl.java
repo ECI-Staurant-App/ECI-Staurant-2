@@ -28,10 +28,9 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     @Override
     public void saveStudent(Usuario student) throws EcistaurantPersistenceException {
         Optional<Usuario> optionalStudent = usuarioRepository.findByCarne(student.getCarne());
-        if (optionalStudent.isPresent()){
+        if (optionalStudent.isPresent()) {
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.STUDENT_REGISTERED);
-        }else
-        {
+        } else {
             usuarioRepository.save(student);
         }
 
@@ -56,6 +55,12 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         return pedidoRepository.save(pedido);
     }
 
+    @Override
+    public void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException {
 
+        Usuario usuario1 = getStudentById(usuario.getCarne());
+        usuario1.setSaldo(usuario.getSaldo());
+
+    }
 
 }

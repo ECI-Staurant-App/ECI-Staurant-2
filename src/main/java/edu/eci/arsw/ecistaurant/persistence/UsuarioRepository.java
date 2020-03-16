@@ -16,7 +16,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{
     Optional<Usuario> findByCarne(int carne);
 
 
-    @Query("Select u from usuario u where u.email = ?1")
+    @Query("Select u from Usuario u where u.email = ?1")
     Usuario findByEmail(String email);
 
 }

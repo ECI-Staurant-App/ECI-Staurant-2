@@ -1,4 +1,6 @@
+/*
 package edu.eci.arsw.ecistaurant;
+
 
 
 import edu.eci.arsw.ecistaurant.model.Usuario;
@@ -26,6 +28,7 @@ import java.util.List;
 @SpringBootTest
 public class EcistaurantApplicationTests extends TestCase
 {
+
 	@Autowired
 	private UsuarioRepository repoEst;
 	@Autowired
@@ -85,3 +88,4 @@ public class EcistaurantApplicationTests extends TestCase
 
 
 }
+*/

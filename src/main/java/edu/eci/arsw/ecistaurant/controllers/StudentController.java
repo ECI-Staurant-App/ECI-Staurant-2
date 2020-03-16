@@ -11,24 +11,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/student")
+@RequestMapping(value = "/users")
 public class StudentController {
 
     @Autowired
     private ServiciosEstudiante studentServices;
 
     @GetMapping
-    public ResponseEntity<?>  getAllStudents(){
+    public ResponseEntity<?>  getAllUsers(){
         try{
             List<Usuario> usuarios = studentServices.getAllStudents();
             return new ResponseEntity<>(usuarios, HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/{carne}")
+    public ResponseEntity<?>  getUserById(@PathVariable int carne){
+        try{
+            return new ResponseEntity<>(studentServices.getStudentById(carne), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> addNewCar(@RequestBody Usuario usuario){
+    public ResponseEntity<?> addUser(@RequestBody Usuario usuario){
         try{
             studentServices.saveStudent(usuario);
             return new ResponseEntity<>(usuario,HttpStatus.CREATED);
@@ -36,4 +45,18 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping(value = "/{carne}")
+    public ResponseEntity<?> putUser (@PathVariable int carne,@RequestBody Usuario usuario){
+        try {
+            studentServices.actualizarSaldo(usuario);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (EcistaurantPersistenceException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
+
+
+
+

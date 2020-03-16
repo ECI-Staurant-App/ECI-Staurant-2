@@ -16,4 +16,6 @@ public interface ServiciosEstudiante {
     Usuario getStudentById(int carne) throws EcistaurantPersistenceException;
 
     Pedido realizarPedido(Pedido pedido) throws EcistaurantPersistenceException;
+
+    void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException;
 }

@@ -45,14 +45,13 @@ public class EcistaurantApplicationTests extends TestCase
 		Usuario est = new Usuario();
 		List<Usuario> usuarioList = repoEst.findAll();
 		if (usuarioList.isEmpty()){
-			System.out.println("holaaaaaaAAAAA11 ");
 			est.setCarne(2146190);
 		}else{
 			Usuario ultimoUsuario = usuarioList.get(usuarioList.size()-1);
 			est.setCarne(ultimoUsuario.getCarne()+1);
 		}
-		Random num = new Random(1000);
-		int generator = num.nextInt();
+		Random num = new Random();
+		int generator = num.nextInt(1000);
 		est.setEmail("estudianteprueba"+ generator +"@mail.escuela.co");
 		est.setEnabled(true);
 		est.setName("EstPrueba");

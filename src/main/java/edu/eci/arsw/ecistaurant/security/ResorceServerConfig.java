@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResorceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/mesas.html").permitAll()
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
                 .anyRequest().authenticated();
     }
 }

@@ -4,24 +4,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-<<<<<<< HEAD
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@ComponentScan
 @EnableSwagger2
-public class EciStaurantApplication {
-=======
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-@SpringBootApplication
 @ComponentScan
 public class EciStaurantApplication implements CommandLineRunner {
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
->>>>>>> security
     public static void main(String[] args) {
         SpringApplication.run(EciStaurantApplication.class, args);
 
@@ -33,7 +24,7 @@ public class EciStaurantApplication implements CommandLineRunner {
 
         for (int i = 0; i < 4; i++) {
             String passwordBcrypt = passwordEncoder.encode(password);
-            System.out.println(passwordBcrypt);
+            //System.out.println(passwordBcrypt);
         }
     }
 }

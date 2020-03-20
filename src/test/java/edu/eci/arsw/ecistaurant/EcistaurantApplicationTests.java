@@ -1,8 +1,5 @@
 
 package edu.eci.arsw.ecistaurant;
-
-
-
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;

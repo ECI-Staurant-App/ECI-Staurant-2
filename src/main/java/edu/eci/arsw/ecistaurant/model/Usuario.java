@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable {
 
@@ -24,10 +26,11 @@ public class Usuario implements Serializable {
 
     private Boolean enabled;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Rol> roles;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 

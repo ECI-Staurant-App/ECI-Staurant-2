@@ -1,5 +1,7 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,8 +9,10 @@ import java.util.Date;
 @Entity
 public class Pedido implements Serializable {
 
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @JsonIgnore
     private int idPedido;
 
     @ManyToOne

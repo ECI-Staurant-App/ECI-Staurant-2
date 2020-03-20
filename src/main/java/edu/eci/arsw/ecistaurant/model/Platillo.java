@@ -1,5 +1,7 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,6 +16,7 @@ public class Platillo implements Serializable {
     @Column(name = "precio",nullable = false,length = 20)
     private int precio;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "fk_menu")
     private Menu menu;

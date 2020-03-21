@@ -8,6 +8,7 @@ public class EcistaurantPersistenceException extends Exception {
     public static final String RESTAURANT_REGISTERED = "Restaurant already registered";
     public static final String MENU_REGISTERED = "Menu already registered";
     public static final String PLATILLO_NOT_FOUND = "Platillo not found" ;
+    public static final String PLATILLO_REGISTERED = "Platillo already registered";
 
     public EcistaurantPersistenceException(){
         super();

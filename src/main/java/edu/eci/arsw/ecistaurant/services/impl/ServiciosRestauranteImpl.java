@@ -74,6 +74,27 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    public List<Pedido> getPedidosByUser(int user) {
+        return pedidoRepository.findAllByUsuario(user);
+    }
+
+    @Override
+    public List<Pedido> getPedidosByFecha() {
+        return pedidoRepository.findAllByFecha();
+    }
+
+    @Override
+    public void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException {
+        Optional<Platillo> optionalPlatillo = platilloRepository.findById(platillo.getIdPlatillo());
+        if (optionalPlatillo.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PLATILLO_REGISTERED);
+        }else
+        {
+            platilloRepository.save(platillo);
+        }
+    }
+
+    @Override
     public List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException {
         return platilloRepository.findAll();
     }

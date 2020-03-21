@@ -72,16 +72,9 @@ public class EcistaurantApplicationTests extends TestCase
 
 	@Test
 	public void deberiaRegistrarPedido(){
-		Pedido pedido = new Pedido();
 		try {
-			pedido.setUsuario(studentServices.getStudentById(2146190));
-			pedido.setRestaurante(restaurantServices.getRestaurantById(1));
-			pedido.setPlatillo(restaurantServices.getPlatilloById(10));
-			SimpleDateFormat dateformat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-			Date newDate = dateformat.parse("02-04-2020 13:35:42");
-			pedido.setFecha(newDate);
-			studentServices.realizarPedido(pedido);
-		} catch (EcistaurantPersistenceException | ParseException e) {
+			studentServices.realizarPedido(2146190,"kiosko1","kk");
+		} catch (EcistaurantPersistenceException e) {
 			e.printStackTrace();
 		}
 	}

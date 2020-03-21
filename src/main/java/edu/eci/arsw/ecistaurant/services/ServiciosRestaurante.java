@@ -24,6 +24,12 @@ public interface ServiciosRestaurante {
 
     void saveMenu(Menu menu) throws EcistaurantPersistenceException;
 
+    List<Pedido> getPedidosByUser(int user);
+
+    List<Pedido> getPedidosByFecha();
+
+    void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException;
+
     List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException;
 
     Platillo getPlatilloById(int id ) throws EcistaurantPersistenceException;

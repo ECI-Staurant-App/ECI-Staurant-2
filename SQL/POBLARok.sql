@@ -55,8 +55,8 @@ delete from rol;
 delete from usuario;
 
 
-insert into usuario_roles values (2145197,(select count(id) from rol));
-insert into usuario_roles values (1111111,(select count(id)+1 from rol);
+insert into usuario_roles values (2145197,(select id from rol where nombre = 'ROLE_USER'));
+insert into usuario_roles values (1111111,(select id from rol where nombre = 'ROLE_ADMIN'));
 
 
 

@@ -13,7 +13,7 @@ body {
 }
 
 body {
-	background: #9b111e;
+	background: #1b47b5    ;
 	color: #fff;
 }
 
@@ -53,7 +53,7 @@ body {
 	border-radius: 50%;
 	background: none;
 	background-color: #fff;
-	color: #9b111e;
+	color: #1b47b5    ;
 	text-align: center;
 	font-weight: 700;
 	font-size: 1.5em;
@@ -146,7 +146,7 @@ body {
 	width: 14.5em;
 	height: 14.5em;
 	border-radius: 50%;
-	background: #9b111e;
+	background: #1b47b5    ;
 	background: -webkit-radial-gradient(transparent 35%, #000000 35%);
 	background: -moz-radial-gradient(transparent 35%, #000000 35%);
 	background: radial-gradient(transparent 35%, #000000 35%);
@@ -191,40 +191,53 @@ body {
 }
 
 .csstransforms .opened-nav li:first-child {
-	-webkit-transform: rotate(-0deg) skew(60deg);
-	-moz-transform: rotate(-0deg) skew(60deg);
-	-ms-transform: rotate(-0deg) skew(60deg);
-	transform: rotate(-0deg) skew(60deg);
+	-webkit-transform: rotate(-20deg) skew(60deg);
+	-moz-transform: rotate(-20deg) skew(60deg);
+	-ms-transform: rotate(-20deg) skew(60deg);
+	transform: rotate(-20deg) skew(60deg);
 }
 
 .csstransforms .opened-nav li:nth-child(2) {
-	-webkit-transform: rotate(37deg) skew(60deg);
-	-moz-transform: rotate(37deg) skew(60deg);
-	-ms-transform: rotate(37deg) skew(60deg);
-	transform: rotate(37deg) skew(60deg);
+	-webkit-transform: rotate(12deg) skew(60deg);
+	-moz-transform: rotate(12deg) skew(60deg);
+	-ms-transform: rotate(12deg) skew(60deg);
+	transform: rotate(12deg) skew(60deg);
 }
 
 .csstransforms .opened-nav  li:nth-child(3) {
-	-webkit-transform: rotate(75deg) skew(60deg);
-	-moz-transform: rotate(75deg) skew(60deg);
-	-ms-transform: rotate(75deg) skew(60deg);
-	transform: rotate(75deg) skew(60deg);
+	-webkit-transform: rotate(44deg) skew(60deg);
+	-moz-transform: rotate(44deg) skew(60deg);
+	-ms-transform: rotate(44deg) skew(60deg);
+	transform: rotate(44deg) skew(60deg);
 }
 
 .csstransforms .opened-nav li:nth-child(4) {
-	-webkit-transform: rotate(112deg) skew(60deg);
-	-moz-transform: rotate(112deg) skew(60deg);
-	-ms-transform: rotate(112deg) skew(60deg);
-	transform: rotate(112deg) skew(60deg);
+	-webkit-transform: rotate(76deg) skew(60deg);
+	-moz-transform: rotate(76deg) skew(60deg);
+	-ms-transform: rotate(76deg) skew(60deg);
+	transform: rotate(76deg) skew(60deg);
 }
 
 .csstransforms .opened-nav li:nth-child(5) {
-	-webkit-transform: rotate(150deg) skew(60deg);
-	-moz-transform: rotate(150deg) skew(60deg);
-	-ms-transform: rotate(150deg) skew(60deg);
-	transform: rotate(150deg) skew(60deg);
+	-webkit-transform: rotate(108deg) skew(60deg);
+	-moz-transform: rotate(108deg) skew(60deg);
+	-ms-transform: rotate(108deg) skew(60deg);
+	transform: rotate(108deg) skew(60deg);
 }
 
+.csstransforms .opened-nav li:nth-child(6) {
+	-webkit-transform: rotate(140deg) skew(60deg);
+	-moz-transform: rotate(140deg) skew(60deg);
+	-ms-transform: rotate(140deg) skew(60deg);
+	transform: rotate(140deg) skew(60deg);
+}
+
+.csstransforms .opened-nav li:nth-child(7) {
+	-webkit-transform: rotate(172deg) skew(60deg);
+	-moz-transform: rotate(172deg) skew(60deg);
+	-ms-transform: rotate(172deg) skew(60deg);
+	transform: rotate(172deg) skew(60deg);
+}
 
 .no-csstransforms .cn-wrapper {
 	overflow: hidden;

@@ -50,18 +50,6 @@ public class StudentController {
         return new ResponseEntity<>(studentServices.buscarMesasDisponibles(), HttpStatus.ACCEPTED);
     }
 
-   /* @GetMapping("/{/platillos/restaurant}")
-    public ResponseEntity<?>  getPlatillosByRestaurant(@PathVariable String restaurant){
-        try{
-            return new ResponseEntity<>(studentServices.getStudentById(restaurant), HttpStatus.ACCEPTED);
-        }catch (EcistaurantPersistenceException e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
-    }
-*/
-
-
-
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody Usuario usuario){
@@ -72,8 +60,6 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-
-
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @RequestMapping(value = "/AddOrder", method = RequestMethod.POST)

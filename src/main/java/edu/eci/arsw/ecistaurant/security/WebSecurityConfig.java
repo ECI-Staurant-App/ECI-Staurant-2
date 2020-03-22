@@ -47,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**").permitAll()
                 /*.antMatchers("/users/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/restaurants/**").hasAnyRole("USER","ADMIN")*/
-                .anyRequest().authenticated()
+                .anyRequest().authenticated().and()
+                .csrf().disable().cors()
                 .and()
                 .formLogin()
                 .loginPage("/login")

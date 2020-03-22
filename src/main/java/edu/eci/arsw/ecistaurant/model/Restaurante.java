@@ -16,11 +16,10 @@ public class Restaurante implements Serializable {
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     Set<Menu> menus= new HashSet<Menu>();
 

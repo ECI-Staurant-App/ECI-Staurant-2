@@ -12,7 +12,6 @@ public class Menu implements Serializable {
 
 
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @JsonIgnore
     @Id
     private int idMenu;
 
@@ -24,15 +23,14 @@ public class Menu implements Serializable {
     //@OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
     //Set<Platillo> platillos= new HashSet<Platillo>();
 
-
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurante")
     private Restaurante restaurante;
 
-    public Menu(String nombre, int precio) {
+    public Menu(String nombre, int precio,Restaurante restaurante) {
         this.nombre = nombre;
         this.precio = precio;
+        this.restaurante = restaurante;
     }
 
     public Menu() {

@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurante,Integer> {
 
+    @Query(value = "SELECT * from restaurante",nativeQuery = true)
     List<Restaurante> findAll();
 
     Restaurante save(Restaurante restaurante);

@@ -1,4 +1,4 @@
-package edu.eci.arsw.ecistaurant.persistence;
+/*package edu.eci.arsw.ecistaurant.persistence;
 import edu.eci.arsw.ecistaurant.model.Platillo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,3 +18,4 @@ public interface PlatilloRepository extends JpaRepository<Platillo,Integer> {
 
     Platillo findByNombre(String nombre);
 }
+*/

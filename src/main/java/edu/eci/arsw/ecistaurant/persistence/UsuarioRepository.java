@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.persistence;
 
+//import edu.eci.arsw.ecistaurant.model.Platillo;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

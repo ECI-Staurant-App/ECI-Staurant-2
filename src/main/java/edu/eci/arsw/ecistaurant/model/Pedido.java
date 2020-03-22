@@ -16,27 +16,27 @@ public class Pedido implements Serializable {
     private int idPedido;
 
     @ManyToOne
-    @JoinColumn(name = "fk_estudiante")
+    @JoinColumn(name = "estudiante")
     private Usuario usuario;
 
     @Column
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "fk_restaurante")
+    @JoinColumn(name = "restaurante")
     private Restaurante restaurante;
 
     @ManyToOne
-    @JoinColumn(name = "fk_platillo")
-    private Platillo platillo;
+    @JoinColumn(name = "menu")
+    private Menu menu;
 
     public Pedido() {
     }
 
-    public Pedido(Usuario usuario, Restaurante restaurante, Platillo platillo, Date fecha) {
+    public Pedido(Usuario usuario, Restaurante restaurante, Menu menu, Date fecha) {
         this.usuario = usuario;
         this.restaurante = restaurante;
-        this.platillo = platillo;
+        this.menu = menu;
         this.fecha = fecha;
     }
 
@@ -48,9 +48,9 @@ public class Pedido implements Serializable {
         this.restaurante = restaurante;
     }
 
-    public void setPlatillo(Platillo platillo) {
+   /* public void setPlatillo(Platillo platillo) {
         this.platillo = platillo;
-    }
+    }*/
 
     public int getIdPedido() {
         return idPedido;
@@ -68,9 +68,17 @@ public class Pedido implements Serializable {
         this.usuario = usuario;
     }
 
-    public Platillo getPlatillo() {
-        return platillo;
+    public Menu getMenu() {
+        return menu;
     }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    /*  public Platillo getPlatillo() {
+        return platillo;
+    }*/
 
     public Date getFecha() {
         return fecha;

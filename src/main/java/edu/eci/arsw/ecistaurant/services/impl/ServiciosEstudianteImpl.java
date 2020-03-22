@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.services.impl;
 
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Mesa;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Usuario;
@@ -23,7 +24,7 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     @Autowired
     RestaurantRepository restaurantRepository;
     @Autowired
-    PlatilloRepository platilloRepository;
+    MenuRepository menuRepository;
     @Autowired
     MesaRepository mesaRepository;
 
@@ -53,12 +54,12 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
-    public Pedido realizarPedido(int usuario,String restaurante,String platillo) throws EcistaurantPersistenceException {
+    public Pedido realizarPedido(int usuario,String restaurante,String menu) throws EcistaurantPersistenceException {
 
         Pedido pedido = new Pedido();
         pedido.setUsuario(getStudentById(usuario));
         pedido.setRestaurante(restaurantRepository.findByNombre(restaurante));
-        pedido.setPlatillo(platilloRepository.findByNombre(platillo));
+        pedido.setMenu(menuRepository.findByNombre(menu).get());
         Date date = new Date();
         System.out.println(date);
         pedido.setFecha(date);
@@ -81,6 +82,11 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     @Override
     public List<Mesa> buscarMesasDisponibles() {
         return mesaRepository.findAllByEstaDisponible() ;
+    }
+
+    @Override
+    public List<Menu> getMenuByRestaurant(String restaurant) {
+        return null;
     }
 
 }

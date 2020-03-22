@@ -2,7 +2,6 @@ package edu.eci.arsw.ecistaurant.services.impl;
 
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
-import edu.eci.arsw.ecistaurant.model.Platillo;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
@@ -21,8 +20,8 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     private PedidoRepository pedidoRepository;
     @Autowired
     private MenuRepository menuRepository;
-    @Autowired
-    private PlatilloRepository platilloRepository;
+    //@Autowired
+   // private PlatilloRepository platilloRepository;
 
     @Override
     public List<Restaurante> getAllRestaurants() throws EcistaurantPersistenceException {
@@ -63,13 +62,14 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    public void saveMenu(Menu menu) throws EcistaurantPersistenceException {
-        Optional<Menu> optionalMenu = menuRepository.findById(menu.getIdMenu());
+    public void saveMenu(String menu,int precio) throws EcistaurantPersistenceException {
+        Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
         if (optionalMenu.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
         }else
         {
-            menuRepository.save(menu);
+            optionalMenu.get().setPrecio(precio);
+            menuRepository.save(optionalMenu.get());
         }
     }
 
@@ -84,6 +84,11 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    public List<Menu> getAllMenuByRestaurant(String restaurante) {
+        return menuRepository.findAllByRestaurante(restaurante);
+    }
+
+    /*@Override
     public void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException {
         Optional<Platillo> optionalPlatillo = platilloRepository.findById(platillo.getIdPlatillo());
         if (optionalPlatillo.isPresent()){
@@ -109,6 +114,6 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
             return optionalPlatillo.get();
         }
     }
-
+*/
 
 }

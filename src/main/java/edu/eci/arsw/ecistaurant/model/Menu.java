@@ -1,5 +1,7 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -8,7 +10,9 @@ import java.util.Set;
 @Entity
 public class Menu implements Serializable {
 
+
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @JsonIgnore
     @Id
     private int idMenu;
 
@@ -17,17 +21,18 @@ public class Menu implements Serializable {
     @Column(name = "precio",nullable = false,length = 20)
     private int precio;
 
-    @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
-    Set<Platillo> platillos= new HashSet<Platillo>();
+    //@OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
+    //Set<Platillo> platillos= new HashSet<Platillo>();
 
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "fk_restaurante")
+    @JoinColumn(name = "restaurante")
     private Restaurante restaurante;
 
-    public Menu(String nombre, int precio, Restaurante restaurante) {
+    public Menu(String nombre, int precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.restaurante = restaurante;
     }
 
     public Menu() {
@@ -65,11 +70,11 @@ public class Menu implements Serializable {
         this.restaurante = restaurante;
     }
 
-    public Set<Platillo> getPlatillos() {
+    /*public Set<Platillo> getPlatillos() {
         return platillos;
     }
 
     public void setPlatillos(Set<Platillo> platillos) {
         this.platillos = platillos;
-    }
+    }*/
 }

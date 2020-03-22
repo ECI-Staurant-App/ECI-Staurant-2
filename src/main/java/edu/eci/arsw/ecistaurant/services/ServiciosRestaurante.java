@@ -2,7 +2,7 @@ package edu.eci.arsw.ecistaurant.services;
 
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
-import edu.eci.arsw.ecistaurant.model.Platillo;
+//import edu.eci.arsw.ecistaurant.model.Platillo;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
 
@@ -22,16 +22,18 @@ public interface ServiciosRestaurante {
 
     Pedido getPedidoById(int id) throws EcistaurantPersistenceException;
 
-    void saveMenu(Menu menu) throws EcistaurantPersistenceException;
+    void saveMenu(String menu,int precio) throws EcistaurantPersistenceException;
 
     List<Pedido> getPedidosByUser(int user);
 
     List<Pedido> getPedidosByFecha();
 
-    void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException;
+    List<Menu> getAllMenuByRestaurant(String restaurante);
 
-    List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException;
+    // void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException;
 
-    Platillo getPlatilloById(int id ) throws EcistaurantPersistenceException;
+   // List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException;
+
+   // Platillo getPlatilloById(int id ) throws EcistaurantPersistenceException;
 
 }

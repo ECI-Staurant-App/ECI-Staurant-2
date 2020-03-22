@@ -1,7 +1,6 @@
 package edu.eci.arsw.ecistaurant.persistence;
 
 import edu.eci.arsw.ecistaurant.model.Pedido;
-import edu.eci.arsw.ecistaurant.model.Platillo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,7 +17,7 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
 
     Optional<Pedido> findById(int id);
 
-    @Query(value = "SELECT * from pedido where fk_estudiante = ?1 ORDER BY fecha DESC ",nativeQuery = true)
+    @Query(value = "SELECT * from pedido where estudiante = ?1 ORDER BY fecha DESC ",nativeQuery = true)
     List<Pedido> findAllByUsuario(int carne);
 
     @Query(value = "SELECT * from pedido ORDER BY fecha DESC ",nativeQuery = true)

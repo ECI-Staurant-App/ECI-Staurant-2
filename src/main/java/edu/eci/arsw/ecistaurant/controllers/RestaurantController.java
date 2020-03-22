@@ -1,7 +1,9 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
-import edu.eci.arsw.ecistaurant.model.Platillo;
+//import edu.eci.arsw.ecistaurant.model.Platillo;
+import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
@@ -23,7 +25,18 @@ public class RestaurantController {
     private ServiciosEstudiante serviciosEstudiante;
 
 
+
     @GetMapping("/")
+    public ResponseEntity<?>  getAllRestaurants(){
+        try{
+            List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
+            return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{orders}")
     public ResponseEntity<?>  getAllOrders(){
         try{
             List<Pedido> pedidos = serviciosRestaurante.getAllPedidos();
@@ -43,22 +56,26 @@ public class RestaurantController {
         }
     }
 
-    @GetMapping("/lastOrders}")
+    @GetMapping("/{lastOrders}")
     public ResponseEntity<?>  getLastOrders(){
         return new ResponseEntity<>(serviciosRestaurante.getPedidosByFecha(), HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/AddPlatiilo", method = RequestMethod.POST)
-    public ResponseEntity<?> addPlatillo(Platillo platillo){
+    @RequestMapping(value = "/AddMenu", method = RequestMethod.POST)
+    public ResponseEntity<?> addMenu(String menu,int precio){
         try{
-            serviciosRestaurante.savePlatillo(platillo);
+            serviciosRestaurante.saveMenu(menu, precio);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
-
+    @RequestMapping(value = "/menu", method = RequestMethod.GET)
+    public ResponseEntity<?>  getAllMenuByRestaurant(@PathVariable String restaurante) {
+        List<Menu> menus = serviciosRestaurante.getAllMenuByRestaurant(restaurante);
+        return new ResponseEntity<>(menus, HttpStatus.ACCEPTED);
+    }
 }
 
 

@@ -1,5 +1,7 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,9 +16,11 @@ public class Restaurante implements Serializable {
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     Set<Menu> menus= new HashSet<Menu>();
 

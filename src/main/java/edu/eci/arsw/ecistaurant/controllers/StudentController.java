@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
@@ -48,7 +49,15 @@ public class StudentController {
         return new ResponseEntity<>(studentServices.buscarMesasDisponibles(), HttpStatus.ACCEPTED);
     }
 
-
+   /* @GetMapping("/{/platillos/restaurant}")
+    public ResponseEntity<?>  getPlatillosByRestaurant(@PathVariable String restaurant){
+        try{
+            return new ResponseEntity<>(studentServices.getStudentById(restaurant), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+*/
 
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody Usuario usuario){
@@ -59,6 +68,7 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
 
     @RequestMapping(value = "/AddOrder", method = RequestMethod.POST)
     public ResponseEntity<?> placeOrder(int user,String restaurante, String platillo){
@@ -71,7 +81,7 @@ public class StudentController {
     }
 
     @PutMapping(value = "/{carne}")
-    public ResponseEntity<?> putUser(@PathVariable int carne,@RequestBody Usuario usuario){
+    public ResponseEntity<?> putUser(@PathVariable int carne,@RequestBody Usuario usuario) {
         try {
             studentServices.actualizarSaldo(usuario);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -79,6 +89,8 @@ public class StudentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
 }
 
 

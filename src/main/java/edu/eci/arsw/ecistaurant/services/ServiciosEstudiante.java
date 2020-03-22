@@ -1,4 +1,5 @@
 package edu.eci.arsw.ecistaurant.services;
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Mesa;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 
@@ -16,11 +17,13 @@ public interface ServiciosEstudiante {
 
     Usuario getStudentById(int carne) throws EcistaurantPersistenceException;
 
-    Pedido realizarPedido(int usuario,String restaurante,String platillo) throws EcistaurantPersistenceException;
+    Pedido realizarPedido(int usuario, String restaurante, String platillo) throws EcistaurantPersistenceException;
 
     void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException;
 
     List<Mesa> buscarMesas();
 
     List<Mesa> buscarMesasDisponibles();
+
+    List<Menu> getMenuByRestaurant(String restaurant);
 }

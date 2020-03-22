@@ -1,9 +1,6 @@
 package edu.eci.arsw.ecistaurant.services.impl;
 
-import edu.eci.arsw.ecistaurant.model.Menu;
-import edu.eci.arsw.ecistaurant.model.Mesa;
-import edu.eci.arsw.ecistaurant.model.Pedido;
-import edu.eci.arsw.ecistaurant.model.Usuario;
+import edu.eci.arsw.ecistaurant.model.*;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +82,9 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
-    public List<Menu> getMenuByRestaurant(String restaurant) {
-        return null;
+    public List<Menu> getAllMenuByRestaurant(String restaurante) {
+        Restaurante restaurantSelected = restaurantRepository.findByNombre(restaurante);
+        return menuRepository.findAllByRestaurante(restaurantSelected.getIdRestaurante());
     }
 
 }

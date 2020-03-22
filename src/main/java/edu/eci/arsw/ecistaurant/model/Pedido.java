@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Pedido implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "restaurante")
+    @JsonBackReference
     private Restaurante restaurante;
 
     @ManyToOne

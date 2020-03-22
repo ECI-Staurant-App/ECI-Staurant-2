@@ -25,5 +25,5 @@ public interface ServiciosEstudiante {
 
     List<Mesa> buscarMesasDisponibles();
 
-    List<Menu> getMenuByRestaurant(String restaurant);
+    List<Menu> getAllMenuByRestaurant(String restaurante);
 }

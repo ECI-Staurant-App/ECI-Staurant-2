@@ -1,6 +1,13 @@
 apiclient = (function () {
 
     return {
+
+        getAllRestaurants: function(callback) {
+            $.getJSON("https://ecistaurant.herokuapp.com/restaurants/",function (data) {
+                callback(data);
+            },null)
+        },
+
         getAllUsers: function(callback) {
             $.getJSON("https://ecistaurant.herokuapp.com/users",function(data){
                 callback(data);
@@ -15,7 +22,7 @@ apiclient = (function () {
         },
         getMenuByRestaurant : function (restaurante,callback) {
 
-            $.getJSON("https://ecistaurant.herokuapp.com/restaurants/menu"+restaurante,function (data) {
+            $.getJSON("https://ecistaurant.herokuapp.com/restaurants/menus"+restaurante,function (data) {
                 callback(data);
             }, null)
         }

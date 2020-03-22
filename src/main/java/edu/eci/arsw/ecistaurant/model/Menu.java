@@ -26,7 +26,7 @@ public class Menu implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "restaurante")
+    @JoinColumn(name = "fk_restaurante")
     @JsonBackReference
     private Restaurante restaurante;
 

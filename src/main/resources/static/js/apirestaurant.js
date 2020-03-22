@@ -1,11 +1,7 @@
 services = (function () {
 
     return {
-        getAllRestaurants: function(callback) {
-            $.getJSON("https://ecistaurant.herokuapp.com/restaurants",function (data) {
-                callback(data);
-            },null)
-        },
+
         getAllOrders: function(callback) {
             $.getJSON("https://ecistaurant.herokuapp.com/restaurants/orders",function(data){
                 callback(data);

@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -14,15 +15,19 @@ public class Restaurante implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Id
     private int idRestaurante;
+
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     @JsonManagedReference
+
     Set<Menu> menus= new HashSet<Menu>();
 
     public Restaurante(String nombre) {
@@ -32,7 +37,6 @@ public class Restaurante implements Serializable {
     public Restaurante() {
 
     }
-
     public int getIdRestaurante() {
         return idRestaurante;
     }

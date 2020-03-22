@@ -1,10 +1,7 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
-import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
-//import edu.eci.arsw.ecistaurant.model.Platillo;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
-import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
@@ -77,11 +74,7 @@ public class RestaurantController {
         }
     }
 
-    @RequestMapping(value = "/menu", method = RequestMethod.GET)
-    public ResponseEntity<?>  getAllMenuByRestaurant(@PathVariable String restaurante) {
-        List<Menu> menus = serviciosRestaurante.getAllMenuByRestaurant(restaurante);
-        return new ResponseEntity<>(menus, HttpStatus.ACCEPTED);
-    }
+
 }
 
 

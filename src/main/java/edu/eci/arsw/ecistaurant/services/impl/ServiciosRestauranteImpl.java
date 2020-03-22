@@ -20,8 +20,6 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     private PedidoRepository pedidoRepository;
     @Autowired
     private MenuRepository menuRepository;
-    //@Autowired
-   // private PlatilloRepository platilloRepository;
 
     @Override
     public List<Restaurante> getAllRestaurants() throws EcistaurantPersistenceException {
@@ -68,8 +66,10 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
         }else
         {
-            optionalMenu.get().setPrecio(precio);
-            menuRepository.save(optionalMenu.get());
+            Menu nuevo = new Menu();
+            nuevo.setNombre(menu);
+            nuevo.setPrecio(precio);
+            menuRepository.save(nuevo);
         }
     }
 
@@ -83,37 +83,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         return pedidoRepository.findAllByFecha();
     }
 
-    @Override
-    public List<Menu> getAllMenuByRestaurant(String restaurante) {
-        return menuRepository.findAllByRestaurante(restaurante);
-    }
 
-    /*@Override
-    public void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException {
-        Optional<Platillo> optionalPlatillo = platilloRepository.findById(platillo.getIdPlatillo());
-        if (optionalPlatillo.isPresent()){
-            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PLATILLO_REGISTERED);
-        }else
-        {
-            platilloRepository.save(platillo);
-        }
-    }
 
-    @Override
-    public List<Platillo> getAllPlatillos() throws EcistaurantPersistenceException {
-        return platilloRepository.findAll();
-    }
-
-    @Override
-    public Platillo getPlatilloById(int id) throws EcistaurantPersistenceException {
-        Optional<Platillo> optionalPlatillo= platilloRepository.findById(id);
-        if (!optionalPlatillo.isPresent()){
-            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PLATILLO_NOT_FOUND);
-        }else
-        {
-            return optionalPlatillo.get();
-        }
-    }
-*/
 
 }

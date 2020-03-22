@@ -36,31 +36,22 @@ insert into menu values (128,'Churrasco',10000,1);
 insert into menu values (129,'Bandeja paisa',15800,3);
 insert into menu values (130,'Bandeja pastusa',10000,2);
 
----PLATILLOS
-insert into platillo values (10,'Bandeja paisa',7500123);
-insert into platillo values (11,'Chuleta paisa',6700,123);
-insert into platillo values (12,'kk',5600,124);
-insert into platillo values (13,'sopa',1500,124);
-insert into platillo values (14,'Bandeja paisa',10000,126);
-insert into platillo values (15,'Pechuga',9800,126);
-insert into platillo values (16,'Churrasco',9500,127);
-insert into platillo values (17,'Bandeja paisa',9900,129);
-
 --ROLES 
 
 insert into rol (nombre) values ('ROLE_USER');
 insert into rol (nombre) values ('ROLE_ADMIN');
 
-delete from usuario_roles;
-delete from rol;
-delete from usuario;
 
 
 insert into usuario_roles values (2145197,(select id from rol where nombre = 'ROLE_USER'));
 insert into usuario_roles values (1111111,(select id from rol where nombre = 'ROLE_ADMIN'));
 
 
+------DELETEEEEES!!!
 
+delete from usuario_roles;
+delete from rol;
+delete from usuario;
 
 
 

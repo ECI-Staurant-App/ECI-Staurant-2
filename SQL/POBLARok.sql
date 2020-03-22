@@ -27,13 +27,14 @@ insert into usuario values (2145196,'test7.arias@mail',true,'test3','$2a$10$Yr4F
 insert into usuario values (1111111,'admin.arias@mail',true,'admin','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',1000000);
 
 --MENU
-insert into menu values (123,'Menu del dia',9800,1);
-insert into menu values (124,'Menu de la abuela',9800,1);
-insert into menu values (125,'Menu kk',9800,1);
-insert into menu values (126,'Menu joder',9800,2);
-insert into menu values (127,'Menucito',9800,3);
-insert into menu values (128,'Menu arabe',10000,1);
-insert into menu values (129,'Menu italiano',15800,3);
+insert into menu values (123,'Bandeja paisa',9800,1);
+insert into menu values (124,'Chuleta paisa',9800,1);
+insert into menu values (125,'Sopa de arroz',9800,1);
+insert into menu values (126,'Bandeja paisa',9800,2);
+insert into menu values (127,'Pechuga',9800,3);
+insert into menu values (128,'Churrasco',10000,1);
+insert into menu values (129,'Bandeja paisa',15800,3);
+insert into menu values (130,'Bandeja pastusa',10000,2);
 
 ---PLATILLOS
 insert into platillo values (10,'Bandeja paisa',7500123);

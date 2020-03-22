@@ -49,7 +49,6 @@ public class StudentController {
         return new ResponseEntity<>(studentServices.buscarMesasDisponibles(), HttpStatus.ACCEPTED);
     }
 
-
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody Usuario usuario){

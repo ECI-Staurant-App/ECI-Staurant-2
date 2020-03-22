@@ -37,17 +37,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/",
-                        "/v2/api-docs",
-                        "/swagger-resources/**",
-                        "/swagger-ui.html",
-                        "/swagger.json",
                         "/js/**",
                         "/css/**",
                         "/img/**",
                         "/webjars/**").permitAll()
                 /*.antMatchers("/users/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/restaurants/**").hasAnyRole("USER","ADMIN")*/
-                .anyRequest().authenticated()
+                .anyRequest().authenticated().and()
+                .csrf().disable().cors()
                 .and()
                 .formLogin()
                 .loginPage("/login")

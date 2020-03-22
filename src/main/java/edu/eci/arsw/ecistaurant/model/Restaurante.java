@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Restaurante implements Serializable {
     Set<Pedido> pedidos= new HashSet<Pedido>();
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
+    @JsonManagedReference
     Set<Menu> menus= new HashSet<Menu>();
 
     public Restaurante(String nombre) {

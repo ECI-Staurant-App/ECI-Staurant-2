@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -23,14 +24,15 @@ public class Menu implements Serializable {
     //@OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
     //Set<Platillo> platillos= new HashSet<Platillo>();
 
+
     @ManyToOne
     @JoinColumn(name = "restaurante")
+    @JsonBackReference
     private Restaurante restaurante;
 
-    public Menu(String nombre, int precio,Restaurante restaurante) {
+    public Menu(String nombre, int precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.restaurante = restaurante;
     }
 
     public Menu() {

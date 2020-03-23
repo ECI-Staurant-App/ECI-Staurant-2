@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
@@ -71,6 +72,17 @@ public class RestaurantController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/{restaurant}/menus", method = RequestMethod.GET)
+    public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") int restaurantId){
+        try{
+            List<Menu> menus =serviciosRestaurante.getMenusByRestaurant(restaurantId);
+            return new ResponseEntity<>(menus,HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 

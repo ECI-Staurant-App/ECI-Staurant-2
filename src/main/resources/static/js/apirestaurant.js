@@ -1,4 +1,4 @@
-services = (function () {
+apirestaurant = (function () {
 
     return {
 

@@ -35,10 +35,10 @@ A continuacion se presenta el diagrama de componentes
 
 ### Historias de usuario:
 
-![](img/est.png)
+![](img/casoest.png)
 
 * COMO usuario
-QUIERO registrarme a la plataforma
+QUIERO loguearme en la plataforma
 PARA PODER disfrutar de los beneficios de esta. 
 
 
@@ -46,14 +46,13 @@ PARA PODER disfrutar de los beneficios de esta.
 QUIERO realizar pedidos
 PARA PODER evitar filas en los horarios de almuerzo
 
+* COMO usuario
+QUIERO ver los menus por restaurante
+PARA PODER decidir que comprar
   
 * COMO usuario
 QUIERO buscar mesa
 PARA PODER encontrar facilmente una mesa disponible para comer
-
-* COMO usuario
-QUIERO recibir mesa
-PARA PODER acceder facilmente una mesa disponible para comer
 
 
    
@@ -71,14 +70,15 @@ PARA PODER tener actualizada la información de los saldos de los clientes
  
 
 
-![](img/rest.png)
+![](img/casorest.png)
 
 * COMO restaurante
 QUIERO recibir pedidos
 PARA PODER agilizar manera de atender clientes
 
- 
-
+*COMO restaurante
+QUIERO agregar menus
+PARA PODER dar a conocer mis platos.
 
 * COMO restaurante
 QUIERO despachar pedidos

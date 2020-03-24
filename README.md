@@ -29,9 +29,8 @@ Actualmente no existe una solucion para estas problematicas y como solución pro
 
 #### Deploy Diagram
 
-![](img/despliegue.jpg)
+![](img/despl.png)
 
-A continuacion se presenta el diagrama de componentes
 
 ### Historias de usuario:
 

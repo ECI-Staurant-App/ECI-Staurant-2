@@ -47,8 +47,8 @@ var services = (function () {
         restauranteSeleccionado = id;
         sessionStorage.setItem("restauranteSeleccionado", restauranteSeleccionado);
         console.log(restauranteSeleccionado);
-        window.location.href = "http://localhost:8080/restaurante2.html";
-
+        //window.location.href = "http://localhost:8080/restaurante2.html";
+        window.location.href = "http://ecistaurant.herokuapp.com/restaurante2.html";
         return true;
 
     }
@@ -102,7 +102,7 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price"><strike>' + precio + '</strike> <span>$369.00</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="images/back.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price"><strike>' + precio + '</strike> <span>$369.00</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             if ((i+3)%3 == 0){

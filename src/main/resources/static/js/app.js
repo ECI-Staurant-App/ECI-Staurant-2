@@ -47,7 +47,7 @@ var services = (function () {
         restauranteSeleccionado = id;
         sessionStorage.setItem("restauranteSeleccionado", restauranteSeleccionado);
         console.log(restauranteSeleccionado);
-        window.location.href = "http://localhost:8080/restaurante.html";
+        window.location.href = "http://localhost:8080/restaurante2.html";
 
         return true;
 
@@ -93,12 +93,38 @@ var services = (function () {
 
     function llenarMenu(menus){
         var menus = doMapMenus(menus);
+        var voyEn=0;
         for (i in menus){
             var nombre = menus[i].menuName;
             var precio = menus[i].menuPrice;
             var id = menus[i].menuId;
             var fila = '<div class="row"> <div class="col-lg-4 col-md-6 mb-4"> <div class="card h-100"> <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a> <div class="card-body"><h4 class="card-title"><a href="#">' + nombre+ '</a></h4><h5>' + precio + '</h5><p class="card-text">' + id + '</p></div><div class="card-footer"><small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small></div></div></div>';
-            $("#itemsMenu").append(fila);
+            var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
+            var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
+            var fin = '</div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price"><strike>' + precio + '</strike> <span>$369.00</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
+            var carrusel="#myCarousel";
+            var subItem = "#sub";
+            if ((i+3)%3 == 0){
+                voyEn=i;
+                if (i==0) {
+                    card = primero + card;
+                }
+                else{
+                    card = otros + card;
+                }
+                $("#myCarouselmenu").append(card);
+            }
+            else{
+                card = card;
+
+                if ((i+1)%3==0){
+                    card+=fin;
+                }
+                $(subItem+voyEn).append(card);
+            }
+
+
         }
         console.log(menus);
     }

@@ -76,7 +76,7 @@ PARA PODER tener actualizada la información de los saldos de los clientes
 QUIERO recibir pedidos
 PARA PODER agilizar manera de atender clientes
 
-*COMO restaurante
+* COMO restaurante
 QUIERO agregar menus
 PARA PODER dar a conocer mis platos.
 

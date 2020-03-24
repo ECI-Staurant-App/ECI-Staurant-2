@@ -21,7 +21,7 @@ Actualmente no existe una solucion para estas problematicas y como solución pro
 
 #### E-R Diagram
 
-![](img/db.png)
+![](img/e-R.jpg)
 
 #### Component Diagram
 

@@ -137,6 +137,7 @@ var services = (function () {
 
     function funcione(){
         apiclient.getAllRestaurants(llenaCarrusel);
+        console.log($("#username"))
 
     }
     return {

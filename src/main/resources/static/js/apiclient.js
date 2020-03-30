@@ -26,6 +26,26 @@ apiclient = (function () {
                 callback(data);
             }, null)
         }
+         /*placeOrder = function(usuario,restaurante,platillo){
+                var postPromise = $.ajax({
+                    url: "https://ecistaurant.herokuapp.com/AddOrder/",
+                    type: 'POST',
+                    data: ,
+                    contentType: "application/json"
+                });
+
+                postPromise.then(
+                    function(){
+                        console.info('OK');
+                    },
+                    function(){
+                        console.info('NOK');
+                    }
+                );
+
+
+            }*/
+
     }
 
 })();

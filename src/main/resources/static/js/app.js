@@ -2,6 +2,7 @@ var services = (function () {
     var api = apiclient;
     var restaurantes;
     var restauranteSeleccionado="";
+    var user;
     var placeOrder = function(){
 
 
@@ -50,6 +51,12 @@ var services = (function () {
         //window.location.href = "http://localhost:8080/restaurante2.html";
         window.location.href = "http://ecistaurant.herokuapp.com/restaurante2.html";
         return true;
+
+    }
+
+    function setUserLogged(nombre){
+        user=nombre;
+        sessionStorage.setItem("user",user);
 
     }
 
@@ -144,6 +151,7 @@ var services = (function () {
         funcione:funcione,
         funcioneMenus:funcioneMenus,
         setRestauranteSeleccionado:setRestauranteSeleccionado,
+        setUserLogged:setUserLogged
     }
 
 })();

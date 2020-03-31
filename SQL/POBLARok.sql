@@ -12,9 +12,9 @@ insert into mesa values (9,false,'kiosko2',null);
 
 
 ---RESTAURANTES---
-insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko1');
-insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko2');
-insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'restaurante');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko1','https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'kiosko2','https://grupolamusa.com/media/grupo-la-musa-hd-madrid-2.jpg');
+insert into restaurante values ((select count(id_restaurante) from restaurante )+1,'restaurante','https://cdn.hipwallpaper.com/i/26/28/oFCSY3.jpg');
 
 ---usuarioS
 insert into usuario values (2145195,'johan.arias@mail',true,'johan','johan123',10000);
@@ -27,15 +27,14 @@ insert into usuario values (2145196,'test7.arias@mail',true,'test3','$2a$10$Yr4F
 insert into usuario values (1111111,'admin.arias@mail',true,'admin','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',1000000);
 
 --MENU
-insert into menu values (123,'Bandeja paisa',9800,1);
-insert into menu values (124,'Chuleta paisa',9800,1);
-insert into menu values (125,'Sopa de arroz',9800,1);
-insert into menu values (126,'Bandeja paisa',9800,2);
-insert into menu values (127,'Pechuga',9800,3);
-insert into menu values (128,'Churrasco',10000,1);
-insert into menu values (129,'Bandeja paisa',15800,3);
-insert into menu values (130,'Bandeja pastusa',10000,2);
-
+insert into menu values (123,'Bandeja paisa',9800,'https://i.pinimg.com/600x315/7d/6e/8f/7d6e8fe02fc717889876b24d0f96fc1a.jpg',1);
+insert into menu values (124,'Chuleta valluna',9800,'https://static.wixstatic.com/media/7ad47b_def5d558283e4bb19d450db95545da75~mv2.jpg/v1/fill/w_480,h_319,al_c,q_85,usm_0.66_1.00_0.01/7ad47b_def5d558283e4bb19d450db95545da75~mv2.jpg',1);
+insert into menu values (125,'Sopa de arroz',9800,'https://gbprodcdnimages2.azureedge.net/files/styles/recipe_main_image_670x420/windowsazurestorage/recipes/1540112471dc6a49ca746e90c646f5fa86ee2c0409.jpg',1);
+insert into menu values (126,'Crep de pollo',9800,'https://okdiario.com/img/2018/04/30/receta-de-crepes-de-pollo-1.jpeg',2);
+insert into menu values (127,'Pechuga',9800,'https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2016/06/pechugadepollo.jpg',3);
+insert into menu values (128,'Churrasco',10000,'https://www.goya.com/media/3542/argentinean-grilled-steaks-with-salsa-criolla.jpg?quality=80',1);
+insert into menu values (129,'Carne de cerdo',15800,'https://www.sportlife.es/media/cache/big/upload/images/article/5b3f10b4a3fea541e6dfc628/5b4347dc0de6949769349a93-alimentos-deportivos-carne-cerdo.jpg',3);
+insert into menu values (130,'Pollo en salsa',10000,'https://www.lacocinademasito.com/files/pollo-en-salsa-final.jpg',2);
 --ROLES 
 
 insert into rol (nombre) values ('ROLE_USER');

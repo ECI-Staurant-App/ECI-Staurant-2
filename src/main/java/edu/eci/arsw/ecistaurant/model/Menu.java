@@ -20,10 +20,8 @@ public class Menu implements Serializable {
     private String nombre;
     @Column(name = "precio",nullable = false,length = 20)
     private int precio;
-
-    //@OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
-    //Set<Platillo> platillos= new HashSet<Platillo>();
-
+    @Column(name = "url",nullable = false)
+    private String url;
 
     @ManyToOne
     @JoinColumn(name = "fk_restaurante")
@@ -70,11 +68,11 @@ public class Menu implements Serializable {
         this.restaurante = restaurante;
     }
 
-    /*public Set<Platillo> getPlatillos() {
-        return platillos;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPlatillos(Set<Platillo> platillos) {
-        this.platillos = platillos;
-    }*/
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

@@ -19,6 +19,9 @@ public class Restaurante implements Serializable {
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
+    @Column(name = "url",nullable = false)
+    private String url;
+
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -27,6 +30,7 @@ public class Restaurante implements Serializable {
 
     @OneToMany(mappedBy = "restaurante",cascade = CascadeType.ALL)
     @JsonManagedReference
+
 
     Set<Menu> menus= new HashSet<Menu>();
 
@@ -67,5 +71,13 @@ public class Restaurante implements Serializable {
 
     public void setMenus(Set<Menu> menus) {
         this.menus = menus;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

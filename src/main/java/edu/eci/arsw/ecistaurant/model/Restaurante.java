@@ -19,7 +19,7 @@ public class Restaurante implements Serializable {
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
-    @Column(name = "url",nullable = false)
+    @Column(name = "url",nullable = true)
     private String url;
 
 

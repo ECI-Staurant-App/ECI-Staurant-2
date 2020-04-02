@@ -20,7 +20,7 @@ public class Menu implements Serializable {
     private String nombre;
     @Column(name = "precio",nullable = false,length = 20)
     private int precio;
-    @Column(name = "url",nullable = false)
+    @Column(name = "url",nullable = true)
     private String url;
 
     @ManyToOne

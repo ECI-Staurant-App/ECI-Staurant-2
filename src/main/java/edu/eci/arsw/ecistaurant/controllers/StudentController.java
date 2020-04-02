@@ -62,7 +62,7 @@ public class StudentController {
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @RequestMapping(value = "/AddOrder", method = RequestMethod.POST)
-    public ResponseEntity<?> placeOrder(int user,String restaurante, String platillo){
+    public ResponseEntity<?> placeOrder(String user,String restaurante, String platillo){
         try{
             studentServices.realizarPedido(user,restaurante,platillo);
             return new ResponseEntity<>(HttpStatus.CREATED);

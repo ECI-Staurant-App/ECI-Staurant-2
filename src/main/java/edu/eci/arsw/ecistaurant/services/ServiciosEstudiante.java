@@ -17,9 +17,13 @@ public interface ServiciosEstudiante {
 
     Usuario getStudentById(int carne) throws EcistaurantPersistenceException;
 
-    Pedido realizarPedido(int usuario, String restaurante, String platillo) throws EcistaurantPersistenceException;
+    Usuario getUserByEmail(String user) throws EcistaurantPersistenceException;
+
+    Pedido realizarPedido(String email, String restaurante, String platillo) throws EcistaurantPersistenceException;
 
     void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException;
+
+    Menu findMenuByName(String menu) throws EcistaurantPersistenceException;
 
     List<Mesa> buscarMesas();
 

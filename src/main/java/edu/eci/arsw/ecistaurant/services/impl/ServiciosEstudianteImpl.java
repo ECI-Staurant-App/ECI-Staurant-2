@@ -6,7 +6,6 @@ import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +37,6 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         } else {
             usuarioRepository.save(user);
         }
-
-
     }
 
     @Override
@@ -51,12 +48,21 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
-    public Pedido realizarPedido(int usuario,String restaurante,String menu) throws EcistaurantPersistenceException {
+    public Usuario getUserByEmail(String user) throws EcistaurantPersistenceException {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(user);
+        if (!optionalUsuario.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.STUDENT_NOT_FOUND);
+        }
+        return optionalUsuario.get();
+    }
+
+    @Override
+    public Pedido realizarPedido(String correo,String restaurante,String menu) throws EcistaurantPersistenceException {
 
         Pedido pedido = new Pedido();
-        pedido.setUsuario(getStudentById(usuario));
+        pedido.setUsuario(getUserByEmail(correo));
         pedido.setRestaurante(restaurantRepository.findByNombre(restaurante));
-        pedido.setMenu(menuRepository.findByNombre(menu).get());
+        pedido.setMenu(findMenuByName(menu));
         Date date = new Date();
         System.out.println(date);
         pedido.setFecha(date);
@@ -69,6 +75,15 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         Usuario usuario1 = getStudentById(usuario.getCarne());
         usuario1.setSaldo(usuario.getSaldo());
 
+    }
+
+    @Override
+    public Menu findMenuByName(String menu) throws EcistaurantPersistenceException {
+        Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
+        if (!optionalMenu.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_NOT_FOUND);
+        }
+        return optionalMenu.get();
     }
 
     @Override

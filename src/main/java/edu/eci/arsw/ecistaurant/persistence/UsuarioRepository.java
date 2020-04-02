@@ -18,6 +18,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{
 
     Usuario save(Usuario usuario);
 
-    Usuario findByEmail(String email);
+    Optional<Usuario> findByEmail(String email);
 
 }

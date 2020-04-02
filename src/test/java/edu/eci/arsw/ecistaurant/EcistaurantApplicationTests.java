@@ -1,9 +1,11 @@
 
 package edu.eci.arsw.ecistaurant;
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
+import edu.eci.arsw.ecistaurant.persistence.MenuRepository;
 import edu.eci.arsw.ecistaurant.persistence.RestaurantRepository;
 import edu.eci.arsw.ecistaurant.persistence.UsuarioRepository;
 import edu.eci.arsw.ecistaurant.services.impl.ServiciosEstudianteImpl;
@@ -35,7 +37,8 @@ public class EcistaurantApplicationTests extends TestCase
 	private ServiciosEstudianteImpl studentServices;
 	@Autowired
 	private ServiciosRestauranteImpl restaurantServices;
-
+	@Autowired
+	private MenuRepository menuRepository;
 
 	@Test
 	public void deberiaInsertarEstudiante() {
@@ -60,12 +63,14 @@ public class EcistaurantApplicationTests extends TestCase
 
 	@Test
 	public void deberiaInsertarRestaurante(){
+		Random num = new Random();
+		int generator = num.nextInt(1000);
 		Restaurante  restaurante = new Restaurante();
 		List<Restaurante> restaurantes = repoRest.findAll();
 		if (restaurantes.isEmpty()) {
 			restaurante.setIdRestaurante(1);
 		}
-		restaurante.setNombre("KIOSKO_PRUEBA");
+		restaurante.setNombre("KIOSKO_PRUEBA"+generator);
 		Restaurante nuevo = repoRest.save(restaurante);
 		assertTrue(nuevo.getNombre().equalsIgnoreCase(restaurante.getNombre()));
 	}
@@ -73,9 +78,26 @@ public class EcistaurantApplicationTests extends TestCase
 	@Test
 	public void deberiaRegistrarPedido(){
 		try {
-			studentServices.realizarPedido(2146190,"kiosko1","kk");
+			Pedido pedido = new Pedido();
+			List<Pedido> pedidos = restaurantServices.getAllPedidos();
+			int pedidosAntes = pedidos.size();
+			int pedidosDespues;
+			if (pedidos.isEmpty()) {
+				studentServices.realizarPedido("johan.arias@mail", "kiosko1", "Bandeja paisa");
+			} else {
+				Random num = new Random();
+				List<Menu> menus = menuRepository.findAll();
+				int generatorMenu = num.nextInt(menus.size()-1);
+				String menuAleatorio = menus.get(generatorMenu).getNombre();
+				List<Restaurante> restaurantes = restaurantServices.getAllRestaurants();
+				int generatorRestaurant = num.nextInt(restaurantes.size()-1);
+				String restauranteAleatorio = restaurantes.get(generatorRestaurant).getNombre();
+				studentServices.realizarPedido("estudianteprueba131@mail.escuela.co",restauranteAleatorio,menuAleatorio);
+			}
+			pedidosDespues = restaurantServices.getAllPedidos().size();
+			assertEquals(pedidosAntes + 1 , pedidosDespues);
 		} catch (EcistaurantPersistenceException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

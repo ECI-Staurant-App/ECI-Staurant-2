@@ -16,7 +16,7 @@ public class Restaurante implements Serializable {
     @Id
     private int idRestaurante;
 
-    @Column(name = "nombre",nullable = false)
+    @Column(name = "nombre",nullable = false,unique = true)
     private String nombre;
 
     @Column(name = "url",nullable = true)

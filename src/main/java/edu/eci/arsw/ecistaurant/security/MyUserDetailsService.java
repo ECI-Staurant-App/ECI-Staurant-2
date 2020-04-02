@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 
-        Usuario usuario = usuarioRepository.findByEmail(email);
+        Usuario usuario = usuarioRepository.findByEmail(email).get();
 
         if (logger == null){
             logger.error("Error en el login, no existe el usuario "+ email+ " en el sistema");

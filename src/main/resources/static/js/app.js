@@ -3,6 +3,7 @@ var services = (function () {
     var restaurantes;
     var restauranteSeleccionado="";
     var user;
+    var selectedUser="";
     var placeOrder = function(){
 
 
@@ -48,20 +49,24 @@ var services = (function () {
         restauranteSeleccionado = id;
         sessionStorage.setItem("restauranteSeleccionado", restauranteSeleccionado);
         console.log(restauranteSeleccionado);
-        //window.location.href = "http://localhost:8080/restaurante2.html";
-        window.location.href = "http://ecistaurant.herokuapp.com/restaurante2.html";
+        window.location.href = "http://localhost:8080/restaurante2.html";
+        //window.location.href = "http://ecistaurant.herokuapp.com/restaurante2.html";
         return true;
 
     }
 
     function setUserLogged(nombre){
-        user=nombre;
-        sessionStorage.setItem("user",user);
+        user=$("#username");
+        selectedUser = user.val();
+        console.log(selectedUser)
+        sessionStorage.setItem("selectedUser",selectedUser);
 
     }
 
     function llenaCarrusel(restaurante){
-
+        var u = sessionStorage.getItem("selectedUser");
+        console.log("usuario");
+        console.log(u);
         restaurantes = doMap(restaurante);
         console.log(restaurantes);
         //$("#carruselRestaurante").empty();
@@ -101,7 +106,7 @@ var services = (function () {
     function llenarMenu(menus){
         var menus = doMapMenus(menus);
         var voyEn=0;
-        for (i in menus){
+        for (i=0;i<menus.length;i++){
             var nombre = menus[i].menuName;
             var precio = menus[i].menuPrice;
             var id = menus[i].menuId;
@@ -109,10 +114,12 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="images/back.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price"><strike>' + precio + '</strike> <span>$369.00</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="images/back.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
-            if ((i+3)%3 == 0){
+            var op= (i+4)%4;
+            console.log(i + "->" + op)
+            if (op === 0){
                 voyEn=i;
                 if (i==0) {
                     card = primero + card;
@@ -120,17 +127,17 @@ var services = (function () {
                 else{
                     card = otros + card;
                 }
+
                 $("#myCarouselmenu").append(card);
             }
             else{
                 card = card;
 
-                if ((i+1)%3==0){
+                if (((i+1)%4==0)){
                     card+=fin;
                 }
                 $(subItem+voyEn).append(card);
             }
-
 
         }
         console.log(menus);

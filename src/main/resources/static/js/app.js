@@ -30,6 +30,7 @@ var services = (function () {
                 rtId: rt.idRestaurante,
                 rtName: rt.nombre,
                 rtMenus: rt.menus,
+                rtFoto: rt.url,
             }
         })
     }
@@ -40,6 +41,7 @@ var services = (function () {
                 menuId: rt.idMenu,
                 menuName: rt.nombre,
                 menuPrice: rt.precio,
+                menuImg: rt.url,
             }
         })
 
@@ -76,11 +78,12 @@ var services = (function () {
             var slide ="";
             var nombre = restaurantes[i].rtName;
             var id = restaurantes[i].rtId;
+            var foto = restaurantes[i].rtFoto;
             console.log(nombre);
             var it=i;
             var primera='<div class="carousel-item active">';
             var normal ='<div class="carousel-item">';
-            var lodemas = '<img src="/images/logo.png" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante.html"'+' onclick="services.setRestauranteSeleccionado('+id + ')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
+            var lodemas = '<img src="'+ foto +'" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante.html"'+' onclick="services.setRestauranteSeleccionado('+id + ')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
             var primeraSlide = '<li data-target="#myCarousel" data-slide-to=' + it + ' class="active"></li>'
             var otrasSlide= '<li data-target="#myCarousel" data-slide-to='+it+'></li>'
             if (i==0){
@@ -110,11 +113,12 @@ var services = (function () {
             var nombre = menus[i].menuName;
             var precio = menus[i].menuPrice;
             var id = menus[i].menuId;
+            var foto = menus[i].menuImg;
             var fila = '<div class="row"> <div class="col-lg-4 col-md-6 mb-4"> <div class="card h-100"> <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a> <div class="card-body"><h4 class="card-title"><a href="#">' + nombre+ '</a></h4><h5>' + precio + '</h5><p class="card-text">' + id + '</p></div><div class="card-footer"><small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small></div></div></div>';
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="images/back.jpg" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             var op= (i+4)%4;

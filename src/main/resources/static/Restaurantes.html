@@ -25,7 +25,14 @@
 
         .carousel-item{
             text-align: center;
-            min-height: 100vh; /* Prevent carousel from being distorted if for some reason image doesn't load */
+            /* Prevent carousel from being distorted if for some reason image doesn't load */
+            height: 100vh;
+            min-height: 350px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
         .bs-example{
             //margin: 20px;

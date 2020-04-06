@@ -4,25 +4,10 @@ var services = (function () {
     var restauranteSeleccionado="";
     var user;
     var selectedUser="";
-    var placeOrder = function(){
+    var menuSeleccionado = "";
 
-
-        var postPromise = $.ajax({
-            url: "/users/AddOrder",
-            type: 'POST',
-            data: JSON.stringify(selectedBlueprint),
-            contentType: "application/json"
-        });
-
-        postPromise.then(
-            function(){
-                console.info('OK');
-            },
-            function(){
-                console.info('NOK');
-            }
-        );
-        return postPromise;
+    function placeOrder(){
+        return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
     }
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
@@ -56,11 +41,18 @@ var services = (function () {
         return true;
 
     }
+    function setMenuSeleccionado(id){
+        menuSeleccionado = id;
+        sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
+        placeOrder();
+        console.log(menuSeleccionado);
+        alert("Su pedido fue registrado exitosamente!")
+    }
 
     function setUserLogged(nombre){
         user=$("#username");
         selectedUser = user.val();
-        console.log(selectedUser)
+        console.log(selectedUser);
         sessionStorage.setItem("selectedUser",selectedUser);
 
     }
@@ -111,6 +103,7 @@ var services = (function () {
         var voyEn=0;
         for (i=0;i<menus.length;i++){
             var nombre = menus[i].menuName;
+            menuSeleccionado = nombre;
             var precio = menus[i].menuPrice;
             var id = menus[i].menuId;
             var foto = menus[i].menuImg;
@@ -118,7 +111,7 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary"> Pide ahora!</a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+id + ')"> Pide ahora! </a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             var op= (i+4)%4;
@@ -147,6 +140,8 @@ var services = (function () {
         console.log(menus);
     }
 
+
+
     function funcioneMenus() {
         console.log(restauranteSeleccionado);
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
@@ -162,7 +157,8 @@ var services = (function () {
         funcione:funcione,
         funcioneMenus:funcioneMenus,
         setRestauranteSeleccionado:setRestauranteSeleccionado,
-        setUserLogged:setUserLogged
+        setUserLogged:setUserLogged,
+        setMenuSeleccionado : setMenuSeleccionado,
     }
 
 })();

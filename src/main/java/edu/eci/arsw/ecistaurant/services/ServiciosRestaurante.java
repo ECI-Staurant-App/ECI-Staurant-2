@@ -24,7 +24,7 @@ public interface ServiciosRestaurante {
 
     void saveMenu(String menu,int precio) throws EcistaurantPersistenceException;
 
-    List<Menu> getMenusByRestaurant(int restId) throws EcistaurantPersistenceException;
+    List<Menu> getMenusByRestaurant(String restaurante) throws EcistaurantPersistenceException;
 
     List<Pedido> getPedidosByUser(int user);
 

@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu,Integer> {
 
-    @Query(value = "SELECT * from menu WHERE fk_restaurante = :restaurante",nativeQuery = true)
-    List<Menu> findAllByRestaurante(@Param("restaurante") int restaurante);
+    @Query(value = "SELECT * from menu WHERE fk_restaurante =  (select id_restaurante from restaurante where nombre = :restaurante)",nativeQuery = true)
+    List<Menu> findAllByRestaurante(@Param("restaurante") String restaurante);
 
     Menu save(Menu menu);
 

@@ -28,14 +28,13 @@ apiclient = (function () {
             }, null)
         },
         placeOrder : function(usuario,restaurante,platillo) {
+
+            console.log("USER :"+usuario);
+            console.log("REST :"+restaurante);
+            console.log("PLAT :"+platillo);
             var postPromise = $.ajax({
-                url: "https://ecistaurant.herokuapp.com/AddOrder/",
+                url: "http://localhost:8080/AddOrder/"+usuario+restaurante+platillo,
                 type: 'POST',
-                contentType : 'application/json',
-                data : { 'usuario':usuario,
-                    'restaurante':restaurante,
-                    'platillo':platillo
-                }
             });
 
             postPromise.then(

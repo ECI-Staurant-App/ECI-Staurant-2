@@ -99,7 +99,7 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     @Override
     public List<Menu> getAllMenuByRestaurant(String restaurante) {
         Restaurante restaurantSelected = restaurantRepository.findByNombre(restaurante);
-        return menuRepository.findAllByRestaurante(restaurantSelected.getIdRestaurante());
+        return menuRepository.findAllByRestaurante(restaurantSelected.getNombre());
     }
 
 }

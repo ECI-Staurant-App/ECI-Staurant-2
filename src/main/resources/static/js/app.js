@@ -7,6 +7,8 @@ var services = (function () {
     var menuSeleccionado = "";
 
     function placeOrder(){
+        selectedUser = sessionStorage.getItem("selectedUser");
+        restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
         return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
     }
     function doMap(restaurante) {
@@ -33,15 +35,16 @@ var services = (function () {
     }
 
     function setRestauranteSeleccionado(id){
+        console.log("IDDDDDREST : "+id);
         restauranteSeleccionado = id;
         sessionStorage.setItem("restauranteSeleccionado", restauranteSeleccionado);
         console.log(restauranteSeleccionado);
         window.location.href = "http://localhost:8080/restaurante2.html";
-        //window.location.href = "http://ecistaurant.herokuapp.com/restaurante2.html";
         return true;
 
     }
     function setMenuSeleccionado(id){
+        console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
         placeOrder();
@@ -75,7 +78,7 @@ var services = (function () {
             var it=i;
             var primera='<div class="carousel-item active">';
             var normal ='<div class="carousel-item">';
-            var lodemas = '<img src="'+ foto +'" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante.html"'+' onclick="services.setRestauranteSeleccionado('+id + ')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
+            var lodemas = '<img src="'+ foto +'" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante.html"'+' onclick="services.setRestauranteSeleccionado('+nombre + ')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
             var primeraSlide = '<li data-target="#myCarousel" data-slide-to=' + it + ' class="active"></li>'
             var otrasSlide= '<li data-target="#myCarousel" data-slide-to='+it+'></li>'
             if (i==0){
@@ -103,7 +106,6 @@ var services = (function () {
         var voyEn=0;
         for (i=0;i<menus.length;i++){
             var nombre = menus[i].menuName;
-            menuSeleccionado = nombre;
             var precio = menus[i].menuPrice;
             var id = menus[i].menuId;
             var foto = menus[i].menuImg;
@@ -111,7 +113,7 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+id + ')"> Pide ahora! </a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+nombre + ')"> Pide ahora! </a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             var op= (i+4)%4;
@@ -139,8 +141,6 @@ var services = (function () {
         }
         console.log(menus);
     }
-
-
 
     function funcioneMenus() {
         console.log(restauranteSeleccionado);

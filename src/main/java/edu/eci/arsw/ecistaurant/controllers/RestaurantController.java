@@ -77,9 +77,10 @@ public class RestaurantController {
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @RequestMapping(value = "/{restaurant}/menus", method = RequestMethod.GET)
-    public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") int restaurantId){
+    public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
-            List<Menu> menus =serviciosRestaurante.getMenusByRestaurant(restaurantId);
+
+            List<Menu> menus =serviciosRestaurante.getMenusByRestaurant(restaurant);
             return new ResponseEntity<>(menus,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

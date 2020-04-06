@@ -74,8 +74,8 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    public List<Menu> getMenusByRestaurant(int restId) throws EcistaurantPersistenceException {
-        return  menuRepository.findAllByRestaurante(restId);
+    public List<Menu> getMenusByRestaurant(String restaurante) throws EcistaurantPersistenceException {
+        return  menuRepository.findAllByRestaurante(restaurante);
     }
 
     @Override

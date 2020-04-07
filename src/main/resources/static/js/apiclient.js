@@ -33,8 +33,12 @@ apiclient = (function () {
             console.log("REST :"+restaurante);
             console.log("PLAT :"+platillo);
             var postPromise = $.ajax({
-                url: "http://localhost:8080/AddOrder/"+usuario+restaurante+platillo,
+                url: "http://localhost:8080/AddOrder/",
                 type: 'POST',
+                data: 'platillo='+platillo+'&restaurante='+restaurante+'&user='+usuario,
+                error: function (jqxhr,status,exception) {
+                    alert('Eception:' ,exception);
+                }
             });
 
             postPromise.then(

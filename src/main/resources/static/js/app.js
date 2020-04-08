@@ -78,7 +78,7 @@ var services = (function () {
             var it=i;
             var primera='<div class="carousel-item active">';
             var normal ='<div class="carousel-item">';
-            var lodemas = '<img src="'+ foto +'" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante.html"'+' onclick="services.setRestauranteSeleccionado('+'&quot;' +  nombre + '&quot;'  +')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
+            var lodemas = '<img src="'+ foto +'" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" class="btn btn-warning btn-lg btn-block" href="/restaurante2.html"'+' onclick="services.setRestauranteSeleccionado('+'&quot;' +  nombre + '&quot;'  +')">' + 'Ve Ahora a '+  nombre + '!</button>'+ '<h5 id="idrest">' +'</h5> </div> </div>';
             var primeraSlide = '<li data-target="#myCarousel" data-slide-to=' + it + ' class="active"></li>'
             var otrasSlide= '<li data-target="#myCarousel" data-slide-to='+it+'></li>'
             if (i==0){

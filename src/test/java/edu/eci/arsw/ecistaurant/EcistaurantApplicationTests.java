@@ -93,6 +93,7 @@ public class EcistaurantApplicationTests extends TestCase
 			int pedidosDespues;
 			if (pedidos.isEmpty()) {
 				studentServices.realizarPedido("johan.arias@mail", "kiosko1", "Bandeja paisa");
+				restauranteAleatorio = "kiosko1";
 			} else {
 				studentServices.realizarPedido("estudianteprueba131@mail.escuela.co",restauranteAleatorio,menuAleatorio);
 			}
@@ -101,6 +102,7 @@ public class EcistaurantApplicationTests extends TestCase
 		} catch (EcistaurantPersistenceException e) {
 			System.out.println(e.getMessage());
 		}
+
 	}
 
 

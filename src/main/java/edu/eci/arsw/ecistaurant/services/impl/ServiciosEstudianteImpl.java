@@ -3,6 +3,7 @@ package edu.eci.arsw.ecistaurant.services.impl;
 import edu.eci.arsw.ecistaurant.model.*;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
+import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,8 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     MenuRepository menuRepository;
     @Autowired
     MesaRepository mesaRepository;
+    @Autowired
+    ServiciosRestaurante serviciosRestaurante;
 
     @Override
     public List<Usuario> getAllStudents() throws EcistaurantPersistenceException {
@@ -59,9 +62,15 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     @Override
     public Pedido realizarPedido(String correo,String restaurante,String menu) throws EcistaurantPersistenceException {
 
+        Restaurante restaurant= null;
+        try{
+            restaurant = serviciosRestaurante.getRestaurantByName(restaurante);
+        }catch (EcistaurantPersistenceException e){
+            throw new EcistaurantPersistenceException(e.getMessage());
+        }
         Pedido pedido = new Pedido();
         pedido.setUsuario(getUserByEmail(correo));
-        pedido.setRestaurante(restaurantRepository.findByNombre(restaurante));
+        pedido.setRestaurante(restaurant);
         pedido.setMenu(findMenuByName(menu));
         Date date = new Date();
         System.out.println(date);
@@ -98,7 +107,7 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
 
     @Override
     public List<Menu> getAllMenuByRestaurant(String restaurante) {
-        Restaurante restaurantSelected = restaurantRepository.findByNombre(restaurante);
+        Restaurante restaurantSelected = restaurantRepository.findByNombre(restaurante).get();
         return menuRepository.findAllByRestaurante(restaurantSelected.getNombre());
     }
 

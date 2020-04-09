@@ -28,32 +28,41 @@ public class RestaurantController {
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllRestaurants(){
+        List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
+        return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @GetMapping("/{user}")
+    public ResponseEntity<?>  getOrderByUser(@PathVariable ("user") int user){
         try{
-            List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
-            return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
+            serviciosEstudiante.getStudentById(user);
+            return new ResponseEntity<>(serviciosRestaurante.getPedidosByUser(user), HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{orders}")
-    public ResponseEntity<?>  getAllOrders(){
+    @GetMapping("/{id}")
+    public ResponseEntity<?>  getOrderById(@PathVariable int id){
         try{
-            List<Pedido> pedidos = serviciosRestaurante.getAllPedidos();
-            return new ResponseEntity<>(pedidos, HttpStatus.ACCEPTED);
+            serviciosRestaurante.getPedidoById(id);
+            return new ResponseEntity<>(serviciosRestaurante.getPedidoById(id), HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{user}")
-    public ResponseEntity<?>  getOrderByUser(@PathVariable int user){
-        try{
-            serviciosEstudiante.getStudentById(user);
-            return new ResponseEntity<>(serviciosRestaurante.getPedidosByUser(user), HttpStatus.ACCEPTED);
-        }catch (EcistaurantPersistenceException e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/{pedido}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeOrderState(@PathVariable("pedido")int pedido , @RequestBody String estado) {
+        try {
+            serviciosRestaurante.changeOrderState(estado,pedido);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (EcistaurantPersistenceException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -80,7 +89,7 @@ public class RestaurantController {
     public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Menu> menus =serviciosRestaurante.getMenusByRestaurant(restaurant);
+            List<Menu> menus = serviciosRestaurante.getMenusByrestaurant(restaurant);
             return new ResponseEntity<>(menus,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
@@ -98,7 +107,6 @@ public class RestaurantController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
-
 
 }
 

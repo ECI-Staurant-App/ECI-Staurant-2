@@ -77,24 +77,26 @@ public class EcistaurantApplicationTests extends TestCase
 
 	@Test
 	public void deberiaRegistrarPedido(){
+
+
+		Random num = new Random();
+		List<Menu> menus = menuRepository.findAll();
+		int generatorMenu = num.nextInt(menus.size()-1);
+		String menuAleatorio = menus.get(generatorMenu).getNombre();
+		List<Restaurante> restaurantes = restaurantServices.getAllRestaurants();
+		int generatorRestaurant = num.nextInt(restaurantes.size()-1);
+		String restauranteAleatorio = restaurantes.get(generatorRestaurant).getNombre();;
 		try {
 			Pedido pedido = new Pedido();
-			List<Pedido> pedidos = restaurantServices.getAllPedidos();
+			List<Pedido> pedidos = restaurantServices.getPedidosByRestaurant(restauranteAleatorio);
 			int pedidosAntes = pedidos.size();
 			int pedidosDespues;
 			if (pedidos.isEmpty()) {
 				studentServices.realizarPedido("johan.arias@mail", "kiosko1", "Bandeja paisa");
 			} else {
-				Random num = new Random();
-				List<Menu> menus = menuRepository.findAll();
-				int generatorMenu = num.nextInt(menus.size()-1);
-				String menuAleatorio = menus.get(generatorMenu).getNombre();
-				List<Restaurante> restaurantes = restaurantServices.getAllRestaurants();
-				int generatorRestaurant = num.nextInt(restaurantes.size()-1);
-				String restauranteAleatorio = restaurantes.get(generatorRestaurant).getNombre();
 				studentServices.realizarPedido("estudianteprueba131@mail.escuela.co",restauranteAleatorio,menuAleatorio);
 			}
-			pedidosDespues = restaurantServices.getAllPedidos().size();
+			pedidosDespues = restaurantServices.getPedidosByRestaurant(restauranteAleatorio).size();
 			assertEquals(pedidosAntes + 1 , pedidosDespues);
 		} catch (EcistaurantPersistenceException e) {
 			System.out.println(e.getMessage());

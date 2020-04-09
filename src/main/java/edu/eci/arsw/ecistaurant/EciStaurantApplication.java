@@ -32,12 +32,16 @@ public class EciStaurantApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String password = "12345";
 
-        for (int i = 0; i < 4; i++) {
-            String passwordBcrypt = passwordEncoder.encode(password);
-            System.out.println(passwordBcrypt);
-        }
+        String password = "12345";
+        String passwordBcrypt = passwordEncoder.encode(password);
+        System.out.println(passwordBcrypt);
+        String password1 = "1234";
+        String passwordBcrypt1 = passwordEncoder.encode(password1);
+        System.out.println(passwordBcrypt1);
+        String password2 = "123456";
+        String passwordBcrypt2 = passwordEncoder.encode(password2);
+        System.out.println(passwordBcrypt2);
     }
 
     @Bean

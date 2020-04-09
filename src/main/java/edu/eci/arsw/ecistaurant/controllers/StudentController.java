@@ -30,8 +30,8 @@ public class StudentController {
         }
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{usuario}")
-    public ResponseEntity<?>  getUserById(int usuario){
+    @RequestMapping(value = "/{usuario}", method = RequestMethod.GET)
+    public ResponseEntity<?>  getUserById(@PathVariable ("usuario") int usuario){
         try{
             return new ResponseEntity<>(studentServices.getStudentById(usuario), HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
@@ -39,14 +39,21 @@ public class StudentController {
         }
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{mesas}")
+    @RequestMapping(value = "/Alltables", method = RequestMethod.GET)
     public ResponseEntity<?>  getTables(){
         return new ResponseEntity<>(studentServices.buscarMesas(), HttpStatus.ACCEPTED);
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{mesaDisponibles}")
+    @RequestMapping(value = "/tables", method = RequestMethod.GET)
     public ResponseEntity<?>  getAvailableTables(){
         return new ResponseEntity<>(studentServices.buscarMesasDisponibles(), HttpStatus.ACCEPTED);
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/menus", method = RequestMethod.GET)
+    public ResponseEntity<?>  getAllMenuByRestaurant(@RequestParam(value="restaurante") String restaurante) {
+        List<Menu> menus = studentServices.getAllMenuByRestaurant(restaurante);
+        return new ResponseEntity<>(menus, HttpStatus.ACCEPTED);
     }
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
@@ -72,7 +79,7 @@ public class StudentController {
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PutMapping(value = "/{user}")
-    public ResponseEntity<?> putUser(@PathVariable int carne,@RequestBody Usuario usuario) {
+    public ResponseEntity<?> putUser(@PathVariable int user,@RequestBody Usuario usuario) {
         try {
             studentServices.actualizarSaldo(usuario);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -81,11 +88,6 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/{menus}")
-    public ResponseEntity<?>  getAllMenuByRestaurant(String restaurante) {
-        List<Menu> menus = studentServices.getAllMenuByRestaurant(restaurante);
-        return new ResponseEntity<>(menus, HttpStatus.ACCEPTED);
-    }
 
 }
 

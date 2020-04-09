@@ -37,7 +37,7 @@ apiclient = (function () {
                 type: 'POST',
                 data: 'platillo='+platillo+'&restaurante='+restaurante+'&user='+usuario,
                 error: function (jqxhr,status,exception) {
-                    alert('Eception:' ,exception);
+                    alert('Exception:' ,exception);
                 }
             });
 

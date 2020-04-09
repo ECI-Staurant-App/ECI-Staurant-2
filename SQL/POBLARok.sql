@@ -25,7 +25,9 @@ insert into usuario values (2145194,'test1.arias@mail',true,'test3','johan123',0
 insert into usuario values (2145197,'test6.arias@mail',true,'test2','',10000);
 insert into usuario values (2145196,'test7.arias@mail',true,'test3','$2a$10$Yr4F8CDjptZ5FWD6xxuTa.qk9Ylvejwccarr8UerQP/heBqmoMcy6',0);
 insert into usuario values (1111111,'admin.arias@mail',true,'admin','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',1000000);
-
+insert into usuario values (2199999,'kiosko1',true,'kiosko1','$2a$10$l.sCXWauFzf//kaYTCMXEev.p9pCVE8jDf7mb0jrMHmSAjKoxaHw6',0);
+insert into usuario values (2199990,'kiosko2',true,'kiosko2','$2a$10$/yHAc/NgpbEEGBnDj01q2.sVrDEKKyazaZ/.FRqd0UPmsX0TMMgO6',0);
+insert into usuario values (2199998,'restaurante',true,'restaurante','$2a$10$8PdQhxpU39Sg3qaR/S0oyO9sO/CptVshX.uXYoHE48YQ2383qUmum',0);
 --MENU
 insert into menu values (123,'Bandeja paisa',9800,'https://i.pinimg.com/600x315/7d/6e/8f/7d6e8fe02fc717889876b24d0f96fc1a.jpg',1);
 insert into menu values (124,'Chuleta valluna',9800,'https://static.wixstatic.com/media/7ad47b_def5d558283e4bb19d450db95545da75~mv2.jpg/v1/fill/w_480,h_319,al_c,q_85,usm_0.66_1.00_0.01/7ad47b_def5d558283e4bb19d450db95545da75~mv2.jpg',1);
@@ -44,6 +46,9 @@ insert into rol (nombre) values ('ROLE_ADMIN');
 
 insert into usuario_roles values (2145197,(select id from rol where nombre = 'ROLE_USER'));
 insert into usuario_roles values (1111111,(select id from rol where nombre = 'ROLE_ADMIN'));
+insert into usuario_roles values (2199999,(select id from rol where nombre = 'ROLE_USER'));
+insert into usuario_roles values (2199990,(select id from rol where nombre = 'ROLE_USER'));
+insert into usuario_roles values (2199998,(select id from rol where nombre = 'ROLE_USER'));
 
 
 ------DELETEEEEES!!!
@@ -52,6 +57,25 @@ delete from usuario_roles;
 delete from rol;
 delete from usuario;
 
+
+--TRIGER ESTADO PEDIDO
+
+create function trigger_order_state()
+	returns trigger
+	language 'plpgsql'
+as $BODY$
+begin
+	new.estado:='pendiente';
+	return new;
+end;
+$BODY$
+
+create trigger order_state
+before insert on pedido
+	for each row 	
+		execute procedure trigger_order_state();
+	
+	
 
 
 

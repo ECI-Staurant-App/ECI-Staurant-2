@@ -32,14 +32,18 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "menu")
     private Menu menu;
 
+    @Column
+    private String estado;
+
     public Pedido() {
     }
 
-    public Pedido(Usuario usuario, Restaurante restaurante, Menu menu, Date fecha) {
+    public Pedido(Usuario usuario, Restaurante restaurante, Menu menu, Date fecha,String estado) {
         this.usuario = usuario;
         this.restaurante = restaurante;
         this.menu = menu;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
     public Restaurante getRestaurante() {
@@ -49,10 +53,6 @@ public class Pedido implements Serializable {
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
     }
-
-   /* public void setPlatillo(Platillo platillo) {
-        this.platillo = platillo;
-    }*/
 
     public int getIdPedido() {
         return idPedido;
@@ -78,15 +78,19 @@ public class Pedido implements Serializable {
         this.menu = menu;
     }
 
-    /*  public Platillo getPlatillo() {
-        return platillo;
-    }*/
-
     public Date getFecha() {
         return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

@@ -22,4 +22,7 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
 
     @Query(value = "SELECT * from pedido ORDER BY fecha DESC ",nativeQuery = true)
     List<Pedido> findAllByFecha();
+
+    @Query(value="SELECT * from pedido WHERE pedido.restaurante = (SELECT id_restaurante FROM restaurante WHERE nombre= ?1 LIMIT 1)",nativeQuery = true)
+    List<Pedido> findOrOrderByRestaurante(String restaurate);
 }

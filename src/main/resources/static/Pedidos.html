@@ -7,10 +7,12 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/bootsnip.css" rel="stylesheet">
+    <script src="js/apirestaurant.js"></script>
+    <script src="js/appRestaurant.js"></script>
 
 
 </head>
-<body>
+<body onload="services.funcione()">
 
 <!------ Include the above in your HEAD tag ---------->
 
@@ -32,9 +34,11 @@
                         </div>
                         <div class="table-container">
                             <table class="table table-filter">
-                                <tbody>
-                                <tr data-status="pagado"><td><div class="ckbox"><input type="checkbox" id="checkbox1"><label for="checkbox1"></label></div></td><td><div class="media"><a href="#" class="pull-left"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo"></a><div class="media-body"><span class="media-meta pull-right">Fecha pedido</span><h4 class="title">Nombre del plato<span class="pull-right pagado">(Pagado)</span></h4><p class="summary">Nombre del usuario </p></div></div></td></tr>
+                                <tbody id="pedidosTable">
+
                                 <!-- hasta aqui va uno -->
+                                <!--
+                                <tr data-status="pagado"><td><div class="ckbox"><input type="checkbox" id="checkbox1"><label for="checkbox1"></label></div></td><td><div class="media"><a href="#" class="pull-left"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo"></a><div class="media-body"><span class="media-meta pull-right">Fecha pedido</span><h4 class="title">Nombre del plato<span class="pull-right pagado">(Pagado)</span></h4><p class="summary">Nombre del usuario </p></div></div></td></tr>
                                 <tr data-status="pendiente">
                                     <td>
                                         <div class="ckbox">
@@ -146,7 +150,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>-->
                                 </tbody>
                             </table>
                         </div>

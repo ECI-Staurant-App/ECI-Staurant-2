@@ -88,7 +88,10 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         return pedidoRepository.findAllByFecha();
     }
 
-
+    @Override
+    public List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException {
+        return pedidoRepository.findOrOrderByRestaurante(restaurant);
+    }
 
 
 }

@@ -30,6 +30,7 @@ public interface ServiciosRestaurante {
 
     List<Pedido> getPedidosByFecha();
 
+    List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException;
 
 
     // void savePlatillo(Platillo platillo) throws EcistaurantPersistenceException;

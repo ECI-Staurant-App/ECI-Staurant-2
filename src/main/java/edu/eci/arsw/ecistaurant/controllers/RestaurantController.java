@@ -87,6 +87,18 @@ public class RestaurantController {
         }
     }
 
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/{restaurant}/orders", method = RequestMethod.GET)
+    public ResponseEntity<?> getOrdersByRestaurant(@PathVariable ("restaurant") String restaurant){
+        try{
+
+            List<Pedido> pedidos =serviciosRestaurante.getPedidosByRestaurant(restaurant);
+            return new ResponseEntity<>(pedidos,HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
 

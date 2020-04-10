@@ -14,8 +14,8 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
     List<Pedido> findAll();
 
     Pedido save(Pedido pedido);
-
-    Optional<Pedido> findById(int id);
+    @Query(value = "SELECT * from pedido where id_pedido = ?1 AND restaurante = (SELECT id_restaurante from restaurante where nombre=?2 ) ",nativeQuery = true)
+    Optional<Pedido> findByIdAndRestaurante(int id, String restaurante);
 
     @Query(value = "SELECT * from pedido where estudiante = ?1 ORDER BY fecha DESC ",nativeQuery = true)
     List<Pedido> findAllByUsuario(int carne);

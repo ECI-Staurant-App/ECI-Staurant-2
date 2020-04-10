@@ -17,9 +17,9 @@ public interface ServiciosRestaurante {
 
     Restaurante getRestaurantByName(String restaurante) throws EcistaurantPersistenceException;
 
-    void changeOrderState(String estado,int pedido) throws EcistaurantPersistenceException;
+    void changeOrderState(String estado,int pedido, String restaurante) throws EcistaurantPersistenceException;
 
-    Pedido getPedidoById(int id) throws EcistaurantPersistenceException;
+    Pedido getPedidoByIdAndRestaurant(int id, String restaurante) throws EcistaurantPersistenceException;
 
     void saveMenu(String menu,int precio) throws EcistaurantPersistenceException;
 

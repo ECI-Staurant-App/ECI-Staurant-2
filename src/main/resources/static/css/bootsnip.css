@@ -126,13 +126,13 @@ body {
     font-size: .8em;
     margin-right: 20px;
 }
-.table-filter .media .title span.pagado {
+.table-filter .media .title span.completado {
     color: #5cb85c;
 }
 .table-filter .media .title span.pendiente {
     color: #f0ad4e;
 }
-.table-filter .media .title span.cancelado {
+.table-filter .media .title span.nuevo {
     color: #d9534f;
 }
 .table-filter .media .summary {

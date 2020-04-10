@@ -46,9 +46,9 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    public void changeOrderState(String estado,int pedido) throws EcistaurantPersistenceException {
+    public void changeOrderState(String estado,int pedido, String restaurante) throws EcistaurantPersistenceException {
         try{
-            Pedido order = getPedidoById(pedido);
+            Pedido order = getPedidoByIdAndRestaurant(pedido,restaurante);
             order.setEstado(estado);
             pedidoRepository.save(order);
         }catch (EcistaurantPersistenceException e){
@@ -57,8 +57,8 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    public Pedido getPedidoById(int id) throws EcistaurantPersistenceException {
-        Optional<Pedido> optionalPedido = pedidoRepository.findById(id);
+    public Pedido getPedidoByIdAndRestaurant(int id,String restaurante) throws EcistaurantPersistenceException {
+        Optional<Pedido> optionalPedido = pedidoRepository.findByIdAndRestaurante(id,restaurante);
         if (!optionalPedido.isPresent())
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PEDIDO_NOT_FOUND);
         return optionalPedido.get();

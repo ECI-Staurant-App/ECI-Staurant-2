@@ -44,11 +44,11 @@ public class RestaurantController {
     }
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @GetMapping("/{id}")
-    public ResponseEntity<?>  getOrderById(@PathVariable int id){
+    @GetMapping("/{restaurant}/orders/{id}")
+    public ResponseEntity<?>  getOrderById(@PathVariable int id,@PathVariable String restaurant){
         try{
-            serviciosRestaurante.getPedidoById(id);
-            return new ResponseEntity<>(serviciosRestaurante.getPedidoById(id), HttpStatus.ACCEPTED);
+            serviciosRestaurante.getPedidoByIdAndRestaurant(id,restaurant);
+            return new ResponseEntity<>(serviciosRestaurante.getPedidoByIdAndRestaurant(id,restaurant), HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
@@ -56,10 +56,10 @@ public class RestaurantController {
 
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @RequestMapping(value = "/{pedido}", method = RequestMethod.PUT)
-    public ResponseEntity<?> changeOrderState(@PathVariable("pedido")int pedido , @RequestBody String estado) {
+    @RequestMapping(value = "/{restaurante}/orders/{pedido}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeOrderState(@PathVariable("pedido")int pedido,@PathVariable("restaurante")String restaurante , @RequestBody String estado) {
         try {
-            serviciosRestaurante.changeOrderState(estado,pedido);
+            serviciosRestaurante.changeOrderState(estado,pedido,restaurante);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (EcistaurantPersistenceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

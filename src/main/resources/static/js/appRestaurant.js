@@ -23,13 +23,13 @@ var services = (function () {
             var estado = ordenes[i].orderEstado;
             var id = ordenes[i].orderId;
             if (estado == "pendiente") {
-                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-warning\" onclick='services.changeEstado("+ '&quot;'+estado+ '&quot;'+","+ id+")'>Finalizar</button></div></td><td><div class=\"media\"><a href=\"#\" class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
+                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-warning\" onclick='services.changeEstado("+ '&quot;'+estado+ '&quot;'+","+ id+")'>Finalizar</button></div></td><td><div class=\"media\"><a class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
             }
             else if (estado == "nuevo"){
-                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-danger\" onclick='services.changeEstado("+ '&quot;'+estado+ '&quot;'+","+ id+")'>Atender</button></div></td><td><div class=\"media\"><a href=\"#\" class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
+                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-danger\" onclick='services.changeEstado("+ '&quot;'+estado+ '&quot;'+","+ id+")'>Atender</button></div></td><td><div class=\"media\"><a  class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
             }
             else{
-                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-success disabled\">Completado!</button></div></td><td><div class=\"media\"><a href=\"#\" class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
+                var fila = "<tr data-status=\"" + estado + "\"><td><div> <button type=\"button\" class=\"btn btn-success disabled\">Completado!</button></div></td><td><div class=\"media\"><a class=\"pull-left\"><img src=\"" + ordenes[i].orderMenu.url + "\" class=\"media-photo\"></a><div class=\"media-body\"><span class=\"media-meta pull-right\">" + ordenes[i].orderFecha + "</span><h4 class=\"title\">" + ordenes[i].orderMenu.nombre + "<span class=\"pull-right " + estado + "\">" + "(" + estado + ")" + "</span></h4><p class=\"summary\">" + ordenes[i].orderEstudiante.name + " </p></div></div></td></tr>"
             }
             $("#pedidosTable").append(fila);
         }
@@ -40,8 +40,7 @@ var services = (function () {
         var ahora = estados.indexOf(actual);
         var nuevo = estados[(ahora+1)%estados.length];
         api.changeOrderState(user,id,nuevo);
-        $("#pedidosTable").empty();
-        api.getOrdersByRestaurant(user,llenaHistorial);
+        location.reload();
 
 
     }

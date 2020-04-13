@@ -5,6 +5,7 @@ var services = (function () {
     var user;
     var selectedUser="";
     var menuSeleccionado = "";
+    var zelda = "https://ecistaurant.herokuapp.com";
 
     function placeOrder(){
         selectedUser = sessionStorage.getItem("selectedUser");
@@ -39,7 +40,7 @@ var services = (function () {
         restauranteSeleccionado = id;
         sessionStorage.setItem("restauranteSeleccionado", restauranteSeleccionado);
         console.log(restauranteSeleccionado);
-        window.location.href = "http://localhost:8080/restaurante2.html";
+        window.location.href = zelda+"/restaurante2.html";
         return true;
 
     }
@@ -92,11 +93,6 @@ var services = (function () {
             $("#numeroSlides").append(slide);
             $("#carruselRestaurante").append(fila);
         }
-
-        /*restaurante.map(function (bp) {
-            var fila = '<div class="carousel-item active">' + '<img src="/images/logo.png" alt="First Slide">' + '<div class="carousel-caption d-none d-md-block"> <button type="button" href="localhost:8080" class="btn btn-outline-primary">' + 'Ve Ahora a ' + '!</button>'+ '<h5>' +bp.rtName +'</h5> </div> </div>';
-            $("#carruselRestaurante").append(fila);
-        })*/
 
 
     }

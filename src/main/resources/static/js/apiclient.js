@@ -1,29 +1,29 @@
 apiclient = (function () {
-
+   var zelda = "https://ecistaurant.herokuapp.com";
     return {
 
         getAllRestaurants: function(callback) {
             //http://localhost:8080/
-            $.getJSON("http://localhost:8080/restaurants/",function (data) {
+            $.getJSON(zelda+"/restaurants/",function (data) {
                 callback(data);
             },null)
         },
 
         getAllUsers: function(callback) {
-            $.getJSON("http://localhost:8080/users/",function(data){
+            $.getJSON(zelda+"/users/",function(data){
                 callback(data);
             },null)
 
         },
         getUserByCarne: function(usuario, callback) {
 
-            $.getJSON("http://localhost:8080/users"+usuario,function(data){
+            $.getJSON(zelda+"/users"+usuario,function(data){
                 callback(data);
             },null)
         },
         getMenuByRestaurant : function (restaurante,callback) {
 
-            $.getJSON("http://localhost:8080/restaurants/"+restaurante+"/menus",function (data) {
+            $.getJSON(zelda+"/restaurants/"+restaurante+"/menus",function (data) {
                 callback(data);
             }, null)
         },
@@ -33,7 +33,7 @@ apiclient = (function () {
             console.log("REST :"+restaurante);
             console.log("PLAT :"+platillo);
             var postPromise = $.ajax({
-                url: "http://localhost:8080/users/AddOrder/",
+                url: zelda+"/users/AddOrder/",
                 type: 'POST',
                 data: 'platillo='+platillo+'&restaurante='+restaurante+'&user='+usuario,
                 error: function (jqxhr,status,exception) {

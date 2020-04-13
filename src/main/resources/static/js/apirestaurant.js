@@ -1,36 +1,37 @@
 apirestaurant = (function () {
-
+    var zelda = "https://ecistaurant.herokuapp.com";
     return {
 
+
         getAllOrders: function(callback) {
-            $.getJSON("https://ecistaurant.herokuapp.com/restaurants/orders",function(data){
+            $.getJSON(zelda+"/restaurants/orders",function(data){
                 callback(data);
             },null)
 
         },
 
         getOrdersByRestaurant: function(restaurant,callback) {
-            $.getJSON("http://localhost:8080/restaurants/" + restaurant + "/orders",function(data){
+            $.getJSON(zelda+"/restaurants/" + restaurant + "/orders",function(data){
                 callback(data);
             },null)
 
         },
         getOrderByUser: function(usuario, callback) {
 
-            $.getJSON("https://ecistaurant.herokuapp.com/restaurants"+usuario,function(data){
+            $.getJSON(zelda+"/restaurants"+usuario,function(data){
                 callback(data);
             },null)
         },
         getLastOrders : function (callback) {
 
-            $.getJSON("https://ecistaurant.herokuapp.com/restaurants/LastOrders",function (data) {
+            $.getJSON(zelda+"/restaurants/LastOrders",function (data) {
                 callback(data);
             }, null)
         },
 
         changeOrderState : function (restaurante,idOrden,estado){
             var putPromise = $.ajax({
-                url: "http://localhost:8080/restaurants/"+restaurante+"/orders/"+idOrden,
+                url: zelda+"/restaurants/"+restaurante+"/orders/"+idOrden,
                 type: 'PUT',
                 data: estado,
                 contentType:'text/plain',

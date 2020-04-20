@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.services.impl;
 
+import edu.eci.arsw.ecistaurant.cache.RestaurantCache;
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
@@ -7,6 +8,7 @@ import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.annotations.Cacheable;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,41 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     private PedidoRepository pedidoRepository;
     @Autowired
     private MenuRepository menuRepository;
+    @Autowired
+    private RestaurantCache restaurantCache;
 
+    @Override
+    public Restaurante getRestaurantInCache(String restaurante) throws EcistaurantPersistenceException {
+
+        if(!restaurantCache.estaEnCache(restaurante)){
+            restaurantCache.saveRestaurante(getRestaurantFromRepo(restaurante));
+        }
+        return restaurantCache.getRestaurante(restaurante);
+    }
+
+    @Override
+    public void updateRestaurantInCache(String restaurante) throws EcistaurantPersistenceException{
+
+        if (!restaurantCache.estaEnCache(restaurante)){
+            restaurantCache.saveRestaurante(getRestaurantFromRepo(restaurante));
+        }else{
+            restaurantRepo.save(restaurantCache.getRestaurante(restaurante));
+        }
+
+    }
+
+    public Restaurante getRestaurantFromRepo(String restaurante) throws EcistaurantPersistenceException{
+
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
+        if (optionalRestaurante.isPresent()){
+            return optionalRestaurante.get();
+        }else {
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_NOT_FOUND);
+        }
+    }
+
+
+    @Cacheable(value = "restaurantes")
     @Override
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
@@ -28,6 +64,8 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
     @Override
     public void saveRestaurant(Restaurante restaurante) throws EcistaurantPersistenceException {
+
+        updateRestaurantInCache(restaurante.getNombre());
         Optional<Restaurante> optionalRestaurante = restaurantRepo.findById(restaurante.getIdRestaurante());
         if (optionalRestaurante.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_REGISTERED);

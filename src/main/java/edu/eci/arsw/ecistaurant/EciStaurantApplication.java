@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 @EnableSwagger2
 @ComponentScan
+@EnableCaching
 public class EciStaurantApplication implements CommandLineRunner {
 
     @Autowired

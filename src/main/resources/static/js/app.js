@@ -5,7 +5,7 @@ var services = (function () {
     var user;
     var selectedUser="";
     var menuSeleccionado = "";
-    var zelda = "https://ecistaurant.herokuapp.com";
+    var zelda = "http://localhost:8080";
 
     function placeOrder(){
         selectedUser = sessionStorage.getItem("selectedUser");

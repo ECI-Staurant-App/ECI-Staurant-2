@@ -1,167 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org"
+	  layout:decorate="~{fragments/layout}">
 <head>
-	<title>Mesas</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-</head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/back.jpg');">
 
-			<div class="wrap-login100 p-t-30 p-b-50">
-				<div class="container">
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa-left">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>							
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>							
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-					<div class="cards" data-toggle="modal" data-target="#modalMesa">
-						<div class="card-item">
-							<div class="card-image-mesa">
-							</div>
-						</div>
-					</div>
-				</div>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/apiclient.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/mesas.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="alertifyJS/alertify.min.js"></script>
+	<script type="text/javascript"> </script>
+	<title>Mesas</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="alertifyJS/css/alertify.min.css">
+	<link rel="stylesheet" href="alertifyJS/css/themes/semantic.min.css">
+	<style type="text/css">
+		/* FontAwesome for working BootSnippet :> */
+		@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+		#team {
+			background: #eee !important;
+		}
+		body {
+			background-color: gray;
+		}
+
+		.btn-primary:hover,
+		.btn-primary:focus {
+			background-color: white;
+			border-color: white;
+			box-shadow: none;
+			outline: none;
+		}
+
+		.btn-primary {
+			color: #fff;
+			background-color: white;
+			border-color: black;
+		}
+
+		section {
+			padding: 60px 0;
+		}
+
+		section .section-title {
+			text-align: center;
+			color: white;
+			margin-bottom: 50px;
+			text-transform: uppercase;
+		}
+
+		#team .card {
+			border: none;
+			background: gray;
+		}
+
+		.image-flip:hover .backside,
+		.image-flip.hover .backside {
+			-webkit-transform: rotateY(0deg);
+			-moz-transform: rotateY(0deg);
+			-o-transform: rotateY(0deg);
+			-ms-transform: rotateY(0deg);
+			transform: rotateY(0deg);
+			border-radius: .25rem;
+		}
+
+		.image-flip:hover .frontside,
+		.image-flip.hover .frontside {
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			-o-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+
+		.mainflip {
+			-webkit-transition: 1s;
+			-webkit-transform-style: preserve-3d;
+			-ms-transition: 1s;
+			-moz-transition: 1s;
+			-moz-transform: perspective(1000px);
+			-moz-transform-style: preserve-3d;
+			-ms-transform-style: preserve-3d;
+			transition: 1s;
+			transform-style: preserve-3d;
+			position: relative;
+		}
+
+		.frontside {
+			position: relative;
+			-webkit-transform: rotateY(0deg);
+			-ms-transform: rotateY(0deg);
+			z-index: 2;
+			margin-bottom: 30px;
+		}
+
+		.backside {
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: white;
+			-webkit-transform: rotateY(-180deg);
+			-moz-transform: rotateY(-180deg);
+			-o-transform: rotateY(-180deg);
+			-ms-transform: rotateY(-180deg);
+			transform: rotateY(-180deg);
+			-webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+			-moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+			box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+		}
+
+		.frontside,
+		.backside {
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			backface-visibility: hidden;
+			-webkit-transition: 1s;
+			-webkit-transform-style: preserve-3d;
+			-moz-transition: 1s;
+			-moz-transform-style: preserve-3d;
+			-o-transition: 1s;
+			-o-transform-style: preserve-3d;
+			-ms-transition: 1s;
+			-ms-transform-style: preserve-3d;
+			transition: 1s;
+			transform-style: preserve-3d;
+		}
+
+		.frontside .card,
+		.backside .card {
+			min-height: 250px;
+		}
+
+		.backside .card a {
+			font-family: Consolas, monaco, monospace;
+			font-size: 20px;
+			color: black !important;
+		}
+
+		.frontside .card .card-title,
+		.backside .card .card-title {
+			color: black !important;
+		}
+		.backside .card .card-text {
+			font-family: Cambria;
+			color : black !important;
+		}
+
+		.frontside .card .card-body img {
+			width: 200px;
+			height: 100px;
+			border-radius: 50%;
+		}
+		.container {
+			display: grid;
+			grid-template-columns: repeat(3,1fr);
+			grid-gap: 30px;
+		}
+		@media (min-width: 900px) {
+			.container {grid-template-columns: repeat(3,1fr)}
+
+		}
+	</style>
+
+
+
+</head>
+<body onload="tableServices.funcione()">
+
+<div layout:fragment="content" th:remove="tag">
+	<h5 class="section-title h1">SELECCIONE UNA MESA!</h5>
+
+	<div class="container" >
+		<div class="row">
+			<div id ="fillCards">
+
 			</div>
+
+			<div id="panel" class="left-panel"></div>
+
 		</div>
 	</div>
-	
-	<div class="modal fade" id="modalMesa" role="dialog">
-		<div class="modal-dialog">
-		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Mesa</h4>
-			</div>
-			<div class="modal-body">
-				<div class="form-group">
-					<label for="ubicacion"><span style="color: red"></span> Ubicacion</label>
-					<input readonly>
-						Null
-					</textarea>
-				</div>	
-				<div class="form-group">
-					<label for="tiempo"><span style="color: red"></span> Tiempo</label>
-					<input readonly>
-						Null
-					</textarea>
-				  </div>	  
-			</div>
-			<button type="button" class="btn btn-primary" data-dismiss="modal" >Reservar</button>
-		  </div>
-		  
-		</div>
-	  </div>
+</div>
 
-
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
-	
 </body>
 </html>

@@ -5,14 +5,12 @@ var services = (function () {
     var user;
     var selectedUser="";
     var menuSeleccionado = "";
-    var zelda = "https://ecistaurant.herokuapp.com";
-    //var zelda ="http://localhost:8080";
+    //var zelda = "https://ecistaurant.herokuapp.com";
+    var zelda ="http://localhost:8080";
 
-    function placeOrder(){
-        selectedUser = sessionStorage.getItem("selectedUser");
-        restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
-        return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
-    }
+
+
+
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
             return {
@@ -36,6 +34,63 @@ var services = (function () {
 
     }
 
+    function placeOrder(){
+
+        selectedUser = sessionStorage.getItem("selectedUser");
+        console.log(selectedUser);
+        restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
+        console.log(restauranteSeleccionado);
+        menuSeleccionado = sessionStorage.getItem("menuSeleccionado");
+        console.log(menuSeleccionado);
+        return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+    }
+
+    function panelConfirmarMesas(){
+        console.log("PANELCONFIRMAR");
+        var confirm = alertify.confirm("¿Desea reservar una mesa?",null,null).set('labels', {
+            ok: 'Si',
+            cancel: 'No'
+        });
+
+        confirm.set('onok', function () {
+            window.location.href = zelda + "/mesas.html";
+        });
+        confirm.set('oncancel', function () {
+            services.panelPedido();
+        });
+    }
+
+
+    function panelPedido() {
+        var confirm = alertify.confirm("Confirmación de su pedido", "Usuario: " + services.getUser() + " " + "\n" +
+            "Restaurante: " + services.getRestaurant() + " " + "\n" +
+            "Menu: " + services.getMenu() + " " + "\n",null, null).set('labels', {
+            ok: 'Confirmar',
+            cancel: 'Cancelar'
+        });
+
+        confirm.set('onok', function () {
+
+            services.placeOrder();
+            alertify.success("Su pedido ha sido registrado");
+        });
+        confirm.set('oncancel', function () {
+            alertify.error("Su pedido ha sido cancelado");
+        });
+    }
+
+    function getUser() {
+        return sessionStorage.getItem("selectedUser");
+    }
+
+    function getRestaurant() {
+        return sessionStorage.getItem("restauranteSeleccionado");
+    }
+    function getMenu() {
+        return sessionStorage.getItem("menuSeleccionado");
+
+    }
+
     function setRestauranteSeleccionado(id){
         console.log("IDDDDDREST : "+id);
         restauranteSeleccionado = id;
@@ -49,9 +104,8 @@ var services = (function () {
         console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
-        placeOrder();
+        panelConfirmarMesas();
         console.log(menuSeleccionado);
-        alert("Su pedido fue registrado exitosamente!")
     }
 
     function setUserLogged(nombre){
@@ -139,6 +193,7 @@ var services = (function () {
         console.log(menus);
     }
 
+
     function funcioneMenus() {
         console.log(restauranteSeleccionado);
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
@@ -156,6 +211,11 @@ var services = (function () {
         setRestauranteSeleccionado:setRestauranteSeleccionado,
         setUserLogged:setUserLogged,
         setMenuSeleccionado : setMenuSeleccionado,
+        getRestaurant : getRestaurant,
+        getMenu : getMenu,
+        getUser : getUser,
+        placeOrder : placeOrder,
+        panelPedido : panelPedido,
     }
 
 })();

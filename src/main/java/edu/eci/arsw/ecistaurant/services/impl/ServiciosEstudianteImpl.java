@@ -72,6 +72,8 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         pedido.setUsuario(getUserByEmail(correo));
         pedido.setRestaurante(restaurant);
         pedido.setMenu(findMenuByName(menu));
+        pedido.setEstado("nuevo");
+        System.out.println("SETEANDO EL ESTADO A NUEVO -> " + pedido.getEstado());
         Date date = new Date();
         System.out.println(date);
         pedido.setFecha(date);

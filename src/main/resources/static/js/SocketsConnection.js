@@ -13,7 +13,7 @@ var conexion = (function () {
         console.log("Gonorreeeeeeeeeeeeeeeeaaaaaaaaaaaa");
         stompClient.connect({}, function (frame) {
             stompClient.send("/app/" + restaurante + '/newOrders', {}, JSON.stringify(2));
-            $('#noti').setContent("Nueva notificaciones");
+
         });
     };
 
@@ -24,7 +24,7 @@ var conexion = (function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/'+restaurante+'/newOrders', function (eventbody) {
                 console.log(eventbody.body);
-
+                document.getElementById('noti').textContent="Nuevos Pedidos!";
             });
 
 

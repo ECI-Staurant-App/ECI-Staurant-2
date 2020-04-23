@@ -72,8 +72,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.webjars/stomp-websocket
     compile group: 'org.webjars', name: 'stomp-websocket', version: '2.3.1'
     // https://mvnrepository.com/artifact/org.webjars/sockjs-client
-    compile group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    compile group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
 
 
 

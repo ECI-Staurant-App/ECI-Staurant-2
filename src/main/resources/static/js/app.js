@@ -10,7 +10,9 @@ var services = (function () {
     function placeOrder(){
         selectedUser = sessionStorage.getItem("selectedUser");
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
+        conexion.sendNotification(restauranteSeleccionado);
         return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+
     }
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
@@ -144,6 +146,11 @@ var services = (function () {
         apiclient.getMenuByRestaurant(restauranteSeleccionado,llenarMenu);
     }
 
+    function getSelectedUser(){
+        var owo = sessionStorage.getItem("selectedUser");
+        return owo;
+    }
+
     function funcione(){
         apiclient.getAllRestaurants(llenaCarrusel);
         console.log($("#username"))
@@ -155,6 +162,7 @@ var services = (function () {
         setRestauranteSeleccionado:setRestauranteSeleccionado,
         setUserLogged:setUserLogged,
         setMenuSeleccionado : setMenuSeleccionado,
+        getSelectedUser:getSelectedUser
     }
 
 })();

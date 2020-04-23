@@ -1,17 +1,33 @@
-var con = (function () {
+var conexion = (function () {
+    var stompClient=null;
 
-    var connectAndSubscribe = function(){
+
+    function initStompClient(){
         console.info('Connecting to WS...');
         var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
+    };
 
-        //subscribe to /topic/TOPICXX when connections succeed
+    function sendNotification(restaurante){
+        initStompClient();
+        console.log("Gonorreeeeeeeeeeeeeeeeaaaaaaaaaaaa");
+        stompClient.connect({}, function (frame) {
+            stompClient.send("/app/" + restaurante + '/newOrders', {}, JSON.stringify(2));
+            $('#noti').setContent("Nueva notificaciones");
+        });
+    };
+
+    function connectAndSubscribeNotifications(){
+        initStompClient();
+        var restaurante = services.getSelectedUser();
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/', function (eventbody) {
-                //Aqui debo hacer lo que reciba en el path de destinatio
+            stompClient.subscribe('/topic/'+restaurante+'/newOrders', function (eventbody) {
+                console.log(eventbody.body);
 
             });
+
+
 
             //Debo hacer los demas subscribe que necesite.
             // La pregunta es ¿Quien abrira el socket y quien se conectara?
@@ -28,21 +44,16 @@ var con = (function () {
             Y ADEMAS se suscriben al topico /topic/nuevoPedido.IdPedido
              */
         });
-
-
     };
 
 
 
     return{
-        connect: function () {
+        init:initStompClient,
+        connectAndSubscribeNotifications:connectAndSubscribeNotifications,
+        sendNotification:sendNotification
 
-        },
-
-        disconnect: function () {
-
-        }
     };
 
 
-});
+})();

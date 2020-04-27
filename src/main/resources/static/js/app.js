@@ -12,8 +12,11 @@ var services = (function () {
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
         conexion.sendNotification(restauranteSeleccionado);
         return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
-
     }
+
+    function getLastOrder(){
+    }
+
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
             return {
@@ -51,6 +54,7 @@ var services = (function () {
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
         placeOrder();
+
         console.log(menuSeleccionado);
         alert("Su pedido fue registrado exitosamente!")
     }

@@ -33,6 +33,7 @@ var services = (function () {
             }
             $("#pedidosTable").append(fila);
         }
+        conexion.limpiarNotificaciones(user);
     }
 
     function changeEstado(actual,id){

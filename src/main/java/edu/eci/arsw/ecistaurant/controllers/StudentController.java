@@ -88,6 +88,19 @@ public class StudentController {
         }
     }
 
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/{usuario}/LastOrder", method = RequestMethod.GET)
+    public ResponseEntity<?>  getLastOrderOfUser(@PathVariable ("usuario") String usuario){
+        try{
+            return new ResponseEntity<>(studentServices.getLastOrderOfUser(usuario), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+
 
 }
 

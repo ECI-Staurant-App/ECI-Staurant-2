@@ -64,6 +64,14 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         return optionalPedido.get();
     }
 
+    @Override
+    public Pedido getPedidoById(int id) throws EcistaurantPersistenceException {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(id);
+        if (!optionalPedido.isPresent())
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PEDIDO_NOT_FOUND);
+        return optionalPedido.get();
+    }
+
 
     @Override
     public void saveMenu(String menu,int precio) throws EcistaurantPersistenceException {

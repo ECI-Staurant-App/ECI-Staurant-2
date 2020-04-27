@@ -12,8 +12,24 @@ var conexion = (function () {
         initStompClient();
         console.log("Gonorreeeeeeeeeeeeeeeeaaaaaaaaaaaa");
         stompClient.connect({}, function (frame) {
-            stompClient.send("/app/" + restaurante + '/newOrders', {}, JSON.stringify(2));
+            stompClient.send("/app/" + restaurante + '/newOrders', {},true);
 
+        });
+    };
+
+    function connectAndSubscribeOrder(id){
+        initStompClient();
+        stompClient.connect({}, function (frame) {
+            stompClient.subscribe("/topic/Pedidos/" + id, {},function(eventbody){
+                console.log("Luego lo pienso mejor, aqui solo cambio de estado en vista");
+            });
+        });
+    };
+
+    function connectAndSendOrder(id){
+        initStompClient();
+        stompClient.connect({}, function (frame) {
+            stompClient.send("/topic/Pedido/" + id, {},id);
         });
     };
 
@@ -24,9 +40,9 @@ var conexion = (function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/'+restaurante+'/newOrders', function (eventbody) {
                 console.log(eventbody.body);
-                document.getElementById('noti').textContent="Nuevos Pedidos!";
+                document.getElementById('noti').textContent=eventbody.body;
             });
-
+            stompClient.send("/app/" + restaurante + '/newOrders', {},false);
 
 
             //Debo hacer los demas subscribe que necesite.
@@ -44,14 +60,25 @@ var conexion = (function () {
             Y ADEMAS se suscriben al topico /topic/nuevoPedido.IdPedido
              */
         });
+
     };
+
+    function limpiarNotificaciones(restaurante){
+        initStompClient();
+        stompClient.connect({}, function (frame) {
+            stompClient.send("/app/" + restaurante + '/cleanNotifications', {});
+        });
+
+    };
+
 
 
 
     return{
         init:initStompClient,
         connectAndSubscribeNotifications:connectAndSubscribeNotifications,
-        sendNotification:sendNotification
+        sendNotification:sendNotification,
+        limpiarNotificaciones:limpiarNotificaciones
 
     };
 

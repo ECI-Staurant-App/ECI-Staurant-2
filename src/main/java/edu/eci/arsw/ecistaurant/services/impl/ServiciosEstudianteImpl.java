@@ -98,6 +98,15 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
+    public Pedido getLastOrderOfUser(String email) throws EcistaurantPersistenceException {
+        Optional<Pedido> optionalPedido = pedidoRepository.findLastOrderOfUser(email);
+        if (!optionalPedido.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_NOT_FOUND);
+        }
+        return optionalPedido.get();
+    }
+
+    @Override
     public List<Mesa> buscarMesas() {
         return mesaRepository.findAll();
     }

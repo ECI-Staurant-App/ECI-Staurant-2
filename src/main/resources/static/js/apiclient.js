@@ -15,6 +15,12 @@ apiclient = (function () {
             },null)
 
         },
+        getLastOrderOfUser: function(user,callback) {
+            $.getJSON(zelda+"/users/"+user+"/LastOrder",function(data){
+                callback(data);
+            },null)
+
+        },
         getUserByCarne: function(usuario, callback) {
 
             $.getJSON(zelda+"/users"+usuario,function(data){

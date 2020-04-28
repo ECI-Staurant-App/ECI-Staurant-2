@@ -43,6 +43,7 @@ apirestaurant = (function () {
 
             putPromise.then(
                 function () {
+                    conexion.connectAndSendOrder(idOrden);
                     console.info("OK");
                 },
                 function () {

@@ -42,7 +42,7 @@ var services = (function () {
         var ahora = estados.indexOf(actual);
         var nuevo = estados[(ahora+1)%estados.length];
         api.changeOrderState(user,id,nuevo);
-        conexion.connectAndSendOrder(id);
+
 
     }
 

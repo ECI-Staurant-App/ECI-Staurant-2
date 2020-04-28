@@ -10,7 +10,7 @@ var services = (function () {
     function placeOrder(){
         selectedUser = sessionStorage.getItem("selectedUser");
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
-        conexion.sendNotification(restauranteSeleccionado);
+        //conexion.sendNotification(restauranteSeleccionado);
         return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
     }
 
@@ -49,14 +49,25 @@ var services = (function () {
         return true;
 
     }
+
+    function setUltimoPedido(pedido){
+        sessionStorage.setItem("ultimoPedido",JSON.stringify(pedido));
+        var ped = sessionStorage.getItem("ultimoPedido");
+        console.log(ped);
+    }
     function setMenuSeleccionado(id){
         console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
+        window.location.href = zelda+"/estadoPedido.html";
         placeOrder();
-
+        var usuario = sessionStorage.getItem("selectedUser");
+        api.getLastOrderOfUser(usuario,setUltimoPedido);
+        console.log("Usuario: "+  usuario);
         console.log(menuSeleccionado);
-        alert("Su pedido fue registrado exitosamente!")
+        alert("Su pedido fue registrado exitosamente!");
+
+
     }
 
     function setUserLogged(nombre){
@@ -99,9 +110,9 @@ var services = (function () {
             $("#numeroSlides").append(slide);
             $("#carruselRestaurante").append(fila);
         }
-
-
     }
+
+
 
     function llenarMenu(menus){
         var menus = doMapMenus(menus);
@@ -144,6 +155,15 @@ var services = (function () {
         console.log(menus);
     }
 
+    function cargaDataYConecta(){
+        var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
+        var Pedi = JSON.parse(sessionStorage.getItem("ultimoPedido"));
+        console.log(Pedi);
+        document.getElementById("idOrden").textContent=Pedi.idPedido;
+        document.getElementById("menuPedido").textContent=Pedi.menu.nombre;
+        conexion.connectAndSubscribeOrder(Pedi.idPedido,restauranteSeleccionado);
+    }
+
     function funcioneMenus() {
         console.log(restauranteSeleccionado);
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
@@ -166,7 +186,8 @@ var services = (function () {
         setRestauranteSeleccionado:setRestauranteSeleccionado,
         setUserLogged:setUserLogged,
         setMenuSeleccionado : setMenuSeleccionado,
-        getSelectedUser:getSelectedUser
+        getSelectedUser:getSelectedUser,
+        cargaDataYConecta:cargaDataYConecta
     }
 
 })();

@@ -17,10 +17,11 @@ var conexion = (function () {
         });
     };
 
-    function connectAndSubscribeOrder(id){
+    function connectAndSubscribeOrder(id,restaurante){
         initStompClient();
         stompClient.connect({}, function (frame) {
-            stompClient.subscribe("/topic/Pedidos/" + id, {},function(eventbody){
+            stompClient.send("/app/" + restaurante + '/newOrders', {},true);
+            stompClient.subscribe("/topic/Pedido/" + id, {},function(eventbody){
                 console.log("Luego lo pienso mejor, aqui solo cambio de estado en vista");
             });
         });
@@ -29,9 +30,13 @@ var conexion = (function () {
     function connectAndSendOrder(id){
         initStompClient();
         stompClient.connect({}, function (frame) {
-            stompClient.send("/topic/Pedido/" + id, {},id);
+            stompClient.send("/app/Pedido/" + id, {},id);
+            location.reload();
         });
+
+
     };
+
 
     function connectAndSubscribeNotifications(){
         initStompClient();
@@ -78,7 +83,9 @@ var conexion = (function () {
         init:initStompClient,
         connectAndSubscribeNotifications:connectAndSubscribeNotifications,
         sendNotification:sendNotification,
-        limpiarNotificaciones:limpiarNotificaciones
+        limpiarNotificaciones:limpiarNotificaciones,
+        connectAndSubscribeOrder:connectAndSubscribeOrder,
+        connectAndSendOrder:connectAndSendOrder
 
     };
 

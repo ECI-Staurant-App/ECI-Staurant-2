@@ -53,7 +53,6 @@ var services = (function () {
     function setUltimoPedido(pedido){
         console.log(pedido);
         sessionStorage.setItem("ultPedido",JSON.stringify(pedido));
-
         return true;
     }
     function setMenuSeleccionado(id){
@@ -183,7 +182,8 @@ var services = (function () {
         setUserLogged:setUserLogged,
         setMenuSeleccionado : setMenuSeleccionado,
         getSelectedUser:getSelectedUser,
-        cargaDataYConecta:cargaDataYConecta
+        cargaDataYConecta:cargaDataYConecta,
+        setUltimoPedido:setUltimoPedido
     }
 
 })();

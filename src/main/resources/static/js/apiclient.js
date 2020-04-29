@@ -18,6 +18,7 @@ apiclient = (function () {
         getLastOrderOfUser: function(user,callback) {
             $.getJSON(zelda+"/users/"+user+"/LastOrder",function(data){
                 callback(data);
+                services.setUltimoPedido(data);
             },null)
 
         },

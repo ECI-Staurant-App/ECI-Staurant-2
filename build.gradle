@@ -69,6 +69,12 @@ dependencies {
     compile group: 'org.webjars', name: 'font-awesome', version: '4.7.0'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-cache")
+    // https://mvnrepository.com/artifact/org.ehcache/ehcache
+    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
+
+
 
 
 

@@ -3,6 +3,8 @@ tableServices = (function () {
     var api = apiclient;
     var mesas;
     var mesaSeleccionada;
+    //var zelda = "https://ecistaurant.herokuapp.com";
+    var zelda = "http://localhost:8080";
 
     function doMap(mesa) {
         return mesa.map(function (rt) {
@@ -90,23 +92,79 @@ tableServices = (function () {
 
     function panelPedido() {
 
-        var confirm = alertify.confirm("Confirmación de su pedido", "Usuario: " + services.getUser() + " " + "\n" +
-            "Restaurante: " + services.getRestaurant() + " " + "\n" +
-            "Menu: " + services.getMenu() + " " + "\n" +
-            "Mesa: " + sessionStorage.getItem("mesaSeleccionada"), null, null).set('labels', {
-            ok: 'Confirmar',
-            cancel: 'Cancelar'
-        });
-
-        confirm.set('onok', function () {
-
-            services.placeOrder();
-            alertify.success("Su pedido ha sido registrado");
-        });
-        confirm.set('oncancel', function () {
-            alertify.error("Su pedido ha sido cancelado");
-        });
+        window.location.href = zelda + "/confirmOrder.html";
     }
+
+    function confirmOrder(){
+        var confirm = alertify.confirm("¿Desea cancelar su pedido?",null,null).set('labels', {
+            ok: 'Si',
+            cancel: 'No'
+        });
+       confirm.set('onok', function () {
+
+           alertify.error("Su pedido ha sido cancelado exitosamente");
+           window.location.href = zelda + "/UsersDashboard.html";
+       });
+       confirm.set('oncancel', function () {
+           alertify.error("Su pedido no ha sido cancelado exitosamente");
+       });
+    }
+
+    function llenarInfoPedido() {
+
+        var usuario = services.getUser();
+        var restaurante = services.getRestaurant();
+        var menu = services.getMenu();
+        var precio = services.getPrecioMenu();
+        var mesaSelected = getMesaSeleccionada();
+        if (mesaSelected == undefined) {
+            mesaSelected = "No seleccionó"
+        }
+
+        var tabla =' <table class="table-fill" id="infoPedido">' +
+            '   <thead>' +
+            '            <tr>' +
+            '                <th class="text-left">Información de su pedido</th>' +
+            '                <th class="text-left"></th>' +
+            '            </tr>' +
+            '            </thead>' +
+                    '<tbody class="table-hover">' +
+                        '<tr>' +
+                '           <td class="text-left">Usuario</td>' +
+                '           <td class="text-left">' + usuario + '</td>' +
+                '       </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Restaurante</td>' +
+                '                <td class="text-left">' + restaurante + '</td>' +
+                '            </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Menu</td>' +
+                '                <td class="text-left">' + menu + '</td>' +
+                '            </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Precio</td>' +
+                '                <td class="text-left">' + '$' + precio + '</td>' +
+                '            </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Mesa</td>' +
+                '                <td class="text-left">' + mesaSelected + '</td>' +
+                '            </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Fecha</td>' +
+                '                <td class="text-left"> </td>' +
+                '            </tr>' +
+        '               </tbody>'+
+            '        </table>' +
+            '<nav class="codrops-demos">' +
+            '    <a href="#" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
+            '    <a href="#" onclick="tableServices.confirmOrder()" style="text-align:center"> Cancelar </a>' +
+            '</nav>'
+        ;
+        $("#infoPedido").html("");
+        $("#infoPedido").append(tabla);
+    }
+
+
 
     function funcione() {
         api.getAllTables(fillCards);
@@ -118,6 +176,9 @@ tableServices = (function () {
         notificar: notificar,
         panelPedido: panelPedido,
         setMesaSeleccionada: setMesaSeleccionada,
+        llenarInfoPedido: llenarInfoPedido,
+        confirmOrder :confirmOrder,
+
     }
 
 })();

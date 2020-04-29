@@ -12,6 +12,7 @@
 
 body {
 	font-family: 'Lato', Arial, sans-serif;
+	text-align: center;
 }
 
 a, button {
@@ -110,6 +111,7 @@ a {
 	border: 3px solid #fff;
 	color: #fff;
 	font-weight: 700;
+	justify-content: center;
 }
 
 .codrops-demos a:hover,

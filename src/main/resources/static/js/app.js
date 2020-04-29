@@ -7,9 +7,7 @@ var services = (function () {
     var menuSeleccionado = "";
     //var zelda = "https://ecistaurant.herokuapp.com";
     var zelda ="http://localhost:8080";
-
-
-
+    var precioSelected = "";
 
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
@@ -42,7 +40,9 @@ var services = (function () {
         console.log(restauranteSeleccionado);
         menuSeleccionado = sessionStorage.getItem("menuSeleccionado");
         console.log(menuSeleccionado);
+        alert("su pedido fue registrado exitosamente");
         return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+
     }
 
     function panelConfirmarMesas(){
@@ -56,26 +56,7 @@ var services = (function () {
             window.location.href = zelda + "/mesas.html";
         });
         confirm.set('oncancel', function () {
-            services.panelPedido();
-        });
-    }
-
-
-    function panelPedido() {
-        var confirm = alertify.confirm("Confirmación de su pedido", "Usuario: " + services.getUser() + " " + "\n" +
-            "Restaurante: " + services.getRestaurant() + " " + "\n" +
-            "Menu: " + services.getMenu() + " " + "\n",null, null).set('labels', {
-            ok: 'Confirmar',
-            cancel: 'Cancelar'
-        });
-
-        confirm.set('onok', function () {
-
-            services.placeOrder();
-            alertify.success("Su pedido ha sido registrado");
-        });
-        confirm.set('oncancel', function () {
-            alertify.error("Su pedido ha sido cancelado");
+            window.location.href = zelda + "/confirmOrder.html";
         });
     }
 
@@ -88,7 +69,9 @@ var services = (function () {
     }
     function getMenu() {
         return sessionStorage.getItem("menuSeleccionado");
-
+    }
+    function getPrecioMenu(){
+        return sessionStorage.getItem("precioSelected");
     }
 
     function setRestauranteSeleccionado(id){
@@ -114,6 +97,13 @@ var services = (function () {
         console.log(selectedUser);
         sessionStorage.setItem("selectedUser",selectedUser);
 
+    }
+
+    function setPrecio(precio){
+
+        precioSelected = precio;
+        sessionStorage.setItem("precioSelected",precioSelected);
+        console.log("PRECIO: "+ precioSelected);
     }
 
     function llenaCarrusel(restaurante){
@@ -164,7 +154,7 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+'&quot;' +  nombre + '&quot;'  +')"> Pide ahora! </a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+'&quot;' +  nombre + '&quot;'  +') ; services.setPrecio('+'&quot;' +  precio + '&quot;'  +')"> Pide ahora! </a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             var op= (i+4)%4;
@@ -211,11 +201,12 @@ var services = (function () {
         setRestauranteSeleccionado:setRestauranteSeleccionado,
         setUserLogged:setUserLogged,
         setMenuSeleccionado : setMenuSeleccionado,
+        setPrecio : setPrecio,
         getRestaurant : getRestaurant,
         getMenu : getMenu,
         getUser : getUser,
+        getPrecioMenu : getPrecioMenu,
         placeOrder : placeOrder,
-        panelPedido : panelPedido,
     }
 
 })();

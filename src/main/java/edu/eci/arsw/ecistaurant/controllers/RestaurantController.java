@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
+import edu.eci.arsw.ecistaurant.cache.RestaurantCache;
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
@@ -22,13 +23,15 @@ public class RestaurantController {
     private ServiciosRestaurante serviciosRestaurante;
     @Autowired
     private ServiciosEstudiante serviciosEstudiante;
+    @Autowired
+    private RestaurantCache restaurantCache;
 
 
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllRestaurants(){
-        List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
+        List<Restaurante> restaurantes = restaurantCache.getAllRestaurants();
         return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
     }
 
@@ -101,7 +104,7 @@ public class RestaurantController {
     public ResponseEntity<?> getOrdersByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Pedido> pedidos =serviciosRestaurante.getPedidosByRestaurant(restaurant);
+            List<Pedido> pedidos = restaurantCache.getPedidosByRestaurant(restaurant);
             return new ResponseEntity<>(pedidos,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

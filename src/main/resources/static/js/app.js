@@ -11,11 +11,11 @@ var services = (function () {
         selectedUser = sessionStorage.getItem("selectedUser");
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
         //conexion.sendNotification(restauranteSeleccionado);
-        return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+        api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+        api.getLastOrderOfUser(selectedUser,setUltimoPedido);
+
     }
 
-    function getLastOrder(){
-    }
 
     function doMap(restaurante) {
         return restaurante.map(function (rt) {
@@ -51,22 +51,18 @@ var services = (function () {
     }
 
     function setUltimoPedido(pedido){
-        sessionStorage.setItem("ultimoPedido",JSON.stringify(pedido));
-        var ped = sessionStorage.getItem("ultimoPedido");
-        console.log(ped);
+        console.log(pedido);
+        sessionStorage.setItem("ultPedido",JSON.stringify(pedido));
+
+        return true;
     }
     function setMenuSeleccionado(id){
         console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
-        window.location.href = zelda+"/estadoPedido.html";
         placeOrder();
-        var usuario = sessionStorage.getItem("selectedUser");
-        api.getLastOrderOfUser(usuario,setUltimoPedido);
-        console.log("Usuario: "+  usuario);
-        console.log(menuSeleccionado);
         alert("Su pedido fue registrado exitosamente!");
-
+        window.open(zelda+"/estadoPedido.html");
 
     }
 
@@ -157,7 +153,7 @@ var services = (function () {
 
     function cargaDataYConecta(){
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
-        var Pedi = JSON.parse(sessionStorage.getItem("ultimoPedido"));
+        var Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
         console.log(Pedi);
         document.getElementById("idOrden").textContent=Pedi.idPedido;
         document.getElementById("menuPedido").textContent=Pedi.menu.nombre;

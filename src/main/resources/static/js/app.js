@@ -6,13 +6,14 @@ var services = (function () {
     var selectedUser="";
     var menuSeleccionado = "";
     var zelda = "http://localhost:8080";
+    var Pedi;
 
     function placeOrder(){
         selectedUser = sessionStorage.getItem("selectedUser");
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
         //conexion.sendNotification(restauranteSeleccionado);
         api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
-        api.getLastOrderOfUser(selectedUser,setUltimoPedido);
+        //api.getLastOrderOfUser(selectedUser,setUltimoPedido);
 
     }
 
@@ -53,15 +54,22 @@ var services = (function () {
     function setUltimoPedido(pedido){
         console.log(pedido);
         sessionStorage.setItem("ultPedido",JSON.stringify(pedido));
-        return true;
+        //window.open(zelda+"/estadoPedido.html");
+        Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
+        console.log(pedido);
+        document.getElementById("idOrden").textContent=Pedi.idPedido;
+        document.getElementById("menuPedido").textContent=Pedi.menu.nombre;
+        conexion.connectAndSubscribeOrder(Pedi.idPedido,restauranteSeleccionado);
     }
     function setMenuSeleccionado(id){
         console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
+        var u = sessionStorage.getItem("usuarioSeleccionado");
         placeOrder();
+        //api.getLastOrderOfUser(usuarioSeleccionado,setUltimoPedido);
         alert("Su pedido fue registrado exitosamente!");
-        window.open(zelda+"/estadoPedido.html");
+
 
     }
 
@@ -70,6 +78,7 @@ var services = (function () {
         selectedUser = user.val();
         console.log(selectedUser);
         sessionStorage.setItem("selectedUser",selectedUser);
+
 
     }
 
@@ -121,7 +130,7 @@ var services = (function () {
             var primero = '<div class="item carousel-item active"> <div id="sub'+i +'" class="row">';
             var otros = '<div class="item carousel-item"> <div id=sub"'+i +'"class="row">';
             var fin = '</div></div>';
-            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="#" class="btn btn-primary" onclick="services.setMenuSeleccionado('+'&quot;' +  nombre + '&quot;'  +')"> Pide ahora! </a></div></div></div>';
+            var card = '<div class="col-sm-3"> <div class="thumb-wrapper"> <div class="img-box"> <img src="'+foto +'" class="img-responsive img-fluid" alt=""> </div> <div class="thumb-content"><h4>'+ nombre + '</h4> <p class="item-price">' + '<span> $'+ precio +'</span></p> <div class="star-rating"> <ul class="list-inline"> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star"></i></li> <li class="list-inline-item"><i class="fa fa-star"></i></li><li class="list-inline-item"><i class="fa fa-star-o"></i></li></ul></div> <a href="/estadoPedido.html" class="btn btn-primary" onclick="services.setMenuSeleccionado('+'&quot;' +  nombre + '&quot;'  +')"> Pide ahora! </a></div></div></div>';
             var carrusel="#myCarousel";
             var subItem = "#sub";
             var op= (i+4)%4;
@@ -150,13 +159,16 @@ var services = (function () {
         console.log(menus);
     }
 
+
+
     function cargaDataYConecta(){
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
-        var Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
-        console.log(Pedi);
-        document.getElementById("idOrden").textContent=Pedi.idPedido;
-        document.getElementById("menuPedido").textContent=Pedi.menu.nombre;
-        conexion.connectAndSubscribeOrder(Pedi.idPedido,restauranteSeleccionado);
+        //var Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
+        var u = sessionStorage.getItem("selectedUser");
+        api.getLastOrderOfUser(u,setUltimoPedido);
+        //Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
+        //console.log(Pedi);
+
     }
 
     function funcioneMenus() {

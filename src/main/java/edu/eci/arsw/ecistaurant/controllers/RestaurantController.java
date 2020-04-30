@@ -92,7 +92,7 @@ public class RestaurantController {
     public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Menu> menus = serviciosRestaurante.getMenusByrestaurant(restaurant);
+            List<Menu> menus = restaurantCache.getMenusByRestaurant(restaurant);
             return new ResponseEntity<>(menus,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
@@ -104,7 +104,7 @@ public class RestaurantController {
     public ResponseEntity<?> getOrdersByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Pedido> pedidos = restaurantCache.getPedidosByRestaurant(restaurant);
+            List<Pedido> pedidos = serviciosRestaurante.getPedidosByRestaurant(restaurant);
             return new ResponseEntity<>(pedidos,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

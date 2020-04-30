@@ -29,6 +29,12 @@ tableServices = (function () {
         panelPedido();
     }
 
+    function setMesaNull(){
+        sessionStorage.setItem("mesaSeleccionada",undefined);
+    }
+
+
+
 
     function fillCards(mesa) {
 
@@ -156,7 +162,7 @@ tableServices = (function () {
         '               </tbody>'+
             '        </table>' +
             '<nav class="codrops-demos">' +
-            '    <a href="#" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
+            '    <a href="/usersDashboard.html" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
             '    <a href="#" onclick="tableServices.confirmOrder()" style="text-align:center"> Cancelar </a>' +
             '</nav>'
         ;
@@ -164,8 +170,7 @@ tableServices = (function () {
         $("#infoPedido").append(tabla);
     }
 
-
-
+    
     function funcione() {
         api.getAllTables(fillCards);
 

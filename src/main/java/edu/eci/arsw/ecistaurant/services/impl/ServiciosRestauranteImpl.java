@@ -22,7 +22,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     @Autowired
     private MenuRepository menuRepository;
 
-    @Cacheable(value = "restaurantCache")
+
     @Override
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();

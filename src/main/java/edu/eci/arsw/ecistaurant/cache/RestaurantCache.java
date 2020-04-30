@@ -1,10 +1,9 @@
 package edu.eci.arsw.ecistaurant.cache;
 
 
-import edu.eci.arsw.ecistaurant.model.Pedido;
+import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
-import edu.eci.arsw.ecistaurant.persistence.RestaurantRepository;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,9 +23,9 @@ public class RestaurantCache {
         return serviciosRestaurante.getAllRestaurants();
     }
 
-    @Cacheable(value = "pedidosCache",key = "#name")
-    public List<Pedido> getPedidosByRestaurant(String name) throws EcistaurantPersistenceException {
+    @Cacheable(value = "menusCache",key = "#name")
+    public List<Menu> getMenusByRestaurant(String name) throws EcistaurantPersistenceException {
         System.out.println("-------------------Retrieving ORDERS from Database ---------------------");
-        return serviciosRestaurante.getPedidosByRestaurant(name);
+        return serviciosRestaurante.getMenusByrestaurant(name);
     }
 }

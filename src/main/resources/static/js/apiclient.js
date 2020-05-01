@@ -1,5 +1,6 @@
 apiclient = (function () {
-   var zelda = "http://localhost:8080/";
+   //var zelda = "https://ecistaurant.herokuapp.com";
+   var zelda =  "http://localhost:8080";
     return {
 
         getAllRestaurants: function(callback) {
@@ -32,6 +33,12 @@ apiclient = (function () {
             $.getJSON(zelda+"/restaurants/"+restaurante+"/menus",function (data) {
                 callback(data);
             }, null)
+        },
+        getAllTables : function (callback){
+
+            $.getJSON(zelda+ "/users/Alltables",function (data) {
+                callback(data);
+            }, null )
         },
         placeOrder : function(usuario,restaurante,platillo) {
 

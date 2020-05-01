@@ -74,6 +74,18 @@ dependencies {
     // https://mvnrepository.com/artifact/org.webjars/sockjs-client
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     compile group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-cache")
+    // https://mvnrepository.com/artifact/org.ehcache/ehcache
+    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
+
+
+
+
+
+
+
+
 
 
 

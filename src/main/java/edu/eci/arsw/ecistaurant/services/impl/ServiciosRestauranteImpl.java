@@ -6,6 +6,8 @@ import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,21 +23,23 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     @Autowired
     private MenuRepository menuRepository;
 
+
     @Override
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
     }
 
     @Override
-    public void saveRestaurant(Restaurante restaurante) throws EcistaurantPersistenceException {
-        Optional<Restaurante> optionalRestaurante = restaurantRepo.findById(restaurante.getIdRestaurante());
+    public void saveRestaurant(String restaurante) throws EcistaurantPersistenceException {
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
         if (optionalRestaurante.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_REGISTERED);
-        }else
-        {
-            restaurantRepo.save(restaurante);
         }
+        Restaurante rest = new Restaurante();
+        rest.setNombre(restaurante);
+        restaurantRepo.save(rest);
     }
+
 
     @Override
     public Restaurante getRestaurantByName(String restaurante) throws EcistaurantPersistenceException {
@@ -74,13 +78,19 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
 
     @Override
-    public void saveMenu(String menu,int precio) throws EcistaurantPersistenceException {
+    public void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException {
         Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
+        if (! optionalRestaurante.isPresent()) {
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_NOT_FOUND);
+        }
         if (optionalMenu.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
         }else
         {
+            Restaurante rest = optionalRestaurante.get();
             Menu nuevo = new Menu();
+            nuevo.setRestaurante(rest);
             nuevo.setNombre(menu);
             nuevo.setPrecio(precio);
             menuRepository.save(nuevo);

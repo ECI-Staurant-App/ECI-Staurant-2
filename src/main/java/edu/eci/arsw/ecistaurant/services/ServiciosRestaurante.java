@@ -13,7 +13,7 @@ public interface ServiciosRestaurante {
 
     List<Restaurante> getAllRestaurants();
 
-    void saveRestaurant(Restaurante restaurante) throws EcistaurantPersistenceException;
+    void saveRestaurant(String restaurante) throws EcistaurantPersistenceException;
 
     Restaurante getRestaurantByName(String restaurante) throws EcistaurantPersistenceException;
 
@@ -23,7 +23,7 @@ public interface ServiciosRestaurante {
 
     Pedido getPedidoById(int id) throws EcistaurantPersistenceException;
 
-    void saveMenu(String menu,int precio) throws EcistaurantPersistenceException;
+    void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException;
 
     List<Menu> getMenusByrestaurant(String restaurante) throws EcistaurantPersistenceException;
 

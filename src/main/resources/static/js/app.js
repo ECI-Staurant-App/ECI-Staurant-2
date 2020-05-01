@@ -53,6 +53,7 @@ var services = (function () {
 
     function setUltimoPedido(pedido){
         console.log(pedido);
+        var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
         sessionStorage.setItem("ultPedido",JSON.stringify(pedido));
         //window.open(zelda+"/estadoPedido.html");
         Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
@@ -162,7 +163,7 @@ var services = (function () {
 
 
     function cargaDataYConecta(){
-        var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
+
         //var Pedi = JSON.parse(sessionStorage.getItem("ultPedido"));
         var u = sessionStorage.getItem("selectedUser");
         api.getLastOrderOfUser(u,setUltimoPedido);

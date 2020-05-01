@@ -13,13 +13,15 @@ public interface ServiciosRestaurante {
 
     List<Restaurante> getAllRestaurants();
 
+    void saveRestaurant(String restaurante) throws EcistaurantPersistenceException;
+
     Restaurante getRestaurantByName(String restaurante) throws EcistaurantPersistenceException;
 
     void changeOrderState(String estado,int pedido, String restaurante) throws EcistaurantPersistenceException;
 
     Pedido getPedidoByIdAndRestaurant(int id, String restaurante) throws EcistaurantPersistenceException;
 
-    void saveMenu(String menu,int precio) throws EcistaurantPersistenceException;
+    void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException;
 
     List<Menu> getMenusByrestaurant(String restaurante) throws EcistaurantPersistenceException;
 

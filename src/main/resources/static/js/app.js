@@ -185,8 +185,9 @@ var services = (function () {
 
 
     function funcioneMenus() {
-        console.log(restauranteSeleccionado);
+
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
+        console.log(restauranteSeleccionado);
         apiclient.getMenuByRestaurant(restauranteSeleccionado,llenarMenu);
     }
 

@@ -6,8 +6,9 @@ import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import springfox.documentation.annotations.Cacheable;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,17 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     @Override
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
+    }
+
+    @Override
+    public void saveRestaurant(String restaurante) throws EcistaurantPersistenceException {
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
+        if (optionalRestaurante.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_REGISTERED);
+        }
+        Restaurante rest = new Restaurante();
+        rest.setNombre(restaurante);
+        restaurantRepo.save(rest);
     }
 
 
@@ -56,15 +68,20 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         return optionalPedido.get();
     }
 
-
     @Override
-    public void saveMenu(String menu,int precio) throws EcistaurantPersistenceException {
+    public void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException {
         Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
+        if (! optionalRestaurante.isPresent()) {
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_NOT_FOUND);
+        }
         if (optionalMenu.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
         }else
         {
+            Restaurante rest = optionalRestaurante.get();
             Menu nuevo = new Menu();
+            nuevo.setRestaurante(rest);
             nuevo.setNombre(menu);
             nuevo.setPrecio(precio);
             menuRepository.save(nuevo);

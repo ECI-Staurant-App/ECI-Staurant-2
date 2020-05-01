@@ -155,10 +155,6 @@ tableServices = (function () {
                 '                <td class="text-left">Mesa</td>' +
                 '                <td class="text-left">' + mesaSelected + '</td>' +
                 '            </tr>' +
-                '            <tr>' +
-                '                <td class="text-left">Fecha</td>' +
-                '                <td class="text-left"> </td>' +
-                '            </tr>' +
         '               </tbody>'+
             '        </table>' +
             '<nav class="codrops-demos">' +

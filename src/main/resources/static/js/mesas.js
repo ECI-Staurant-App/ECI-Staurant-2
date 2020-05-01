@@ -158,7 +158,7 @@ tableServices = (function () {
         '               </tbody>'+
             '        </table>' +
             '<nav class="codrops-demos">' +
-            '    <a href="/usersDashboard.html" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
+            '    <a href="/estadoPedido.html" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
             '    <a href="#" onclick="tableServices.confirmOrder()" style="text-align:center"> Cancelar </a>' +
             '</nav>'
         ;

@@ -6,12 +6,15 @@ import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ServiciosRestauranteImpl implements ServiciosRestaurante {
@@ -25,11 +28,14 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
 
     @Override
+
+    @Cacheable(value = "restaurantCache")
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
     }
 
     @Override
+    @CacheEvict(value = "restaurantCache" , allEntries = true)
     public void saveRestaurant(String restaurante) throws EcistaurantPersistenceException {
         Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
         if (optionalRestaurante.isPresent()){
@@ -39,7 +45,6 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         rest.setNombre(restaurante);
         restaurantRepo.save(rest);
     }
-
 
     @Override
     public Restaurante getRestaurantByName(String restaurante) throws EcistaurantPersistenceException {
@@ -69,6 +74,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @CacheEvict(value = "menusCache" , allEntries = true)
     public void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException {
         Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
         Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
@@ -89,6 +95,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @Cacheable(value="menusCache")
     public List<Menu> getMenusByrestaurant(String restaurante) throws EcistaurantPersistenceException {
 
         try{

@@ -32,7 +32,7 @@ public class RestaurantController {
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllRestaurants(){
-        List<Restaurante> restaurantes = restaurantCache.getAllRestaurants();
+        List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
         return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
     }
 
@@ -77,8 +77,8 @@ public class RestaurantController {
     }
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
-    @PostMapping("/")
-    public ResponseEntity<?> addRestaurant(@RequestBody String restaurante){
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<?> addRestaurant(String restaurante){
         try{
             serviciosRestaurante.saveRestaurant(restaurante);
             return new ResponseEntity<>(restaurante,HttpStatus.CREATED);
@@ -104,7 +104,7 @@ public class RestaurantController {
     public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Menu> menus = restaurantCache.getMenusByRestaurant(restaurant);
+            List<Menu> menus = serviciosRestaurante.getMenusByrestaurant(restaurant);
             return new ResponseEntity<>(menus,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

@@ -10,7 +10,6 @@ var conexion = (function () {
 
     function sendNotification(restaurante){
         initStompClient();
-        console.log("Gonorreeeeeeeeeeeeeeeeaaaaaaaaaaaa");
         stompClient.connect({}, function (frame) {
             stompClient.send("/app/" + restaurante + '/newOrders', {},true);
 

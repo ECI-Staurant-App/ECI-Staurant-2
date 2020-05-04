@@ -29,7 +29,7 @@ Actualmente no existe una solucion para estas problematicas y como solución pro
 
 #### Deploy Diagram
 
-![](img/despl.png)
+![](img/despliegue.jpg)
 
 
 ### Historias de usuario:

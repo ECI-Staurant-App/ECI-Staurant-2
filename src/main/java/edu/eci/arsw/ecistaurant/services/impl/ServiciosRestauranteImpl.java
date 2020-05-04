@@ -52,6 +52,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @CacheEvict(value = "pedidosCache" , allEntries = true)
     public void changeOrderState(String estado,int pedido, String restaurante) throws EcistaurantPersistenceException {
         try{
             Pedido order = getPedidoByIdAndRestaurant(pedido,restaurante);
@@ -123,7 +124,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    //@Cacheable(value = "pedidosCache")
+    @Cacheable(value = "pedidosCache")
     public List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException {
 
         try{

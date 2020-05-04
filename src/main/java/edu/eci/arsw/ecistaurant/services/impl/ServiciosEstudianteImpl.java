@@ -2,6 +2,7 @@ package edu.eci.arsw.ecistaurant.services.impl;
 
 import edu.eci.arsw.ecistaurant.model.*;
 import edu.eci.arsw.ecistaurant.persistence.*;
+import edu.eci.arsw.ecistaurant.services.EcistaurantLogicException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
 
 
     @Override
-   //@CacheEvict(value = "pedidosCache" , allEntries = true)
+   @CacheEvict(value = "pedidosCache" , allEntries = true)
     public Pedido realizarPedido(String correo,String restaurant,String menu) throws EcistaurantPersistenceException {
 
         System.out.println("Executing cache UPDATEEE");
@@ -73,6 +74,7 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         }catch (EcistaurantPersistenceException e){
             throw new EcistaurantPersistenceException(e.getMessage());
         }
+
         Pedido pedido = new Pedido();
         pedido.setUsuario(getUserByEmail(correo));
         pedido.setRestaurante(restaurant1);

@@ -6,9 +6,7 @@ import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,6 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
 
 
     @Override
-
     @Cacheable(value = "restaurantCache")
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
@@ -117,6 +114,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @Cacheable(value = "pedidosCache")
     public List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException {
 
         try{

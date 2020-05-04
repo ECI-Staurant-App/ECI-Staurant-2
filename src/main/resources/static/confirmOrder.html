@@ -39,6 +39,11 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -56,8 +61,8 @@
 <div class="container">
     <!-- Top Navigation -->
     <div class="codrops-top clearfix">
-        <a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/CreativeLinkEffects/"><span>Previous Page</span></a>
-        <span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16114"><span>Go to the home page</span></a></span>
+        <a class="codrops-icon codrops-icon-prev" onclick="goBack()"><span>Previous Page</span></a>
+        <span class="right"><a class="codrops-icon codrops-icon-drop" href="/UsersDashboard.html"><span>Volver al menu</span></a></span>
     </div>
     <header>
         <h1>Gracias por comprar  <span>Confirme su orden!</span></h1>

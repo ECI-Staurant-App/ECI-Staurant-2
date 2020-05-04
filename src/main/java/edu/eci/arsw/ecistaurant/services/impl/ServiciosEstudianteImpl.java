@@ -5,6 +5,7 @@ import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
@@ -60,12 +61,12 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         return optionalUsuario.get();
     }
 
-    @CachePut(value = "pedidosCache", key="#restaurant")
+
     @Override
+   @CacheEvict(value = "pedidosCache" , allEntries = true)
     public Pedido realizarPedido(String correo,String restaurant,String menu) throws EcistaurantPersistenceException {
 
         System.out.println("Executing cache UPDATEEE");
-
         Restaurante restaurant1= null;
         try{
             restaurant1 = serviciosRestaurante.getRestaurantByName(restaurant);

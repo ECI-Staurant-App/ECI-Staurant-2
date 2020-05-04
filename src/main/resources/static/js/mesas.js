@@ -5,6 +5,7 @@ tableServices = (function () {
     var mesaSeleccionada;
     //var zelda = "https://ecistaurant.herokuapp.com";
     var zelda = "http://localhost:8080";
+    var clickCount = 0;
 
     function doMap(mesa) {
         return mesa.map(function (rt) {
@@ -33,8 +34,16 @@ tableServices = (function () {
         sessionStorage.setItem("mesaSeleccionada",undefined);
     }
 
-
-
+    function disableMeAfterOnceClick() {
+        //
+        // check form input values
+        //
+        console.log("Entre A DESACTIVARRRRR");
+        var confirmar = document.getElementById("confirm");
+        console.log("CONFIRMAR " + confirmar);
+        var rechazar = document.getElementById("cancel");
+        console.log("RECHAZAR " + rechazar);
+    }
 
     function fillCards(mesa) {
 
@@ -97,7 +106,6 @@ tableServices = (function () {
     }
 
     function panelPedido() {
-
         window.location.href = zelda + "/confirmOrder.html";
     }
 
@@ -123,6 +131,7 @@ tableServices = (function () {
         var menu = services.getMenu();
         var precio = services.getPrecioMenu();
         var mesaSelected = getMesaSeleccionada();
+        console.log("MESA "+ mesaSelected);
         if (mesaSelected == undefined) {
             mesaSelected = "No seleccionó"
         }
@@ -158,12 +167,13 @@ tableServices = (function () {
         '               </tbody>'+
             '        </table>' +
             '<nav class="codrops-demos">' +
-            '    <a href="/estadoPedido.html" onclick="services.placeOrder()" style="text-align:center"> Confirmar </a>' +
-            '    <a href="#" onclick="tableServices.confirmOrder()" style="text-align:center"> Cancelar </a>' +
-            '</nav>'
-        ;
+            '    <a id="confirm" href="#" onclick="services.placeOrder();" style="text-align:center"> Confirmar </a>' +
+            '    <a id="cancel" href="#" onclick="tableServices.confirmOrder();" style="text-align:center"> Cancelar </a>' +
+            '</nav>';
+
         $("#infoPedido").html("");
         $("#infoPedido").append(tabla);
+
     }
 
     
@@ -179,7 +189,7 @@ tableServices = (function () {
         setMesaSeleccionada: setMesaSeleccionada,
         llenarInfoPedido: llenarInfoPedido,
         confirmOrder :confirmOrder,
-
+        setMesaNull : setMesaNull,
+        disableMeAfterOnceClick : disableMeAfterOnceClick
     }
-
 })();

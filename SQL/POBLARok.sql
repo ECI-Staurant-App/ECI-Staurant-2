@@ -65,7 +65,7 @@ create function trigger_order_state()
 	language 'plpgsql'
 as $BODY$
 begin
-	new.estado:='pendiente';
+	new.estado:='nuevo';
 	return new;
 end;
 $BODY$

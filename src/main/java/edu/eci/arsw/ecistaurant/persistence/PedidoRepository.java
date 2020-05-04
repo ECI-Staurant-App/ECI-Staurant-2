@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
 
     List<Pedido> findAll();
+    @Query(value = "SELECT * from pedido where id_pedido = ?1",nativeQuery = true)
+    Optional<Pedido> findById(int idPedido);
 
     Pedido save(Pedido pedido);
     @Query(value = "SELECT * from pedido where id_pedido = ?1 AND restaurante = (SELECT id_restaurante from restaurante where nombre=?2 ) ",nativeQuery = true)
@@ -25,4 +27,7 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
 
     @Query(value="SELECT * from pedido WHERE pedido.restaurante = (SELECT id_restaurante FROM restaurante WHERE nombre= ?1 LIMIT 1)",nativeQuery = true)
     List<Pedido> findOrOrderByRestaurante(String restaurate);
+
+    @Query(value ="SELECT * from pedido WHERE estudiante=(SELECT carne from usuario WHERE email=?1) order by fecha desc limit 1" ,nativeQuery = true)
+    Optional<Pedido> findLastOrderOfUser(String usuario);
 }

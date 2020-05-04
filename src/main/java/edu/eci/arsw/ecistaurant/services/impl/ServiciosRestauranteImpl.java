@@ -6,10 +6,13 @@ import edu.eci.arsw.ecistaurant.model.Restaurante;
 import edu.eci.arsw.ecistaurant.persistence.*;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ServiciosRestauranteImpl implements ServiciosRestaurante {
@@ -21,20 +24,23 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     @Autowired
     private MenuRepository menuRepository;
 
+
     @Override
+    @Cacheable(value = "restaurantCache")
     public List<Restaurante> getAllRestaurants(){
         return restaurantRepo.findAll();
     }
 
     @Override
-    public void saveRestaurant(Restaurante restaurante) throws EcistaurantPersistenceException {
-        Optional<Restaurante> optionalRestaurante = restaurantRepo.findById(restaurante.getIdRestaurante());
+    @CacheEvict(value = "restaurantCache" , allEntries = true)
+    public void saveRestaurant(String restaurante) throws EcistaurantPersistenceException {
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
         if (optionalRestaurante.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_REGISTERED);
-        }else
-        {
-            restaurantRepo.save(restaurante);
         }
+        Restaurante rest = new Restaurante();
+        rest.setNombre(restaurante);
+        restaurantRepo.save(rest);
     }
 
     @Override
@@ -46,6 +52,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @CacheEvict(value = "pedidosCache" , allEntries = true)
     public void changeOrderState(String estado,int pedido, String restaurante) throws EcistaurantPersistenceException {
         try{
             Pedido order = getPedidoByIdAndRestaurant(pedido,restaurante);
@@ -64,15 +71,30 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
         return optionalPedido.get();
     }
 
+    @Override
+    public Pedido getPedidoById(int id) throws EcistaurantPersistenceException {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(id);
+        if (!optionalPedido.isPresent())
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.PEDIDO_NOT_FOUND);
+        return optionalPedido.get();
+    }
+
 
     @Override
-    public void saveMenu(String menu,int precio) throws EcistaurantPersistenceException {
+    @CacheEvict(value = "menusCache" , allEntries = true)
+    public void saveMenu(String restaurante,String menu,int precio) throws EcistaurantPersistenceException {
         Optional<Menu> optionalMenu = menuRepository.findByNombre(menu);
+        Optional<Restaurante> optionalRestaurante = restaurantRepo.findByNombre(restaurante);
+        if (! optionalRestaurante.isPresent()) {
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.RESTAURANT_NOT_FOUND);
+        }
         if (optionalMenu.isPresent()){
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_REGISTERED);
         }else
         {
+            Restaurante rest = optionalRestaurante.get();
             Menu nuevo = new Menu();
+            nuevo.setRestaurante(rest);
             nuevo.setNombre(menu);
             nuevo.setPrecio(precio);
             menuRepository.save(nuevo);
@@ -80,6 +102,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @Cacheable(value="menusCache")
     public List<Menu> getMenusByrestaurant(String restaurante) throws EcistaurantPersistenceException {
 
         try{
@@ -101,6 +124,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
+    @Cacheable(value = "pedidosCache")
     public List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException {
 
         try{

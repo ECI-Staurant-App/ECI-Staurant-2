@@ -25,6 +25,8 @@ public interface ServiciosEstudiante {
 
     Menu findMenuByName(String menu) throws EcistaurantPersistenceException;
 
+    Pedido getLastOrderOfUser(String email) throws  EcistaurantPersistenceException;
+
     List<Mesa> buscarMesas();
 
     List<Mesa> buscarMesasDisponibles();

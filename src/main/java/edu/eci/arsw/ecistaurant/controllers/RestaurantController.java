@@ -1,8 +1,10 @@
 package edu.eci.arsw.ecistaurant.controllers;
 
+import edu.eci.arsw.ecistaurant.cache.RestaurantCache;
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Pedido;
 import edu.eci.arsw.ecistaurant.model.Restaurante;
+import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
@@ -22,6 +24,8 @@ public class RestaurantController {
     private ServiciosRestaurante serviciosRestaurante;
     @Autowired
     private ServiciosEstudiante serviciosEstudiante;
+    @Autowired
+    private RestaurantCache restaurantCache;
 
 
 
@@ -73,11 +77,22 @@ public class RestaurantController {
     }
 
     @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<?> addRestaurant(String restaurante){
+        try{
+            serviciosRestaurante.saveRestaurant(restaurante);
+            return new ResponseEntity<>(restaurante,HttpStatus.CREATED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     @RequestMapping(value = "/AddMenu", method = RequestMethod.POST)
-    public ResponseEntity<?> addMenu(String menu,int precio){
+    public ResponseEntity<?> addMenu(String restaurante,String menu,int precio){
 
         try{
-            serviciosRestaurante.saveMenu(menu, precio);
+            serviciosRestaurante.saveMenu(restaurante,menu, precio);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -101,7 +116,7 @@ public class RestaurantController {
     public ResponseEntity<?> getOrdersByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
 
-            List<Pedido> pedidos =serviciosRestaurante.getPedidosByRestaurant(restaurant);
+            List<Pedido> pedidos = serviciosRestaurante.getPedidosByRestaurant(restaurant);
             return new ResponseEntity<>(pedidos,HttpStatus.ACCEPTED);
         }catch (EcistaurantPersistenceException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

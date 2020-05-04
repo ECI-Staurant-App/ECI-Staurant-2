@@ -1,5 +1,6 @@
 apiclient = (function () {
-   var zelda = "https://ecistaurant.herokuapp.com";
+   //var zelda = "https://ecistaurant.herokuapp.com";
+   var zelda =  "http://localhost:8080";
     return {
 
         getAllRestaurants: function(callback) {
@@ -11,6 +12,12 @@ apiclient = (function () {
 
         getAllUsers: function(callback) {
             $.getJSON(zelda+"/users/",function(data){
+                callback(data);
+            },null)
+
+        },
+        getLastOrderOfUser: function(user,callback) {
+            $.getJSON(zelda+"/users/"+user+"/LastOrder",function(data){
                 callback(data);
             },null)
 
@@ -27,6 +34,12 @@ apiclient = (function () {
                 callback(data);
             }, null)
         },
+        getAllTables : function (callback){
+
+            $.getJSON(zelda+ "/users/Alltables",function (data) {
+                callback(data);
+            }, null )
+        },
         placeOrder : function(usuario,restaurante,platillo) {
 
             console.log("USER :"+usuario);
@@ -40,12 +53,14 @@ apiclient = (function () {
                     alert('Exception:' ,exception);
                 }
             });
-
+            window.open(zelda+"/estadoPedido.html",'_blank');
             postPromise.then(
                 function () {
                     console.info('OK');
+
                 },
                 function () {
+                    alert("Saldo Insuficiente");
                     console.info('NOK');
                 }
             );

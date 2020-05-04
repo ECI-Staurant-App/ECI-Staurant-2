@@ -2,9 +2,12 @@ package edu.eci.arsw.ecistaurant.services.impl;
 
 import edu.eci.arsw.ecistaurant.model.*;
 import edu.eci.arsw.ecistaurant.persistence.*;
+import edu.eci.arsw.ecistaurant.services.EcistaurantLogicException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -59,19 +62,25 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         return optionalUsuario.get();
     }
 
-    @Override
-    public Pedido realizarPedido(String correo,String restaurante,String menu) throws EcistaurantPersistenceException {
 
-        Restaurante restaurant= null;
+    @Override
+   @CacheEvict(value = "pedidosCache" , allEntries = true)
+    public Pedido realizarPedido(String correo,String restaurant,String menu) throws EcistaurantPersistenceException {
+
+        System.out.println("Executing cache UPDATEEE");
+        Restaurante restaurant1= null;
         try{
-            restaurant = serviciosRestaurante.getRestaurantByName(restaurante);
+            restaurant1 = serviciosRestaurante.getRestaurantByName(restaurant);
         }catch (EcistaurantPersistenceException e){
             throw new EcistaurantPersistenceException(e.getMessage());
         }
+
         Pedido pedido = new Pedido();
         pedido.setUsuario(getUserByEmail(correo));
-        pedido.setRestaurante(restaurant);
+        pedido.setRestaurante(restaurant1);
         pedido.setMenu(findMenuByName(menu));
+        pedido.setEstado("nuevo");
+        System.out.println("SETEANDO EL ESTADO A NUEVO -> " + pedido.getEstado());
         Date date = new Date();
         System.out.println(date);
         pedido.setFecha(date);
@@ -93,6 +102,15 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
             throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_NOT_FOUND);
         }
         return optionalMenu.get();
+    }
+
+    @Override
+    public Pedido getLastOrderOfUser(String email) throws EcistaurantPersistenceException {
+        Optional<Pedido> optionalPedido = pedidoRepository.findLastOrderOfUser(email);
+        if (!optionalPedido.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_NOT_FOUND);
+        }
+        return optionalPedido.get();
     }
 
     @Override

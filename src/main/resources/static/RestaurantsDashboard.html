@@ -13,6 +13,11 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component3.css" />
 		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/apiclient.js"></script>
+		<script src="js/app.js"></script>
+		<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+		<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<script src="js/SocketsConnection.js"></script>
 
 <script type="text/javascript">
 var _gaq = _gaq || [];
@@ -27,7 +32,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 
 
 	</head>
-	<body>
+	<body onload="conexion.connectAndSubscribeNotifications()">
 		<div class="container">
 			<!-- Top Navigation -->
 			<div class="codrops-top clearfix">
@@ -37,7 +42,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 			<header>
 				<h1>Circular Navigation <span>Bienvenido a Ecistaurant App!</span></h1>
 				<nav class="codrops-demos">
-					<a href="/login?logout">LogOut</a>
+					<a id="noti" href="/login?logout">LogOut</a>
 				</nav>
 			</header>
 			<div class="component">

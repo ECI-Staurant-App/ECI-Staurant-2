@@ -3,6 +3,7 @@ package edu.eci.arsw.ecistaurant.controllers;
 import edu.eci.arsw.ecistaurant.model.Menu;
 import edu.eci.arsw.ecistaurant.model.Usuario;
 import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
+import edu.eci.arsw.ecistaurant.services.EcistaurantLogicException;
 import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -87,6 +88,19 @@ public class StudentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/{usuario}/LastOrder", method = RequestMethod.GET)
+    public ResponseEntity<?>  getLastOrderOfUser(@PathVariable ("usuario") String usuario){
+        try{
+            return new ResponseEntity<>(studentServices.getLastOrderOfUser(usuario), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 
 
 }

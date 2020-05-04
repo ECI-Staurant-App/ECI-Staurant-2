@@ -16,6 +16,7 @@ var services = (function () {
     }
 
     function llenaHistorial(listaOrdenes){
+        $("#pedidosTable").empty();
         console.log(listaOrdenes);
         var ordenes = mapOrder(listaOrdenes);
 
@@ -33,6 +34,7 @@ var services = (function () {
             }
             $("#pedidosTable").append(fila);
         }
+        //conexion.limpiarNotificaciones(user);
     }
 
     function changeEstado(actual,id){
@@ -40,9 +42,6 @@ var services = (function () {
         var ahora = estados.indexOf(actual);
         var nuevo = estados[(ahora+1)%estados.length];
         api.changeOrderState(user,id,nuevo);
-        location.reload();
-
-
     }
 
     function funcione(){

@@ -25,7 +25,7 @@ Actualmente no existe una solucion para estas problematicas y como solución pro
 
 #### Component Diagram
 
-![](img/componentes.jpg)
+![](img/COMPFF.jpg)
 
 #### Deploy Diagram
 

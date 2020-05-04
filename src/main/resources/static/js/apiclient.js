@@ -53,10 +53,11 @@ apiclient = (function () {
                     alert('Exception:' ,exception);
                 }
             });
-
+            window.open(zelda+"/estadoPedido.html",'_blank');
             postPromise.then(
                 function () {
                     console.info('OK');
+
                 },
                 function () {
                     console.info('NOK');

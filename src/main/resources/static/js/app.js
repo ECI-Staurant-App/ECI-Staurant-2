@@ -42,7 +42,7 @@ var services = (function () {
         menuSeleccionado = sessionStorage.getItem("menuSeleccionado");
         console.log(menuSeleccionado);
         alert("su pedido fue registrado exitosamente");
-        return api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
+        api.placeOrder(selectedUser,restauranteSeleccionado,menuSeleccionado);
 
     }
 

@@ -20,9 +20,14 @@ var conexion = (function () {
     function connectAndSubscribeOrder(id,restaurante){
         initStompClient();
         stompClient.connect({}, function (frame) {
+            var rest=restaurante;
             stompClient.send("/app/" + restaurante + '/newOrders', {},true);
-            stompClient.subscribe("/topic/Pedido/" + id, {},function(eventbody){
+            stompClient.subscribe("/topic/Pedido/" + id,function(eventbody){
                 console.log("Luego lo pienso mejor, aqui solo cambio de estado en vista");
+                document.getElementById(eventbody.body).className="active step0";
+                if (eventbody.body == "completado"){
+                    alertify.confirm("Su pedido está listo :) Recójalo en: " + rest,null,null)
+                }
             });
         });
     };

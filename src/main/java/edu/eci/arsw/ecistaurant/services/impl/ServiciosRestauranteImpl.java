@@ -123,7 +123,7 @@ public class ServiciosRestauranteImpl implements ServiciosRestaurante {
     }
 
     @Override
-    @Cacheable(value = "pedidosCache")
+    //@Cacheable(value = "pedidosCache")
     public List<Pedido> getPedidosByRestaurant(String restaurant) throws EcistaurantPersistenceException {
 
         try{

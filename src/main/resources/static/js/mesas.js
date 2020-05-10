@@ -68,16 +68,27 @@ tableServices = (function () {
             console.log(ubicacion);
             console.log(isAvailable);
             var it = i;
-            let card = '<card data-image="">' +
-                '<h1 slot="header">' + 'MESA: ' + id + '</h1>' +
-                '<p slot="content">' + 'Disponible:' + disponibilidad + '</p>' +
-                '<p slot="content">' + 'Ubicación: ' + ubicacion + '</p>' +
-                '</card>';
-            $("#app").append(card);
+            var card = '<div class="col" ontouchstart="this.classList.toggle(\'hover\');">' +
+                '<div class="container">' +
+                '<div class="front" style= "background-image: url(https://f0.pngfuel.com/png/807/535/table-knife-and-fork-logo-png-clip-art.png)">' +
+                '<div class="inner">' +
+                '<p>  MESA </p>' +
+                '<span>'+ id + '</span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="back">' +
+                '<div class="inner">' +
+                '<p>' + 'Ubicación: ' + ubicacion +'</p>' +
+                '<p>' + 'Disponible: ' + disponibilidad +'</p>' +
+                     boton +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+            $("#infoMesas").append(card);
         }
 
     }
-
     function notificar() {
         alert("Esta mesa ya está reservada")
     }

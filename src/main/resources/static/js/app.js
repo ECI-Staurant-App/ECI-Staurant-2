@@ -57,6 +57,7 @@ var services = (function () {
             window.location.href = zelda + "/mesas.html";
         });
         confirm.set('oncancel', function () {
+            tableServices.setMesaNull();
             window.location.href = zelda + "/confirmOrder.html";
         });
     }

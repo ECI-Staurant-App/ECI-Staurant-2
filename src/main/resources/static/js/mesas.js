@@ -31,7 +31,7 @@ tableServices = (function () {
     }
 
     function setMesaNull(){
-        sessionStorage.setItem("mesaSeleccionada",undefined);
+        sessionStorage.removeItem('mesaSeleccionada');
     }
 
     function disableMeAfterOnceClick() {

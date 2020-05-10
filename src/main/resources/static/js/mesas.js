@@ -3,8 +3,8 @@ tableServices = (function () {
     var api = apiclient;
     var mesas;
     var mesaSeleccionada;
-    //var zelda = "https://ecistaurant.herokuapp.com";
-    var zelda = "http://localhost:8080";
+    var zelda = "https://ecistaurant.herokuapp.com";
+    //var zelda = "http://localhost:8080";
     var clickCount = 0;
 
     function doMap(mesa) {

@@ -3,8 +3,8 @@ tableServices = (function () {
     var api = apiclient;
     var mesas;
     var mesaSeleccionada;
-    var zelda = "https://ecistaurant.herokuapp.com";
-    //var zelda = "http://localhost:8080";
+    //var zelda = "https://ecistaurant.herokuapp.com";
+    var zelda = "http://localhost:8080";
     var clickCount = 0;
 
     function doMap(mesa) {
@@ -51,8 +51,7 @@ tableServices = (function () {
         console.log(mesas);
 
         for (i in mesas) {
-            var fila = "";
-            var slide = "";
+
             var id = mesas[i].rtId;
             var ubicacion = mesas[i].rtUbicacion;
             var isAvailable = mesas[i].rtIsAvailable;
@@ -69,34 +68,12 @@ tableServices = (function () {
             console.log(ubicacion);
             console.log(isAvailable);
             var it = i;
-            var card = '<div class="col-xs-12 col-sm-6 col-md-4">' +
-                '<div class="image-flip" ontouchstart="this.classList.toggle(\'hover\');"> ' +
-                '<div class="mainflip">' +
-                '<div class="frontside">' +
-                '<div class="card">' +
-                '<div class="card-body text-center">' +
-                '<p> <img class="img-thumbnail" src=/img/table.png alt="card image"></p>' +
-                '<h4 class="card-title">' + 'Mesa ' + id + '</h4>' +
-                '<p class="card-text"></p>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '<div class="backside">' +
-                '<div class="card">' +
-                '<div class="card-body text-center mt-4">' +
-                '<h4 class="card-title">' + 'Mesa ' + id + ' info' + '</h4>' +
-                '<p class="card-text">' + 'Ubicacion: ' + ubicacion + '</p>' +
-                '<p class="card-text">' + ' Disponible: ' + disponibilidad + '</p>' +
-                '<p class="card-text">' + ' Tiempo Restante: ' + timeLeft + '</p>' +
-                boton +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-
-            $("#fillCards").append(card);
+            let card = '<card data-image="">' +
+                '<h1 slot="header">' + 'MESA: ' + id + '</h1>' +
+                '<p slot="content">' + 'Disponible:' + disponibilidad + '</p>' +
+                '<p slot="content">' + 'Ubicación: ' + ubicacion + '</p>' +
+                '</card>';
+            $("#app").append(card);
         }
 
     }

@@ -2,7 +2,6 @@ var services = (function () {
     var api = apirestaurant;
     var user;
 
-
     function mapOrder(order){
         return order.map(function (rt) {
             return {

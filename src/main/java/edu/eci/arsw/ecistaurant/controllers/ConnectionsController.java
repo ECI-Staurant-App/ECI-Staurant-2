@@ -2,6 +2,8 @@ package edu.eci.arsw.ecistaurant.controllers;
 
 
 import edu.eci.arsw.ecistaurant.model.Pedido;
+import edu.eci.arsw.ecistaurant.persistence.EcistaurantPersistenceException;
+import edu.eci.arsw.ecistaurant.services.ServiciosEstudiante;
 import edu.eci.arsw.ecistaurant.services.ServiciosRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -21,7 +23,10 @@ public class ConnectionsController {
     @Autowired
     ServiciosRestaurante serviciosRestaurante;
 
+    @Autowired
+    ServiciosEstudiante serviciosEstudiante;
 
+    private static SimpMessagingTemplate mgt2;
 
     private int newNotifications = 0;
 
@@ -56,6 +61,19 @@ public class ConnectionsController {
         String estado= actual.getEstado();
         mgt.convertAndSend("/topic/Pedido/"+idPedido, estado);
     }
+
+    @MessageMapping("/Mesa/{idMesa}")
+    public void handleMesas(@DestinationVariable int idMesa) throws EcistaurantPersistenceException {
+        serviciosEstudiante.seleccionarMesa(idMesa);
+
+    }
+
+    public static void actualiceTiempoMesas(int idMesa,int tiempo){
+        mgt2.convertAndSend("/topic/Mesa/"+idMesa, tiempo);
+    }
+
+
+
 
 
 

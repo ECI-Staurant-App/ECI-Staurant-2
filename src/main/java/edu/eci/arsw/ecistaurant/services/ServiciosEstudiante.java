@@ -27,6 +27,8 @@ public interface ServiciosEstudiante {
 
     Pedido getLastOrderOfUser(String email) throws  EcistaurantPersistenceException;
 
+    void seleccionarMesa(int id) throws EcistaurantPersistenceException;
+
     List<Mesa> buscarMesas();
 
     List<Mesa> buscarMesasDisponibles();

@@ -1,5 +1,6 @@
 package edu.eci.arsw.ecistaurant;
 import com.google.common.base.Predicate;
+import edu.eci.arsw.ecistaurant.model.Countdown;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

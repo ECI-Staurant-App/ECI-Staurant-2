@@ -37,8 +37,20 @@ var conexion = (function () {
             stompClient.send("/app/Pedido/" + id, {},id);
             location.reload();
         });
+    };
 
+    function connectAndSendMesa(id){
+        stompClient.connect({}, function (frame) {
+            stompClient.send("/app/Mesa/" + id, {},id);
+        });
+    };
 
+    function connectAndSubscribeMesa(id){initStompClient();
+        stompClient.connect({}, function (frame) {
+            stompClient.subscribe("/topic/Mesa/" + id,function(eventbody){
+                console.log(eventbody.body);
+            });
+        });
     };
 
 
@@ -89,7 +101,9 @@ var conexion = (function () {
         sendNotification:sendNotification,
         limpiarNotificaciones:limpiarNotificaciones,
         connectAndSubscribeOrder:connectAndSubscribeOrder,
-        connectAndSendOrder:connectAndSendOrder
+        connectAndSendOrder:connectAndSendOrder,
+        connectAndSendMesa:connectAndSendMesa,
+        connectAndSubscribeMesa:connectAndSubscribeMesa
 
     };
 

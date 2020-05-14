@@ -114,6 +114,14 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
+    public void seleccionarMesa(int id) throws EcistaurantPersistenceException {
+        Optional<Mesa> mesa = mesaRepository.findById(id);
+        Mesa mesafinal = mesa.get();
+        mesafinal.tomarMesa();
+
+    }
+
+    @Override
     public List<Mesa> buscarMesas() {
         return mesaRepository.findAll();
     }

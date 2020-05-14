@@ -3,8 +3,8 @@ tableServices = (function () {
     var api = apiclient;
     var mesas;
     var mesaSeleccionada;
-    var zelda = "https://ecistaurant.herokuapp.com";
-    //var zelda = "http://localhost:8080";
+    //var zelda = "https://ecistaurant.herokuapp.com";
+    var zelda = "http://localhost:8080";
     var clickCount = 0;
 
     function doMap(mesa) {
@@ -27,6 +27,7 @@ tableServices = (function () {
         mesaSeleccionada = id;
         sessionStorage.setItem("mesaSeleccionada", mesaSeleccionada);
         console.log(mesaSeleccionada);
+        conexion.connectAndSendMesa(id);
         panelPedido();
     }
 
@@ -49,7 +50,7 @@ tableServices = (function () {
 
         mesas = doMap(mesa);
         console.log(mesas);
-
+        conexion.init();
         for (i in mesas) {
 
             var id = mesas[i].rtId;
@@ -86,6 +87,7 @@ tableServices = (function () {
                 '</div>' +
                 '</div>';
             $("#infoMesas").append(card);
+            conexion.connectAndSubscribeMesa(id);
         }
 
     }

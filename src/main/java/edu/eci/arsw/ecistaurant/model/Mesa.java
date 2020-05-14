@@ -27,6 +27,11 @@ public class Mesa implements Serializable {
         this.usuario = usuario;
     }
 
+    public void tomarMesa(){
+        Countdown tempo = new Countdown(20,this.idMesa);
+        tempo.inicie();
+    }
+
     public int getIdMesa() {
         return idMesa;
     }

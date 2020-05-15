@@ -1,6 +1,6 @@
 apiclient = (function () {
-   var zelda = "https://ecistaurant.herokuapp.com";
-   //var zelda =  "http://localhost:8080";
+   //var zelda = "https://ecistaurant.herokuapp.com";
+   var zelda =  "http://localhost:8080";
     return {
 
         getAllRestaurants: function(callback) {
@@ -60,10 +60,33 @@ apiclient = (function () {
 
                 },
                 function () {
-                    alert("Saldo Insuficiente");
                     console.info('NOK');
                 }
             );
+        },
+
+        updateSaldo : function(carne,saldo){
+
+            var putPromise = $.ajax({
+                url: zelda+"/users/" + carne,
+                type: 'PUT',
+                data: 'saldo='+saldo,
+                error: function (jqxhr,status,exception) {
+                    alert('Exception:' ,exception);
+                }
+            });
+            putPromise.then(
+                function () {
+                    window.location.href = zelda + "/AdminDashboard.html";
+                    console.info('OK');
+
+
+                },
+                function () {
+                    console.info('NOK');
+                }
+            );
+
         }
 
     }

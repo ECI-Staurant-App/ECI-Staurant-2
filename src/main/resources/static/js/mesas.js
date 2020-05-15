@@ -28,7 +28,7 @@ tableServices = (function () {
         sessionStorage.setItem("mesaSeleccionada", mesaSeleccionada);
         console.log(mesaSeleccionada);
         conexion.connectAndSendMesa(id);
-        panelPedido();
+        //panelPedido();
     }
 
     function setMesaNull(){
@@ -87,8 +87,9 @@ tableServices = (function () {
                 '</div>' +
                 '</div>';
             $("#infoMesas").append(card);
-            conexion.connectAndSubscribeMesa(id);
+
         }
+        conexion.connectAndSubscribeMesa()
 
     }
     function notificar() {

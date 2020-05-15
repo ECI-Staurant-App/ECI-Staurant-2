@@ -26,6 +26,7 @@ public class ConnectionsController {
     @Autowired
     ServiciosEstudiante serviciosEstudiante;
 
+    @Autowired
     private static SimpMessagingTemplate mgt2;
 
     private int newNotifications = 0;
@@ -69,7 +70,7 @@ public class ConnectionsController {
     }
 
     public static void actualiceTiempoMesas(int idMesa,int tiempo){
-        mgt2.convertAndSend("/topic/Mesa/"+idMesa, tiempo);
+        mgt2.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + tiempo);
     }
 
 

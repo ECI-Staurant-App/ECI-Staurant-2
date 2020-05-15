@@ -1,6 +1,8 @@
 package edu.eci.arsw.ecistaurant.model;
 
 import edu.eci.arsw.ecistaurant.controllers.ConnectionsController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,6 +11,10 @@ import java.util.TimerTask;
  *Simple countdown timer of java.util.Timer facility.
  */
 public class Countdown {
+
+    @Autowired
+    SimpMessagingTemplate mgt;
+
     private int duracion;
     private int idMesa;
 
@@ -23,7 +29,9 @@ public class Countdown {
             int i = duracion;
             public void run() {
                 System.out.println(i--);
-                ConnectionsController.actualiceTiempoMesas(idMesa,i);
+                //System.out.println();
+                //ConnectionsController.actualiceTiempoMesas(getIdMesa(),i);
+                //mgt.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + i);
                 if (i< 0)
                     timer.cancel();
             }
@@ -36,5 +44,13 @@ public class Countdown {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public int getIdMesa() {
+        return idMesa;
+    }
+
+    public void setIdMesa(int idMesa) {
+        this.idMesa = idMesa;
     }
 }

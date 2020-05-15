@@ -40,14 +40,15 @@ var conexion = (function () {
     };
 
     function connectAndSendMesa(id){
+        initStompClient();
         stompClient.connect({}, function (frame) {
             stompClient.send("/app/Mesa/" + id, {},id);
         });
     };
 
-    function connectAndSubscribeMesa(id){initStompClient();
+    function connectAndSubscribeMesa(){initStompClient();
         stompClient.connect({}, function (frame) {
-            stompClient.subscribe("/topic/Mesa/" + id,function(eventbody){
+            stompClient.subscribe("/topic/Mesas",function(eventbody){
                 console.log(eventbody.body);
             });
         });

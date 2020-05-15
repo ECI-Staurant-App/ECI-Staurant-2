@@ -28,8 +28,11 @@ public class Mesa implements Serializable {
     }
 
     public void tomarMesa(){
-        Countdown tempo = new Countdown(20,this.idMesa);
+        Countdown tempo = new Countdown(120,this.idMesa);
         tempo.inicie();
+        for (int i=0;i<10;i++){
+            System.out.println("Ome Gonorrea si estoy entrando putisima madre");
+        }
     }
 
     public int getIdMesa() {

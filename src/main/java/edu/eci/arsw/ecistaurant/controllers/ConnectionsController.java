@@ -12,6 +12,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Controller
@@ -65,12 +67,25 @@ public class ConnectionsController {
 
     @MessageMapping("/Mesa/{idMesa}")
     public void handleMesas(@DestinationVariable int idMesa) throws EcistaurantPersistenceException {
-        serviciosEstudiante.seleccionarMesa(idMesa);
+        //serviciosEstudiante.seleccionarMesa(idMesa);
+        final Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int i = 420;
+            public void run() {
+                System.out.println(i--);
+                //System.out.println();
+                //connectionsController.actualiceTiempoMesas(getIdMesa(),i);
+                mgt.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + i);
+                if (i< 0)
+                    timer.cancel();
+            }
+        }, 0, 1000);
 
     }
 
-    public static void actualiceTiempoMesas(int idMesa,int tiempo){
-        mgt2.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + tiempo);
+    public void actualiceTiempoMesas(int idMesa,int tiempo){
+
+        mgt.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + tiempo);
     }
 
 

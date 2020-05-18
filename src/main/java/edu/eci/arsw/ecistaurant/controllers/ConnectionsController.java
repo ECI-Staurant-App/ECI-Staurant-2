@@ -70,7 +70,7 @@ public class ConnectionsController {
         //serviciosEstudiante.seleccionarMesa(idMesa);
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
-            int i = 420;
+            int i = 60;
             public void run() {
                 System.out.println(i--);
                 //System.out.println();

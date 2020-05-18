@@ -60,13 +60,8 @@ tableServices = (function () {
             var isAvailable = mesas[i].rtIsAvailable;
             var disponibilidad = "";
             var boton = "";
-            if (isAvailable) {
-                disponibilidad = "si";
-                boton = '<a id="botonmesa'+ id+'"'+' th:href="" class="btn btn-primary btn-sm" onclick="tableServices.setMesaSeleccionada(' + '&quot;' + id + '&quot;' + ')"><i class="fa fa-plus"></i></a>';
-            } else {
-                disponibilidad = "no";
-                boton = '<a id=botonmesa"'+ id+'"' + ' th:href="" class="btn btn-primary btn-sm" onclick="tableServices.notificar()"><i class="fa fa-plus"></i></a>'
-            }
+            disponibilidad = "si";
+            boton = '<a id="botonmesa'+ id+'"'+' th:href="" class="btn btn-primary btn-sm" onclick="tableServices.setMesaSeleccionada(' + '&quot;' + id + '&quot;' + ')"><i class="fa fa-plus"></i></a>';
             var timeLeft = mesas[i].rtTimeLeft;
             console.log(ubicacion);
             console.log(isAvailable);

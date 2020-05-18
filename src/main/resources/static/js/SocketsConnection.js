@@ -60,6 +60,7 @@ var conexion = (function () {
                     document.getElementById("disponiblemesa" + helper.id).textContent="Disponible: No";
                 }
                 else{
+                    apiclient.updateMesaState(helper.id,true);
                     document.getElementById("tiempomesa" + helper.id).style.display = 'none';
                     document.getElementById("disponiblemesa" + helper.id).textContent="Disponible: Si";
                     document.getElementById("botonmesa" + helper.id).style.display = 'inline';

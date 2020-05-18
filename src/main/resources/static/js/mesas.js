@@ -28,7 +28,8 @@ tableServices = (function () {
         sessionStorage.setItem("mesaSeleccionada", mesaSeleccionada);
         console.log(mesaSeleccionada);
         conexion.connectAndSendMesa(id);
-        //panelPedido();
+        confirmMesa();
+        //
     }
 
     function setMesaNull(){
@@ -60,10 +61,10 @@ tableServices = (function () {
             var boton = "";
             if (isAvailable) {
                 disponibilidad = "si";
-                boton = '<a th:href="" class="btn btn-primary btn-sm" onclick="tableServices.setMesaSeleccionada(' + '&quot;' + id + '&quot;' + ')"><i class="fa fa-plus"></i></a>';
+                boton = '<a id="botonmesa'+ id+'"'+' th:href="" class="btn btn-primary btn-sm" onclick="tableServices.setMesaSeleccionada(' + '&quot;' + id + '&quot;' + ')"><i class="fa fa-plus"></i></a>';
             } else {
                 disponibilidad = "no";
-                boton = '<a th:href="" class="btn btn-primary btn-sm" onclick="tableServices.notificar()"><i class="fa fa-plus"></i></a>'
+                boton = '<a id=botonmesa"'+ id+'"' + ' th:href="" class="btn btn-primary btn-sm" onclick="tableServices.notificar()"><i class="fa fa-plus"></i></a>'
             }
             var timeLeft = mesas[i].rtTimeLeft;
             console.log(ubicacion);
@@ -80,7 +81,8 @@ tableServices = (function () {
                 '<div class="back">' +
                 '<div class="inner">' +
                 '<p>' + 'Ubicación: ' + ubicacion +'</p>' +
-                '<p>' + 'Disponible: ' + disponibilidad +'</p>' +
+                '<p id="tiempomesa' + id + '">' + '</p>'+
+                '<p id="disponiblemesa'+ id +'">' + 'Disponible: ' + disponibilidad +'</p>' +
                      boton +
                 '</div>' +
                 '</div>' +
@@ -106,13 +108,27 @@ tableServices = (function () {
             cancel: 'No'
         });
        confirm.set('onok', function () {
-
            alertify.error("Su pedido ha sido cancelado exitosamente");
            window.location.href = zelda + "/UsersDashboard.html";
        });
        confirm.set('oncancel', function () {
            alertify.error("Su pedido no ha sido cancelado exitosamente");
        });
+    }
+
+    function confirmMesa(){
+        var confirm = alertify.confirm("Usted podra continuar usando su mesa por 40 minutos",null,null).set('labels', {
+            ok: 'ok',
+            cancel: 'cancel'
+        });
+        confirm.set('onok', function () {
+
+            alertify.error("Su Tiempo ha empezado!");
+            window.location.href =  zelda + "/confirmOrder.html";
+        });
+        confirm.set('oncancel', function () {
+            alertify.error("lol bro que imbecil");
+        });
     }
 
     function llenarInfoPedido() {

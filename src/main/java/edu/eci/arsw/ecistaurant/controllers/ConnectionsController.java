@@ -75,9 +75,13 @@ public class ConnectionsController {
                 System.out.println(i--);
                 //System.out.println();
                 //connectionsController.actualiceTiempoMesas(getIdMesa(),i);
-                mgt.convertAndSend("/topic/Mesas", "Mesa = "+idMesa + " t= " + i);
-                if (i< 0)
+                String msj = "{ \"id\":" + idMesa + ',' + "\"time\":" +i+ '}';
+
+                mgt.convertAndSend("/topic/Mesas", msj );
+                if (i<=0) {
+                    String msj2 = "{ \"id\":" + idMesa + ',' + "\"time\":" + "" + '}';
                     timer.cancel();
+                }
             }
         }, 0, 1000);
 

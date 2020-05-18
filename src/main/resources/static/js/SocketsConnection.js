@@ -49,7 +49,23 @@ var conexion = (function () {
     function connectAndSubscribeMesa(){initStompClient();
         stompClient.connect({}, function (frame) {
             stompClient.subscribe("/topic/Mesas",function(eventbody){
-                console.log(eventbody.body);
+
+                var helper = JSON.parse(eventbody.body);
+                console.log(helper.id);
+                console.log(helper.time);
+                if (helper.time!= 0 || helper.time != ""){
+                    document.getElementById("botonmesa" + helper.id).style.display = 'none';
+                    document.getElementById("tiempomesa" + helper.id).style.display = 'inline';
+                    document.getElementById("tiempomesa" + helper.id).textContent=helper.time;
+                    document.getElementById("disponiblemesa" + helper.id).textContent="Disponible: No";
+                }
+                else{
+                    document.getElementById("tiempomesa" + helper.id).style.display = 'none';
+                    document.getElementById("disponiblemesa" + helper.id).textContent="Disponible: Si";
+                    document.getElementById("botonmesa" + helper.id).style.display = 'inline';
+                }
+
+
             });
         });
     };

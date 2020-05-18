@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface MesaRepository extends JpaRepository<Mesa,Integer> {
 
+    @Query(value = "SELECT * from mesa ORDER BY id_mesa",nativeQuery = true)
     List<Mesa> findAll();
 
     Mesa save(Mesa mesa);

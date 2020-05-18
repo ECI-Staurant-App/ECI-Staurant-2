@@ -137,4 +137,15 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         return menuRepository.findAllByRestaurante(restaurantSelected.getNombre());
     }
 
+    @Override
+    public void cambiarEstadoMesa(int mesa, Boolean state) throws EcistaurantPersistenceException {
+        Optional<Mesa> optionalMesa = mesaRepository.findById(mesa);
+        if (!optionalMesa.isPresent()){
+            throw new EcistaurantPersistenceException(EcistaurantPersistenceException.MENU_NOT_FOUND);
+        }
+         Mesa mesita = optionalMesa.get();
+        mesita.setEstaDisponible(state);
+        mesaRepository.save(mesita);
+    }
+
 }

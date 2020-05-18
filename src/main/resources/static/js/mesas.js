@@ -28,6 +28,7 @@ tableServices = (function () {
         sessionStorage.setItem("mesaSeleccionada", mesaSeleccionada);
         console.log(mesaSeleccionada);
         conexion.connectAndSendMesa(id);
+
         confirmMesa();
         //
     }
@@ -117,6 +118,8 @@ tableServices = (function () {
     }
 
     function confirmMesa(){
+        
+        apiclient.updateMesaState(mesaSeleccionada,false);
         var confirm = alertify.confirm("Usted podra continuar usando su mesa por 40 minutos",null,null).set('labels', {
             ok: 'ok',
             cancel: 'cancel'

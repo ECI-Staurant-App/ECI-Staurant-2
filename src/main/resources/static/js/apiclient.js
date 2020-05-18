@@ -64,6 +64,27 @@ apiclient = (function () {
                     console.info('NOK');
                 }
             );
+        },
+
+        updateMesaState : function(mesa,estado){
+
+            var putPromise = $.ajax({
+                url: zelda+"/users/mesa/" + mesa,
+                type: 'PUT',
+                data: 'estado='+estado,
+                error: function (jqxhr,status,exception) {
+                    alert('Exception:' ,exception);
+                }
+            });
+            putPromise.then(
+                function () {
+                    console.info('OK');
+                },
+                function () {
+                    console.info('NOK');
+                }
+            );
+
         }
 
     }

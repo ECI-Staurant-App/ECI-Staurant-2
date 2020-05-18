@@ -99,6 +99,16 @@ public class StudentController {
         }
     }
 
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/mesa/{mesa}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeTableState(@PathVariable("mesa")int mesa, Boolean estado) {
+        try {
+            studentServices.cambiarEstadoMesa(mesa,estado);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (EcistaurantPersistenceException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 

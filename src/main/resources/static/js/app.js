@@ -6,8 +6,8 @@ var services = (function () {
     var selectedUser="";
     var menuSeleccionado = "";
     var Pedi;
-    //var zelda = "https://ecistaurant.herokuapp.com";
-    var zelda ="http://localhost:8080";
+    var zelda = "https://ecistaurant.herokuapp.com";
+    //var zelda ="http://localhost:8080";
     var precioSelected = "";
 
     function doMap(restaurante) {

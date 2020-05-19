@@ -35,6 +35,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#show_hide").click(function () {
+
                 $("#toggle_tst").toggle()
             });
         });
@@ -67,7 +68,7 @@
     <header>
         <h1>Gracias por comprar  <span>Confirme su orden!</span></h1>
         <nav class="codrops-demos">
-            <a href="#" id="show_hide" onclick="tableServices.llenarInfoPedido()"> InfoPedido </a>
+            <a class="pointer" onclick="tableServices.llenarInfoPedido()"> InfoPedido </a>
         </nav>
     </header>
     <div class="component">

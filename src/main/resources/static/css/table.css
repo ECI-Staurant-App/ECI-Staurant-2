@@ -142,6 +142,9 @@ td.text-right {
     text-align: right;
 }
 
+.pointer{
+    cursor: pointer;
+}
 .mydiv {
     display:table-cell;
 }

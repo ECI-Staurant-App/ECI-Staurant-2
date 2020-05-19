@@ -60,7 +60,6 @@ apiclient = (function () {
 
                 },
                 function () {
-                    alert("Saldo Insuficiente");
                     console.info('NOK');
                 }
             );

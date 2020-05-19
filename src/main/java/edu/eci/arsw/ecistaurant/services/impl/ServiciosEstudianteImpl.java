@@ -88,10 +88,11 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
-    public void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException {
+    public void actualizarSaldo(int user,int saldo) throws EcistaurantPersistenceException {
 
-        Usuario usuario1 = getStudentById(usuario.getCarne());
-        usuario1.setSaldo(usuario.getSaldo());
+        Usuario usuario = getStudentById(user);
+        usuario.setSaldo(saldo);
+        usuarioRepository.save(usuario);
 
     }
 

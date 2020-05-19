@@ -80,9 +80,9 @@ public class StudentController {
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PutMapping(value = "/{user}")
-    public ResponseEntity<?> putUser(@PathVariable int user,@RequestBody Usuario usuario) {
+    public ResponseEntity<?> updateSaldo(@PathVariable int user,int saldo) {
         try {
-            studentServices.actualizarSaldo(usuario);
+            studentServices.actualizarSaldo(user,saldo);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (EcistaurantPersistenceException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -24,7 +24,7 @@ apiclient = (function () {
         },
         getUserByCarne: function(usuario, callback) {
 
-            $.getJSON(zelda+"/users"+usuario,function(data){
+            $.getJSON(zelda+"/users/"+usuario,function(data){
                 callback(data);
             },null)
         },
@@ -85,7 +85,13 @@ apiclient = (function () {
                 }
             );
 
-        }
+        },
+
+        getSaldo: function(correo) {
+
+            $.getJSON(zelda+"/users/saldo/"+ correo,null
+            ,null)
+        },
 
     }
 

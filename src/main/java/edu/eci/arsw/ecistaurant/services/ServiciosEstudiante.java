@@ -36,4 +36,6 @@ public interface ServiciosEstudiante {
     List<Menu> getAllMenuByRestaurant(String restaurante);
 
     void cambiarEstadoMesa(int mesa, Boolean state) throws EcistaurantPersistenceException;
+
+    int getSaldoUser(String correo) throws EcistaurantPersistenceException;
 }

@@ -110,6 +110,16 @@ public class StudentController {
         }
     }
 
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/saldo/{correo}", method = RequestMethod.GET)
+    public ResponseEntity<?>  getSaldo(@PathVariable ("correo") String correo){
+        try{
+            return new ResponseEntity<>(studentServices.getSaldoUser(correo), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 
 

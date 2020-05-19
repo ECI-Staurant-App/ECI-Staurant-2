@@ -148,4 +148,10 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
         mesaRepository.save(mesita);
     }
 
+    @Override
+    public int getSaldoUser(String correo) throws EcistaurantPersistenceException {
+        Usuario user = getUserByEmail(correo);
+        return user.getSaldo();
+    }
+
 }

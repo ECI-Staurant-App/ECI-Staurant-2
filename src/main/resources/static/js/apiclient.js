@@ -86,9 +86,10 @@ apiclient = (function () {
 
         },
 
-        getSaldo: function(correo,callback) {
 
-            $.getJSON(zelda+"/users/saldo/"+ correo,function (data) {
+        getSaldo: function(correo,callback) {
+            //http://localhost:8080/
+            $.getJSON(zelda+"/users/saldo/" +correo,function (data) {
                 callback(data);
             },null)
         },
@@ -105,7 +106,6 @@ apiclient = (function () {
             });
             putPromise.then(
                 function () {
-                    window.location.href = zelda + "/AdminDashboard.html";
                     console.info('OK');
                 },
                 function () {

@@ -86,11 +86,34 @@ apiclient = (function () {
 
         },
 
-        getSaldo: function(correo) {
+        getSaldo: function(correo,callback) {
 
-            $.getJSON(zelda+"/users/saldo/"+ correo,null
-            ,null)
+            $.getJSON(zelda+"/users/saldo/"+ correo,function (data) {
+                callback(data);
+            },null)
         },
+
+        updateSaldo : function(carne,saldo){
+
+            var putPromise = $.ajax({
+                url: zelda+"/users/" + carne,
+                type: 'PUT',
+                data: 'saldo='+saldo,
+                error: function (jqxhr,status,exception) {
+                    alert('Exception:' ,exception);
+                }
+            });
+            putPromise.then(
+                function () {
+                    window.location.href = zelda + "/AdminDashboard.html";
+                    console.info('OK');
+                },
+                function () {
+                    console.info('NOK');
+                }
+            );
+
+        }
 
     }
 

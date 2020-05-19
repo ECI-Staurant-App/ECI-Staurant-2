@@ -21,7 +21,7 @@ public interface ServiciosEstudiante {
 
     Pedido realizarPedido(String email, String restaurante, String platillo) throws EcistaurantPersistenceException;
 
-    void actualizarSaldo(int user,int saldo) throws EcistaurantPersistenceException;
+    void actualizarSaldo(String user,int saldo) throws EcistaurantPersistenceException;
 
     Menu findMenuByName(String menu) throws EcistaurantPersistenceException;
 

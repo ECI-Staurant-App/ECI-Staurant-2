@@ -80,7 +80,7 @@ public class StudentController {
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PutMapping(value = "/{user}")
-    public ResponseEntity<?> updateSaldo(@PathVariable int user,int saldo) {
+    public ResponseEntity<?> updateSaldo(@PathVariable String user,int saldo) {
         try {
             studentServices.actualizarSaldo(user,saldo);
             return new ResponseEntity<>(HttpStatus.CREATED);

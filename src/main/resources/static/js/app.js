@@ -100,11 +100,12 @@ var services = (function () {
     function setMenuSeleccionado(id){
 
         console.log("USER : "+ getUser());
-        console.log("SALDOOOOO " + apiclient.getSaldo(getUser()));
-        if( apiclient.getSaldo(getUser()) < getPrecioMenu()){
+        console.log("SALDOOOOO " + apiclient.getSaldo(getUser(),doNothing));
+        if( apiclient.getSaldo(getUser(),doNothing) < getPrecioMenu()){
             alert("No cuentas con el saldo suficiente");
         }else{
-            
+
+            apiclient.updateSaldo(getUser(), getPrecioMenu() - apiclient.getSaldo(getUser()));
             console.log("IDDDDDMENU : "+id);
             menuSeleccionado = id;
             sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
@@ -119,6 +120,10 @@ var services = (function () {
         console.log(selectedUser);
         sessionStorage.setItem("selectedUser",selectedUser);
 
+    }
+
+    function doNothing(hola){
+        console.log(hola);
     }
 
     function setPrecio(precio){
@@ -249,6 +254,7 @@ var services = (function () {
         getUser : getUser,
         getPrecioMenu : getPrecioMenu,
         placeOrder : placeOrder,
+        doNothing : doNothing,
     }
 
 })();

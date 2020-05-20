@@ -28,8 +28,6 @@ public class RestaurantController {
     private RestaurantCache restaurantCache;
 
 
-
-    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllRestaurants(){
         List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();

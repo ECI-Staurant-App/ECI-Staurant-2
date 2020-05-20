@@ -64,11 +64,22 @@
 
 ### Atender pedidos
   
-  En esta vista el restaurante podrá modificar el estado del pedido. Cuando llega un pedido, será identificado como nuevo, luego pasará a
-  pendiente y por último a completado.
+  En esta vista el restaurante podrá modificar el estado del pedido. Cuando llega un pedido, será identificado como nuevo, luego pasará   a pendiente y por último a completado.
   
    ![](img/PedidosR.png)
    
+   
+### Administrador Dashboard
+   
+   Este es el panel del Administrador acá podrar podrá ser redireccionado en el botón "Saldo"
+   
+   ![](img/admin.png)
+   
+### Actualizar saldo
+
+   En este formulario el administrador podrá realizar recargas al usuario.
+   
+   ![](img/saldo.png)
    
    
   

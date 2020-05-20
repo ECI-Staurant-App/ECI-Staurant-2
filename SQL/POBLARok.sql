@@ -22,7 +22,7 @@ insert into usuario values (2145191,'test.arias@mail',true,'test','johan123',100
 insert into usuario values (2145192,'testyy.arias@mail',true,'probando','johan123',10000);
 insert into usuario values (2145193,'test5.arias@mail',true,'test2','johan123',10000);
 insert into usuario values (2145194,'test1.arias@mail',true,'test3','johan123',0);
-insert into usuario values (2145197,'test6.arias@mail',true,'test2','',10000);
+insert into usuario values (2145197,'estudiante@mail',true,'test2','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',10000);
 insert into usuario values (2145196,'test7.arias@mail',true,'test3','$2a$10$Yr4F8CDjptZ5FWD6xxuTa.qk9Ylvejwccarr8UerQP/heBqmoMcy6',0);
 insert into usuario values (1111111,'admin.arias@mail',true,'admin','$2a$10$l5w6NRox6Z0eKlKjcrmzte79ka3T.8iNt6YboZ398h2z0q4SZMvgi',1000000);
 insert into usuario values (2199999,'kiosko1',true,'kiosko1','$2a$10$l.sCXWauFzf//kaYTCMXEev.p9pCVE8jDf7mb0jrMHmSAjKoxaHw6',0);
@@ -41,14 +41,15 @@ insert into menu values (130,'Pollo en salsa',10000,'https://www.lacocinademasit
 
 insert into rol (nombre) values ('ROLE_USER');
 insert into rol (nombre) values ('ROLE_ADMIN');
+insert into rol(nombre) values('ROLE_RESTAURANT');
 
 
 
 insert into usuario_roles values (2145197,(select id from rol where nombre = 'ROLE_USER'));
 insert into usuario_roles values (1111111,(select id from rol where nombre = 'ROLE_ADMIN'));
-insert into usuario_roles values (2199999,(select id from rol where nombre = 'ROLE_USER'));
-insert into usuario_roles values (2199990,(select id from rol where nombre = 'ROLE_USER'));
-insert into usuario_roles values (2199998,(select id from rol where nombre = 'ROLE_USER'));
+insert into usuario_roles values (2199999,(select id from rol where nombre = 'ROLE_RESTAURANT'));
+insert into usuario_roles values (2199990,(select id from rol where nombre = 'ROLE_RESTAURANT'));
+insert into usuario_roles values (2199998,(select id from rol where nombre = 'ROLE_RESTAURANT'));
 
 
 ------DELETEEEEES!!!
@@ -56,6 +57,8 @@ insert into usuario_roles values (2199998,(select id from rol where nombre = 'RO
 delete from usuario_roles;
 delete from rol;
 delete from usuario;
+delete from restaurante;
+delete from pedido;
 
 
 --TRIGER ESTADO PEDIDO

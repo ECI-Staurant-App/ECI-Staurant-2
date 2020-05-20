@@ -32,6 +32,9 @@
     <script src="alertifyJS/alertify.min.js"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="js/SocketsConnection.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#show_hide").click(function () {
@@ -58,7 +61,7 @@
     </script>
 
 </head>
-<body>
+<body onload="tableServices.startMesa()">
 <div class="containerT">
     <!-- Top Navigation -->
     <div class="codrops-top clearfix">

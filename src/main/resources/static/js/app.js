@@ -6,6 +6,7 @@ var services = (function () {
     var selectedUser="";
     var menuSeleccionado = "";
     var Pedi;
+    var nuevoSaldo= "";
     var zelda = "https://ecistaurant.herokuapp.com";
     //var zelda ="http://localhost:8080";
     var precioSelected = "";
@@ -34,7 +35,7 @@ var services = (function () {
     }
 
     function placeOrder(){
-
+        apiclient.updateSaldo(getUser(),getNuevoSaldo());
         selectedUser = sessionStorage.getItem("selectedUser");
         console.log(selectedUser);
         restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
@@ -119,7 +120,8 @@ var services = (function () {
         if(hola < getPrecioMenu()){
             alert("No cuentas con el saldo suficiente");
         }else{
-            apiclient.updateSaldo(getUser(), Number(hola)-Number(getPrecioMenu()) );
+            var puta  = (Number(hola)-Number(getPrecioMenu())).toString();
+            sessionStorage.setItem("nuevoSaldo",puta)
             panelConfirmarMesas()
         }
     }
@@ -223,13 +225,22 @@ var services = (function () {
     function funcioneMenus() {
 
         var restauranteSeleccionado = sessionStorage.getItem("restauranteSeleccionado");
-        console.log(restauranteSeleccionado);
+        console.log(restauranteSeleccionado)
+        apiclient.getSaldo(getUser(),setSaldoVista);
         apiclient.getMenuByRestaurant(restauranteSeleccionado,llenarMenu);
+    }
+
+    function setSaldoVista(hola){
+        document.getElementById("saldito").textContent=hola;
     }
 
     function getSelectedUser(){
         var owo = sessionStorage.getItem("selectedUser");
         return owo;
+    }
+
+    function getNuevoSaldo(){
+        return sessionStorage.getItem("nuevoSaldo");
     }
 
     function funcione(){
@@ -253,6 +264,7 @@ var services = (function () {
         getPrecioMenu : getPrecioMenu,
         placeOrder : placeOrder,
         doNothing : doNothing,
+        getNuevoSaldo:getNuevoSaldo,
     }
 
 })();

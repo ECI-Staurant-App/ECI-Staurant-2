@@ -45,8 +45,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/img/**",
                         "/webjars/**").permitAll()
-                /*.antMatchers("/users/**").hasAnyRole("USER","ADMIN")
-                .antMatchers("/restaurants/**").hasAnyRole("USER","ADMIN")*/
+                .antMatchers("/RestaurantsDashboard.html",
+                        "/Pedidos.html"
+                        ).hasAnyRole("RESTAURANT","ADMIN")
+                .antMatchers("/UsersDashboard.html",
+                        "/Restaurantes.html",
+                        "/restaurante2.html",
+                        "/mesas.html",
+                        "/confirmOrder.html",
+                        "/estadoPedido.html"
+                ).hasAnyRole("USER","ADMIN")
+                .antMatchers("/AdminDashboard.html",
+                        "/updateSaldo.html"
+                ).hasAnyRole("ADMIN")
                 .anyRequest().authenticated().and()
                 .csrf().disable().cors()
                 .and()

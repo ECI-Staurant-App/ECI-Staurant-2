@@ -6,6 +6,7 @@ tableServices = (function () {
     var zelda = "https://ecistaurant.herokuapp.com";
     //var zelda = "http://localhost:8080";
     var clickCount = 0;
+    var saldoMachete;
 
     function doMap(mesa) {
         return mesa.map(function (rt) {
@@ -27,9 +28,7 @@ tableServices = (function () {
         mesaSeleccionada = id;
         sessionStorage.setItem("mesaSeleccionada", mesaSeleccionada);
         console.log(mesaSeleccionada);
-        conexion.connectAndSendMesa(id);
-
-        confirmMesa();
+        confirmMesa(id);
         //
     }
 
@@ -98,12 +97,18 @@ tableServices = (function () {
         window.location.href = zelda + "/confirmOrder.html";
     }
 
+    function setSaldo(saldo){
+        saldoMachete = saldo;
+        console.log(saldo);
+    }
+
     function confirmOrder(){
         var confirm = alertify.confirm("¿Desea cancelar su pedido?",null,null).set('labels', {
             ok: 'Si',
             cancel: 'No'
         });
        confirm.set('onok', function () {
+
            alertify.error("Su pedido ha sido cancelado exitosamente");
            window.location.href = zelda + "/UsersDashboard.html";
        });
@@ -120,13 +125,19 @@ tableServices = (function () {
             cancel: 'cancel'
         });
         confirm.set('onok', function () {
-
-            alertify.error("Su Tiempo ha empezado!");
             window.location.href =  zelda + "/confirmOrder.html";
         });
         confirm.set('oncancel', function () {
-            alertify.error("lol bro que imbecil");
+            setMesaNull();
+            alertify.error("Tu mesa ha sido cancelada ;) ");
+            window.location.href =  zelda + "/confirmOrder.html";
+
         });
+    }
+
+    function startMesa(){
+        var mesaselected= getMesaSeleccionada();
+        conexion.connectAndSendMesa(mesaselected);
     }
 
     function llenarInfoPedido() {
@@ -140,6 +151,8 @@ tableServices = (function () {
         if (mesaSelected == undefined) {
             mesaSelected = "No seleccionó"
         }
+
+        apiclient.getSaldo(services.getUser(),setSaldo)
 
         var tabla =' <table class="table-fill" id="infoPedido">' +
             '   <thead>' +
@@ -169,6 +182,10 @@ tableServices = (function () {
                 '                <td class="text-left">Mesa</td>' +
                 '                <td class="text-left">' + mesaSelected + '</td>' +
                 '            </tr>' +
+                '            <tr>' +
+                '                <td class="text-left">Saldo Actual</td>' +
+                '                <td class="text-left">' + services.getNuevoSaldo() + '</td>' +
+                '            </tr>' +
         '               </tbody>'+
             '        </table>' +
             '<nav class="codrops-demos">' +
@@ -195,6 +212,7 @@ tableServices = (function () {
         llenarInfoPedido: llenarInfoPedido,
         confirmOrder :confirmOrder,
         setMesaNull : setMesaNull,
-        disableMeAfterOnceClick : disableMeAfterOnceClick
+        disableMeAfterOnceClick : disableMeAfterOnceClick,
+        startMesa:startMesa,
     }
 })();

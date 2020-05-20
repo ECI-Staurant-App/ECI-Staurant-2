@@ -29,14 +29,14 @@ public class RestaurantController {
 
 
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllRestaurants(){
         List<Restaurante> restaurantes = serviciosRestaurante.getAllRestaurants();
         return new ResponseEntity<>(restaurantes, HttpStatus.ACCEPTED);
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/{user}")
     public ResponseEntity<?>  getOrderByUser(@PathVariable ("user") int user){
         try{
@@ -47,7 +47,7 @@ public class RestaurantController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/{restaurant}/orders/{id}")
     public ResponseEntity<?>  getOrderById(@PathVariable int id,@PathVariable String restaurant){
         try{
@@ -59,7 +59,7 @@ public class RestaurantController {
     }
 
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/{restaurante}/orders/{pedido}", method = RequestMethod.PUT)
     public ResponseEntity<?> changeOrderState(@PathVariable("pedido")int pedido,@PathVariable("restaurante")String restaurante , @RequestBody String estado) {
         try {
@@ -70,13 +70,13 @@ public class RestaurantController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/{lastOrders}")
     public ResponseEntity<?>  getLastOrders(){
         return new ResponseEntity<>(serviciosRestaurante.getPedidosByFecha(), HttpStatus.ACCEPTED);
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<?> addRestaurant(String restaurante){
         try{
@@ -87,7 +87,7 @@ public class RestaurantController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/AddMenu", method = RequestMethod.POST)
     public ResponseEntity<?> addMenu(String restaurante,String menu,int precio){
 
@@ -99,7 +99,7 @@ public class RestaurantController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/{restaurant}/menus", method = RequestMethod.GET)
     public ResponseEntity<?> getMenusByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{
@@ -111,7 +111,7 @@ public class RestaurantController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/{restaurant}/orders", method = RequestMethod.GET)
     public ResponseEntity<?> getOrdersByRestaurant(@PathVariable ("restaurant") String restaurant){
         try{

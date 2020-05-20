@@ -20,7 +20,7 @@ public class StudentController {
     @Autowired
     private ServiciosEstudiante studentServices;
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllUsers(){
         try{
@@ -30,7 +30,7 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/{usuario}", method = RequestMethod.GET)
     public ResponseEntity<?>  getUserById(@PathVariable ("usuario") int usuario){
         try{
@@ -39,25 +39,25 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/Alltables", method = RequestMethod.GET)
     public ResponseEntity<?>  getTables(){
         return new ResponseEntity<>(studentServices.buscarMesas(), HttpStatus.ACCEPTED);
     }
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/tables", method = RequestMethod.GET)
     public ResponseEntity<?>  getAvailableTables(){
         return new ResponseEntity<>(studentServices.buscarMesasDisponibles(), HttpStatus.ACCEPTED);
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/menus", method = RequestMethod.GET)
     public ResponseEntity<?>  getAllMenuByRestaurant(@RequestParam(value="restaurante") String restaurante) {
         List<Menu> menus = studentServices.getAllMenuByRestaurant(restaurante);
         return new ResponseEntity<>(menus, HttpStatus.ACCEPTED);
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody Usuario usuario){
         try{
@@ -68,7 +68,7 @@ public class StudentController {
         }
     }
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @RequestMapping(value = "/AddOrder", method = RequestMethod.POST)
     public ResponseEntity<?> placeOrder(String user,String restaurante, String platillo){
         try{
@@ -78,7 +78,7 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @PutMapping(value = "/{user}")
     public ResponseEntity<?> updateSaldo(@PathVariable String user,int saldo) {
         try {

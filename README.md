@@ -84,7 +84,9 @@ PARA PODER dar a conocer mis platos.
 QUIERO despachar pedidos
 PARA PODER entregar el producto solicitado
 
+### Manual de uso
 
+Ver [Manual](Manual)
 
 ### Mockups
 

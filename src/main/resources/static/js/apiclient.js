@@ -24,7 +24,7 @@ apiclient = (function () {
         },
         getUserByCarne: function(usuario, callback) {
 
-            $.getJSON(zelda+"/users"+usuario,function(data){
+            $.getJSON(zelda+"/users/"+usuario,function(data){
                 callback(data);
             },null)
         },
@@ -60,7 +60,6 @@ apiclient = (function () {
 
                 },
                 function () {
-                    alert("Saldo Insuficiente");
                     console.info('NOK');
                 }
             );
@@ -72,6 +71,35 @@ apiclient = (function () {
                 url: zelda+"/users/mesa/" + mesa,
                 type: 'PUT',
                 data: 'estado='+estado,
+                error: function (jqxhr,status,exception) {
+                    alert('Exception:' ,exception);
+                }
+            });
+            putPromise.then(
+                function () {
+                    console.info('OK');
+                },
+                function () {
+                    console.info('NOK');
+                }
+            );
+
+        },
+
+
+        getSaldo: function(correo,callback) {
+            //http://localhost:8080/
+            $.getJSON(zelda+"/users/saldo/" +correo,function (data) {
+                callback(data);
+            },null)
+        },
+
+        updateSaldo : function(carne,saldo){
+
+            var putPromise = $.ajax({
+                url: zelda+"/users/" + carne,
+                type: 'PUT',
+                data: 'saldo='+saldo,
                 error: function (jqxhr,status,exception) {
                     alert('Exception:' ,exception);
                 }

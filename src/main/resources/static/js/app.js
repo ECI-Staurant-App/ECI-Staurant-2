@@ -98,20 +98,30 @@ var services = (function () {
         conexion.connectAndSubscribeOrder(Pedi.idPedido,restauranteSeleccionado);
     }
     function setMenuSeleccionado(id){
-        console.log("IDDDDDMENU : "+id);
         menuSeleccionado = id;
         sessionStorage.setItem("menuSeleccionado", menuSeleccionado);
-        panelConfirmarMesas();
-        console.log(menuSeleccionado);
-    }
+        console.log("USER : "+ getUser());
+        var extra = getUser();
+        console.log("SALDOOOOO " + apiclient.getSaldo(extra,doNothing));
 
+
+    }
     function setUserLogged(nombre){
         user=$("#username");
         selectedUser = user.val();
         console.log(selectedUser);
         sessionStorage.setItem("selectedUser",selectedUser);
 
+    }
 
+    function doNothing(hola){
+        console.log(hola);
+        if(hola < getPrecioMenu()){
+            alert("No cuentas con el saldo suficiente");
+        }else{
+            apiclient.updateSaldo(getUser(), Number(hola)-Number(getPrecioMenu()) );
+            panelConfirmarMesas()
+        }
     }
 
     function setPrecio(precio){
@@ -242,6 +252,7 @@ var services = (function () {
         getUser : getUser,
         getPrecioMenu : getPrecioMenu,
         placeOrder : placeOrder,
+        doNothing : doNothing,
     }
 
 })();

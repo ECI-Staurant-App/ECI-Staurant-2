@@ -88,11 +88,11 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
     }
 
     @Override
-    public void actualizarSaldo(Usuario usuario) throws EcistaurantPersistenceException {
+    public void actualizarSaldo(String user,int saldo) throws EcistaurantPersistenceException {
 
-        Usuario usuario1 = getStudentById(usuario.getCarne());
-        usuario1.setSaldo(usuario.getSaldo());
-
+        Usuario usuario = getUserByEmail(user);
+        usuario.setSaldo(saldo);
+        usuarioRepository.save(usuario);
     }
 
     @Override
@@ -146,6 +146,12 @@ public class ServiciosEstudianteImpl implements ServiciosEstudiante {
          Mesa mesita = optionalMesa.get();
         mesita.setEstaDisponible(state);
         mesaRepository.save(mesita);
+    }
+
+    @Override
+    public int getSaldoUser(String correo) throws EcistaurantPersistenceException {
+        Usuario user = getUserByEmail(correo);
+        return user.getSaldo();
     }
 
 }

@@ -80,9 +80,9 @@ public class StudentController {
     }
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     @PutMapping(value = "/{user}")
-    public ResponseEntity<?> putUser(@PathVariable int user,@RequestBody Usuario usuario) {
+    public ResponseEntity<?> updateSaldo(@PathVariable String user,int saldo) {
         try {
-            studentServices.actualizarSaldo(usuario);
+            studentServices.actualizarSaldo(user,saldo);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (EcistaurantPersistenceException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -107,6 +107,16 @@ public class StudentController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (EcistaurantPersistenceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @RequestMapping(value = "/saldo/{correo}", method = RequestMethod.GET)
+    public ResponseEntity<?>  getSaldo(@PathVariable ("correo") String correo){
+        try{
+            return new ResponseEntity<>(studentServices.getSaldoUser(correo), HttpStatus.ACCEPTED);
+        }catch (EcistaurantPersistenceException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 

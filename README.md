@@ -6,6 +6,7 @@ Integrantes:
 * German Simon Marin
 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8c93879e78e42c192db1af5cf58f361)](https://app.codacy.com/gh/ECI-Staurant-App/ECI-Staurant-2?utm_source=github.com&utm_medium=referral&utm_content=ECI-Staurant-App/ECI-Staurant-2&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant.svg?style=svg)](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant)
 [![Deployed to Heroku](https://www.herokucdn.com/deploy/button.png)](https://ecistaurant.herokuapp.com/)
 

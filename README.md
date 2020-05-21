@@ -87,16 +87,19 @@ PARA PODER entregar el producto solicitado
 ### Estudiante:
 
 username: estudiante@mail
+
 password : 12345
 
 ### Restaurante:
 
 username : kiosko2
+
 password : 1234
 
 ### Administrador
 
 username : admin.arias@mail (Este usuario también puede servir como estudiante)
+
 password : 12345
 
 ### Manual de uso

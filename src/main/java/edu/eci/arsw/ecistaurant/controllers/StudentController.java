@@ -19,7 +19,8 @@ public class StudentController {
 
     @Autowired
     private ServiciosEstudiante studentServices;
-    
+
+    @Secured({"ROLE_USER","ROLE_ADMIN","ROLE_RESTAURANT"})
     @GetMapping("/")
     public ResponseEntity<?>  getAllUsers(){
         try{

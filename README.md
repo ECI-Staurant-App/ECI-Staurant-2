@@ -3,8 +3,6 @@
 Integrantes:
 * Andres Felipe Marcelo
 * Johan Sebastian Arias
-* German Simon Marin
-
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8c93879e78e42c192db1af5cf58f361)](https://app.codacy.com/gh/ECI-Staurant-App/ECI-Staurant-2?utm_source=github.com&utm_medium=referral&utm_content=ECI-Staurant-App/ECI-Staurant-2&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant.svg?style=svg)](https://circleci.com/gh/ECI-Staurant-App/ECI-Staurant)
@@ -84,13 +82,36 @@ PARA PODER dar a conocer mis platos.
 QUIERO despachar pedidos
 PARA PODER entregar el producto solicitado
 
+## Credenciales para cada rol:
+
+### Estudiante:
+
+username: estudiante@mail
+password : 12345
+
+### Restaurante:
+
+username : kiosko2
+password : 1234
+
+### Administrador
+
+username : admin.arias@mail (Este usuario también puede servir como estudiante)
+password : 12345
+
 ### Manual de uso
 
 Ver [Manual](Manual)
+
+
+
+### Documentación atributos no funcionales 
+
+Ver [AtributosNoFuncionales](Atributos%20no%20funcionales)
 
 ### Mockups
 
 Ver [Mockups](mockups)
 
 
-### Backlog [Link backlog](https://tree.taiga.io/project/andresmarcelo7-eci-staurant-app/backlog)
+
